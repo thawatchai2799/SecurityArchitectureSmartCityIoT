@@ -1,0 +1,22 @@
+v24 -> v25: the seven changed regions (word-level diff of extracted text)
+
+[1] v24: competitive but costs 15 s of training; logistic regression is smallest but its
+    v25: competitive but costs 15 s of training (one wall-clock fit in the E1 benchmark; the E15 profiling run re-fits the same model and records its own, slightly different wall time — single-run timings vary between runs, cf. Section 5.4); logistic regression is smallest but its
+
+[2] v24: 0.01, and the flipping attacker was caught by the direction test (cosine 0.07
+    v25: 0.01, and the flipping attacker was quarantined by the direction test (cosine 0.07
+
+[3] v24: row reports false quarantines instead of catches.Attack by Byzantine districtPlain FedAvg F1LPRA F1Rounds
+    v25: row reports false quarantines instead of rounds quarantined.Attack by Byzantine districtPlain FedAvg F1LPRA F1Rounds
+
+[4] v24: 10 attackers, respectively) — but the catch rate is only half the story,
+    v25: 10 attackers, respectively) — but the quarantine rate is only half the story,
+
+[5] v24: = 0.970 with all attackers still caught; the remaining rejections therefore come from
+    v25: = 0.970 with all attackers still quarantined; the remaining rejections therefore come from
+
+[6] v24: (5.9-6.4 × 10⁴ tx/s from 3-15 validators, full chain verification of 5,000 transactions
+    v25: (5.9-6.4 × 10⁴ tx/s from 3-15 validators — E9 measures a separate 5,000-transaction run per configuration, smaller than E8's 10,000-transaction benchmark of Section 5.5, so the two rates are not directly comparable — full chain verification of 5,000 transactions
+
+[7] v24: day, so its rows are held out.ProtocolDayEvaluationFlowsAttack shareF1RecallFPRstaticmondayin-sample120,0000.00000.00000.00000.0020statictuesdayin-sample120,0000.03120.96430.97860.0016staticwednesdayin-sample120,0000.36390.99280.98920.0020staticthursdayheld out240,0000.00650.00100.00060.0022staticfridayheld out360,0000.37730.00050.00030.0095rollingthursdayheld out240,0000.00650.00100.00060.0022rollingfridayheld out360,0000.37730.39080.24340.0014Table 17. Novelty
+    v25: day, so its rows are held out. F1 and recall are undefined on a day with no attack flows — Monday's attack share is zero — and are shown as —.ProtocolDayEvaluationFlowsAttack shareF1RecallFPRstaticmondayin-sample120,0000.0000——0.0020statictuesdayin-sample120,0000.03120.96430.97860.0016staticwednesdayin-sample120,0000.36390.99280.98920.0020staticthursdayheld out240,0000.00650.00100.00060.0022staticfridayheld out360,0000.37730.00050.00030.0095rollingthursdayheld out240,0000.00650.00100.00060.0022rollingfridayheld out360,0000.37730.39080.24340.0014Table 17. Novelty

@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+title: >-
+  Security Architecture for Smart-City IoT: edge AI intrusion detection,
+  poisoning-resilient federated learning and ledger-anchored model provenance
+message: If you use this software, please cite the accompanying article.
+type: software
+authors:
+  - given-names: Suwichai
+    family-names: Phunsa
+    affiliation: Mahasarakham University
+    email: suwichai.p@msu.ac.th
+  - given-names: Thawatchai
+    family-names: Chomsiri
+    affiliation: Mahasarakham University
+    email: thawatchai.c@msu.ac.th
+repository-code: https://github.com/thawatchai2799/SecurityArchitectureSmartCityIoT
+license: MIT
