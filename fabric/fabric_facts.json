@@ -1,0 +1,22 @@
+{
+ "fab_c20_txs": "146",
+ "fab_c20_mean": "136",
+ "fab_c20_p50": "126",
+ "fab_c20_p95": "216",
+ "fab_c20_p99": "338",
+ "fab_c50_txs": "134",
+ "fab_c50_mean": "278",
+ "fab_c50_p50": "263",
+ "fab_c50_p95": "375",
+ "fab_c50_p99": "466",
+ "fab_n_tx": "2,000",
+ "fab_ledger_mb": "24.3",
+ "fab_ledger_bytes": "24,311,978",
+ "fab_anchored": "4,001",
+ "fab_mb_per_10k": "60.8",
+ "fab_batch_timeout": "2 s",
+ "fab_max_msg": "10",
+ "fab_pref_bytes": "512 KB",
+ "fab_ratio_txs": "369",
+ "fab_bytes_per_alert": "6,076"
+}
