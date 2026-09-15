@@ -47,30 +47,59 @@ def _make_mlp(seed, hidden=(32, 16), max_iter=1):
                          random_state=seed, learning_rate_init=1e-3)
 
 
+
+def _bootstrap_within(y, idx_pool, rng, n=500):
+    """Class-balanced draw restricted to one district's own indices.  Used
+    to initialise the global model without pooling data across districts
+    (the original _bootstrap drew from the pooled arrays; see CHANGELOG,
+    Reviewer 1 Comment 3).  Falls back to whatever classes are present."""
+    idx_pool = np.asarray(idx_pool)
+    classes = np.unique(y[idx_pool])
+    out = []
+    for c in classes:
+        pool = idx_pool[y[idx_pool] == c]
+        out.append(rng.choice(pool, min(len(pool), max(1, n // max(len(classes), 1))), replace=False))
+    return np.concatenate(out)
+
 def partition(y_multi: np.ndarray, k: int, regime: str, seed: int = 42, dominance: float = 0.7):
-    """Return list of index arrays, one per district."""
+    """Return list of index arrays, one per district.
+
+    non-iid: each attack family has one or more OWNER districts that receive
+    `dominance` of its flows; the remainder and all benign traffic are spread
+    evenly.  Ownership is assigned round-robin in whichever direction is
+    longer, so that every family has at least one owner (K < T) AND every
+    district has at least one family (K > T).  The original assignment
+    (family i -> district i mod K) left districts 9..K-1 with no family for
+    K > 9, which produced the honest-rejection artefact of the submitted
+    Table 13; see CHANGELOG, Reviewer 1 Comment 6.
+    """
     rng = np.random.default_rng(seed)
     n = len(y_multi)
     if regime == "iid":
         idx = rng.permutation(n)
         return [np.sort(a) for a in np.array_split(idx, k)]
-
-    # non-iid: assign each attack type predominantly to one district; normal traffic
-    # is spread evenly (every district sees benign traffic).
-    types = sorted(set(y_multi) - {"normal", "benign", "benigntraffic"})
-    owner = {t: i % k for i, t in enumerate(types)}
+    benign = {"normal", "benign", "benigntraffic"}
+    types = sorted(set(y_multi) - benign)
+    T = len(types)
+    owners_of = {t: [] for t in types}
+    if k <= T:
+        for i, t in enumerate(types):
+            owners_of[t].append(i % k)
+    else:
+        for d in range(k):
+            owners_of[types[d % T]].append(d)
     parts = [[] for _ in range(k)]
     for t in types:
         ids = np.where(y_multi == t)[0]; rng.shuffle(ids)
         n_dom = int(len(ids) * dominance)
-        parts[owner[t]].extend(ids[:n_dom].tolist())
-        rest = np.array_split(ids[n_dom:], k)
-        for i in range(k):
-            parts[i].extend(rest[i].tolist())
-    normal_ids = np.where(np.isin(y_multi, ["normal", "benign", "benigntraffic"]))[0]
+        for d, chunk in zip(owners_of[t], np.array_split(ids[:n_dom], len(owners_of[t]))):
+            parts[d].extend(chunk.tolist())
+        for d, chunk in enumerate(np.array_split(ids[n_dom:], k)):
+            parts[d].extend(chunk.tolist())
+    normal_ids = np.where(np.isin(y_multi, list(benign)))[0]
     rng.shuffle(normal_ids)
-    for i, chunk in enumerate(np.array_split(normal_ids, k)):
-        parts[i].extend(chunk.tolist())
+    for d, chunk in enumerate(np.array_split(normal_ids, k)):
+        parts[d].extend(chunk.tolist())
     return [np.sort(np.array(p)) for p in parts]
 
 
@@ -104,7 +133,7 @@ def run_federated(X, y_bin, y_multi, X_test, y_test, k=5, rounds=15, local_epoch
     parts = partition(y_multi, k, regime, seed)
 
     # ---- global model initialised on a tiny public bootstrap sample ------- #
-    boot = _bootstrap(y_bin, rng, 500)
+    boot = _bootstrap_within(y_bin, parts[0], rng, 500)   # district-local init (Reviewer 1, C3)
     global_m = _make_mlp(seed, hidden); global_m.fit(Xs[boot], y_bin[boot])
     classes = np.array([0, 1])
     history = []

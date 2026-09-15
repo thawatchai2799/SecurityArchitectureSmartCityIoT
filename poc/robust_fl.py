@@ -32,7 +32,7 @@ import numpy as np
 from sklearn.neural_network import MLPClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import f1_score
-from .federated import (partition, _make_mlp, _weights_of, _set_weights, _hash_weights,
+from .federated import (partition, _bootstrap_within, _make_mlp, _weights_of, _set_weights, _hash_weights,
                         _bootstrap, DISTRICTS)
 
 
@@ -51,48 +51,37 @@ def _unflat(vec, template_c, template_i):
 
 def screen_updates(client_vecs: np.ndarray, global_vec: np.ndarray, tau: float = 3.0, gamma: float = 2.5,
                    c_min: float = 0.2, version: str = "v2"):
-    """Two-stage screen.
-
-    Stage 1 (magnitude): distance to the coordinate-wise median must be
-        <= max(median(d) + tau*MAD(d), gamma*median(d));
-    the gamma floor stops the MAD test from firing on tiny spreads when K is small.
-
-    Stage 2 (direction): the cosine of the client's delta with a reference direction built from the
-    stage-1 survivors must be >= c_min.
-
-    version="v1" is the rule as first published in this work: the reference is the *mean* delta of the
-    survivors, and any subset may be accepted.  The adaptive-attacker sweep (E17) shows that this fails
-    when 40% of the clients collude at a strength that keeps them inside the stage-1 threshold: their
-    two identical, large deltas dominate the mean, the reference points their way, and the screen
-    inverts -- it rejects the honest majority and keeps the attackers.
-
-    version="v2" (default) repairs it with two changes that cost nothing when there is no attack:
-        * the reference is the coordinate-wise MEDIAN of the survivors' deltas, which a minority
-          cannot move;
-        * the accepted set must be a majority; if the cosine test would accept K/2 or fewer clients,
-          the K/2+1 clients with the highest cosine are accepted instead.
-    Returns the mask of accepted clients and the per-client statistics.
-    """
+    K = len(client_vecs)
     med = np.median(client_vecs, axis=0)
     d = np.linalg.norm(client_vecs - med, axis=1)
     mad = 1.4826 * np.median(np.abs(d - np.median(d))) + 1e-9
     thr = max(np.median(d) + tau * mad, gamma * np.median(d))
-    pass1 = d <= thr
-    if pass1.sum() == 0:
-        pass1[np.argmin(d)] = True
+    S1 = d <= thr                                             # Stage 1 (magnitude)
     deltas = client_vecs - global_vec
-    ref = (deltas[pass1].mean(axis=0) if version == "v1"
-           else np.median(deltas[pass1], axis=0))
-    cos = np.array([float(np.dot(x, ref) / (np.linalg.norm(x) * np.linalg.norm(ref) + 1e-12)) for x in deltas])
-    accept = pass1 & (cos >= c_min)
-    if version != "v1" and accept.sum() <= len(client_vecs) // 2:
-        order = np.argsort(-cos)
-        accept = np.zeros(len(client_vecs), dtype=bool)
-        accept[order[:len(client_vecs) // 2 + 1]] = True
-    if accept.sum() == 0:
-        accept[np.argmin(d)] = True
-    return accept, dict(dist=d.tolist(), cos=cos.tolist(), threshold=float(thr), version=version)
 
+    # Algorithm 1 step (6), second clause: too few Stage-1 survivors to form
+    # a majority -> do not aggregate, anchor the round as INCONCLUSIVE.
+    if S1.sum() <= K // 2:
+        return None, dict(dist=d.tolist(), cos=[None] * K, threshold=float(thr),
+                          version=version, inconclusive=True, stage1_survivors=int(S1.sum()))
+
+    ref = (deltas[S1].mean(axis=0) if version == "v1"        # v1: mean reference (kept for E17)
+           else np.median(deltas[S1], axis=0))                 # v2: coordinate-wise median
+    cos = np.array([float(np.dot(x, ref) / (np.linalg.norm(x) * np.linalg.norm(ref) + 1e-12))
+                    for x in deltas])
+    accept = S1 & (cos >= c_min)                              # Stage 2 (direction), within S1
+
+    # Algorithm 1 step (6), first clause: the accepted set must be a majority;
+    # if not, take the floor(K/2)+1 highest-cosine clients OF S1.  Ranking is
+    # restricted to S1 so that a Stage-1 rejection is never readmitted.
+    if version != "v1" and accept.sum() <= K // 2:
+        s1_idx = np.where(S1)[0]
+        order = s1_idx[np.argsort(-cos[s1_idx])]
+        accept = np.zeros(K, dtype=bool)
+        accept[order[:K // 2 + 1]] = True
+
+    return accept, dict(dist=d.tolist(), cos=cos.tolist(), threshold=float(thr),
+                        version=version, inconclusive=False, stage1_survivors=int(S1.sum()))
 
 def run_robust_fl(X, y_bin, y_multi, X_test, y_test, k=5, rounds=15, local_epochs=2, regime="non-iid",
                   seed=42, hidden=(32, 16), attack="scale", byzantine=0, defense=True, ledger=None,
@@ -105,7 +94,10 @@ def run_robust_fl(X, y_bin, y_multi, X_test, y_test, k=5, rounds=15, local_epoch
     loc_tr, loc_te = [], []
     for idx in parts:
         idx = rng.permutation(idx); cut = int(0.8 * len(idx)); loc_tr.append(idx[:cut]); loc_te.append(idx[cut:])
-    boot = _bootstrap(y_bin, rng, 500)
+    # Initialise the global model from ONE district's own data (district 0),
+    # so no training flow crosses a district boundary at any point.  A
+    # pooled draw was used here originally; see CHANGELOG (Reviewer 1, C3).
+    boot = _bootstrap_within(y_bin, parts[0], rng, 500)
     g = _make_mlp(seed, hidden); g.fit(Xs[boot], y_bin[boot]); classes = np.array([0, 1])
     tc, ti = _weights_of(g)
     history, quarantine_log = [], []

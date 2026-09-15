@@ -35,7 +35,7 @@ import time
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import f1_score
-from .federated import (partition, _make_mlp, _weights_of, _set_weights, _hash_weights,
+from .federated import (partition, _bootstrap_within, _make_mlp, _weights_of, _set_weights, _hash_weights,
                         _bootstrap, DISTRICTS)
 from .robust_fl import _flat, _unflat, screen_updates
 
@@ -70,7 +70,10 @@ def aggregate(name, V, ns, gvec, f, lpra_gamma=2.5, lpra_version="v2"):
         s = _krum_scores(V, f); m = max(n - f, 1); sel = np.argsort(s)[:m]
         acc = np.zeros(n, bool); acc[sel] = True; return V[sel].mean(0), acc, {"krum_scores": s.round(3).tolist()}
     if name == "lpra":
-        acc, stats = screen_updates(V, gvec, gamma=lpra_gamma, version=lpra_version); w = ns * acc; w = w / w.sum()
+        acc, stats = screen_updates(V, gvec, gamma=lpra_gamma, version=lpra_version)
+        if acc is None:                      # Algorithm 1 step (6): INCONCLUSIVE -- keep w_g
+            return gvec.copy(), np.zeros(n, bool), stats
+        w = ns * acc; w = w / w.sum()
         return (V * w[:, None]).sum(0), acc, stats
     raise ValueError(name)
 
@@ -84,7 +87,10 @@ def run_byzantine(X, y_bin, y_multi, X_test, y_test, k=5, rounds=10, local_epoch
     parts = partition(y_multi, k, regime, seed)
     attackers = set(range(n_att)) if attack != "none" else set()
     f = f_assumed if f_assumed is not None else max(n_att, 1)
-    boot = _bootstrap(y_bin, rng, 500)
+    # Initialise the global model from ONE district's own data (district 0),
+    # so no training flow crosses a district boundary at any point.  A
+    # pooled draw was used here originally; see CHANGELOG (Reviewer 1, C3).
+    boot = _bootstrap_within(y_bin, parts[0], rng, 500)
     g = _make_mlp(seed, hidden); g.fit(Xs[boot], y_bin[boot]); classes = np.array([0, 1])
     tc, ti = _weights_of(g)
     hist, caught, quarantined_total, honest_quarantined = [], 0, 0, 0
