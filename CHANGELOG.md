@@ -1,5 +1,79 @@
 # Development log
 
+# What changed in v2.0 (code) — the peer-review revision
+
+Three reviewers of the submitted manuscript read the released code against
+the paper.  Four of their findings were correct and are fixed here.  Every
+fix was verified by re-executing the affected experiments under both the
+old and the new code before the change was made, so that the effect on the
+reported numbers is measured, not assumed.  The comparison harnesses and
+their outputs are in `review_response/`.
+
+## A. `screen_updates()` did not match Algorithm 1 (Reviewer 1, C1)
+
+Two deviations.  The majority fallback ranked cosine over all K clients and
+took the global top floor(K/2)+1, so a client rejected by the Stage-1
+magnitude test could be readmitted; Algorithm 1 restricts the fallback to
+S1.  And the INCONCLUSIVE branch (|S1| <= floor(K/2): do not aggregate,
+keep w_g) was absent.  Both corrected in `poc/robust_fl.py`;
+`byzantine.aggregate()` now keeps the current global model when
+`screen_updates()` returns `None`.
+
+Effect on reported results: none.  Re-executing the full K in {5,10,20,50}
+grid (240 aggregation rounds, three seeds) under both versions produced the
+identical accepted set in every round; the INCONCLUSIVE branch was never
+reached.  A synthetic far-but-direction-aligned attacker does separate the
+two -- the old fallback readmits it and displaces an honest client -- which
+is why the paper's rule, not the code's, was kept.
+
+## B. Global model was initialised from pooled data (Reviewer 1, C3)
+
+`_bootstrap()` drew 500 class-balanced examples from the pooled training
+arrays to give sklearn's first `fit()` both classes.  This contradicted
+"raw flows never leave the districts."  Replaced by `_bootstrap_within()`,
+which draws from district 0's own partition only, in `federated.py`,
+`robust_fl.py` and `byzantine.py`.
+
+Effect: none at K = 5 (F1 0.9707 +- 0.0003 under both, to four decimals).
+At K >= 10 initialisation is one of several sources of seed-level variance
+and is now reported as such alongside the other fixes.
+
+## C. `partition()` left most districts without an attack family for K > 9 (Reviewer 1, C6)
+
+Families were assigned by `family_index mod K`, so for K > 9 districts
+9..K-1 received no dominant family -- 11 of 20 at K = 20, 41 of 50 at
+K = 50.  Those "orphan" districts, holding only a diluted mix, became the
+majority; LPRA's median reference locked onto them and rejected the nine
+family-owning districts in nearly every round.  That was the entire source
+of the 80/200 and 90/500 honest rejections in the submitted Table 13.
+Instrumenting which districts were rejected confirmed it: owners 89-100%
+of rounds, orphans 0%.
+
+Fixed: ownership is now round-robin in whichever direction is longer, so
+every family has an owner and every district has a family.  For K <= 9 the
+partition is unchanged.  Effect: K = 20 honest rejections 80-82 -> 0-9;
+K = 50: 90 -> 0; attacker still quarantined 10/10 in every configuration.
+Table 13 is regenerated from this code (`table13_definitive.json`).
+
+## D. E11 timed submission, not commit (Reviewer 1, C2c)
+
+`city_simulation.EdgeGateway.process()` stopped its timer when
+`ledger.submit()` returned, i.e. after a mempool append.  The block is cut
+later.  The 0.03 ms "anchoring" figure was submission cost; commit latency
+on the same ledger is 0.80 ms mean (`ledger_latency.json`).  The manuscript
+is corrected; the code is unchanged, since `_cut_block()` already recorded
+the right quantity in `metrics["tx_latencies"]` -- the harness simply
+reported the wrong one.
+
+## E. Added, not changed
+
+- `review_response/` -- every comparison harness, its raw output, and the
+  extended tamper test (deletion, truncation, re-signing with minority and
+  quorum keys), FLAME baseline, leave-one-family-out under federated
+  training, and four attacks not used in LPRA v2's development.
+- `partition()` docstring now states the K > T behaviour explicitly.
+
+
 This file records what was fixed and why during the development of the experiments, including several bugs
 that only appeared on a second machine. It is kept in the repository because the failures are as informative
 as the results: a Windows code-page crash, a resubstitution score in a cross-dataset matrix, a membership
