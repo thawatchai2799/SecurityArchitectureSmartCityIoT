@@ -1,0 +1,116 @@
+[
+ {
+  "attack": "none",
+  "n_att": 0,
+  "fedavg": {
+   "f1": 0.9707,
+   "att_rej": 0,
+   "hon_rej": 0
+  },
+  "flame": {
+   "f1": 0.9432,
+   "att_rej": 0,
+   "hon_rej": 0
+  },
+  "lpra": {
+   "f1": 0.9707,
+   "att_rej": 0,
+   "hon_rej": 0
+  }
+ },
+ {
+  "attack": "scale",
+  "n_att": 1,
+  "fedavg": {
+   "f1": 0.9354,
+   "att_rej": 0,
+   "hon_rej": 0
+  },
+  "flame": {
+   "f1": 0.9493,
+   "att_rej": 0,
+   "hon_rej": 0
+  },
+  "lpra": {
+   "f1": 0.9707,
+   "att_rej": 30,
+   "hon_rej": 0
+  }
+ },
+ {
+  "attack": "flip",
+  "n_att": 1,
+  "fedavg": {
+   "f1": 0.97,
+   "att_rej": 0,
+   "hon_rej": 0
+  },
+  "flame": {
+   "f1": 0.9703,
+   "att_rej": 0,
+   "hon_rej": 0
+  },
+  "lpra": {
+   "f1": 0.9707,
+   "att_rej": 30,
+   "hon_rej": 0
+  }
+ },
+ {
+  "attack": "noise",
+  "n_att": 1,
+  "fedavg": {
+   "f1": 0.7832,
+   "att_rej": 0,
+   "hon_rej": 0
+  },
+  "flame": {
+   "f1": 0.9706,
+   "att_rej": 0,
+   "hon_rej": 0
+  },
+  "lpra": {
+   "f1": 0.9707,
+   "att_rej": 30,
+   "hon_rej": 0
+  }
+ },
+ {
+  "attack": "stealth",
+  "n_att": 1,
+  "fedavg": {
+   "f1": 0.9706,
+   "att_rej": 0,
+   "hon_rej": 0
+  },
+  "flame": {
+   "f1": 0.9706,
+   "att_rej": 0,
+   "hon_rej": 0
+  },
+  "lpra": {
+   "f1": 0.9706,
+   "att_rej": 0,
+   "hon_rej": 0
+  }
+ },
+ {
+  "attack": "adaptive",
+  "n_att": 2,
+  "fedavg": {
+   "f1": 0.3066,
+   "att_rej": 0,
+   "hon_rej": 0
+  },
+  "flame": {
+   "f1": 0.5891,
+   "att_rej": 0,
+   "hon_rej": 0
+  },
+  "lpra": {
+   "f1": 0.9388,
+   "att_rej": 60,
+   "hon_rej": 0
+  }
+ }
+]

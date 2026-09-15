@@ -1,0 +1,362 @@
+[
+ {
+  "regime": "no attack",
+  "c_min": 0.0,
+  "gamma": 1.5,
+  "f1": 0.9496,
+  "hon": 14,
+  "att": 0,
+  "hon_denom": 150,
+  "att_denom": 0
+ },
+ {
+  "regime": "no attack",
+  "c_min": 0.0,
+  "gamma": 2.5,
+  "f1": 0.9707,
+  "hon": 0,
+  "att": 0,
+  "hon_denom": 150,
+  "att_denom": 0
+ },
+ {
+  "regime": "no attack",
+  "c_min": 0.0,
+  "gamma": 4.0,
+  "f1": 0.9707,
+  "hon": 0,
+  "att": 0,
+  "hon_denom": 150,
+  "att_denom": 0
+ },
+ {
+  "regime": "no attack",
+  "c_min": 0.1,
+  "gamma": 1.5,
+  "f1": 0.9496,
+  "hon": 14,
+  "att": 0,
+  "hon_denom": 150,
+  "att_denom": 0
+ },
+ {
+  "regime": "no attack",
+  "c_min": 0.1,
+  "gamma": 2.5,
+  "f1": 0.9707,
+  "hon": 0,
+  "att": 0,
+  "hon_denom": 150,
+  "att_denom": 0
+ },
+ {
+  "regime": "no attack",
+  "c_min": 0.1,
+  "gamma": 4.0,
+  "f1": 0.9707,
+  "hon": 0,
+  "att": 0,
+  "hon_denom": 150,
+  "att_denom": 0
+ },
+ {
+  "regime": "no attack",
+  "c_min": 0.2,
+  "gamma": 1.5,
+  "f1": 0.9496,
+  "hon": 14,
+  "att": 0,
+  "hon_denom": 150,
+  "att_denom": 0
+ },
+ {
+  "regime": "no attack",
+  "c_min": 0.2,
+  "gamma": 2.5,
+  "f1": 0.9707,
+  "hon": 0,
+  "att": 0,
+  "hon_denom": 150,
+  "att_denom": 0
+ },
+ {
+  "regime": "no attack",
+  "c_min": 0.2,
+  "gamma": 4.0,
+  "f1": 0.9707,
+  "hon": 0,
+  "att": 0,
+  "hon_denom": 150,
+  "att_denom": 0
+ },
+ {
+  "regime": "no attack",
+  "c_min": 0.4,
+  "gamma": 1.5,
+  "f1": 0.9425,
+  "hon": 18,
+  "att": 0,
+  "hon_denom": 150,
+  "att_denom": 0
+ },
+ {
+  "regime": "no attack",
+  "c_min": 0.4,
+  "gamma": 2.5,
+  "f1": 0.9566,
+  "hon": 10,
+  "att": 0,
+  "hon_denom": 150,
+  "att_denom": 0
+ },
+ {
+  "regime": "no attack",
+  "c_min": 0.4,
+  "gamma": 4.0,
+  "f1": 0.9566,
+  "hon": 10,
+  "att": 0,
+  "hon_denom": 150,
+  "att_denom": 0
+ },
+ {
+  "regime": "no attack",
+  "c_min": 0.6,
+  "gamma": 1.5,
+  "f1": 0.939,
+  "hon": 31,
+  "att": 0,
+  "hon_denom": 150,
+  "att_denom": 0
+ },
+ {
+  "regime": "no attack",
+  "c_min": 0.6,
+  "gamma": 2.5,
+  "f1": 0.9426,
+  "hon": 32,
+  "att": 0,
+  "hon_denom": 150,
+  "att_denom": 0
+ },
+ {
+  "regime": "no attack",
+  "c_min": 0.6,
+  "gamma": 4.0,
+  "f1": 0.9426,
+  "hon": 32,
+  "att": 0,
+  "hon_denom": 150,
+  "att_denom": 0
+ },
+ {
+  "regime": "no attack",
+  "c_min": 0.8,
+  "gamma": 1.5,
+  "f1": 0.939,
+  "hon": 50,
+  "att": 0,
+  "hon_denom": 150,
+  "att_denom": 0
+ },
+ {
+  "regime": "no attack",
+  "c_min": 0.8,
+  "gamma": 2.5,
+  "f1": 0.9462,
+  "hon": 50,
+  "att": 0,
+  "hon_denom": 150,
+  "att_denom": 0
+ },
+ {
+  "regime": "no attack",
+  "c_min": 0.8,
+  "gamma": 4.0,
+  "f1": 0.9462,
+  "hon": 50,
+  "att": 0,
+  "hon_denom": 150,
+  "att_denom": 0
+ },
+ {
+  "regime": "adaptive s=6 opp.",
+  "c_min": 0.0,
+  "gamma": 1.5,
+  "f1": 0.9388,
+  "hon": 0,
+  "att": 60,
+  "hon_denom": 90,
+  "att_denom": 60
+ },
+ {
+  "regime": "adaptive s=6 opp.",
+  "c_min": 0.0,
+  "gamma": 2.5,
+  "f1": 0.9388,
+  "hon": 0,
+  "att": 60,
+  "hon_denom": 90,
+  "att_denom": 60
+ },
+ {
+  "regime": "adaptive s=6 opp.",
+  "c_min": 0.0,
+  "gamma": 4.0,
+  "f1": 0.9388,
+  "hon": 0,
+  "att": 60,
+  "hon_denom": 90,
+  "att_denom": 60
+ },
+ {
+  "regime": "adaptive s=6 opp.",
+  "c_min": 0.1,
+  "gamma": 1.5,
+  "f1": 0.9388,
+  "hon": 0,
+  "att": 60,
+  "hon_denom": 90,
+  "att_denom": 60
+ },
+ {
+  "regime": "adaptive s=6 opp.",
+  "c_min": 0.1,
+  "gamma": 2.5,
+  "f1": 0.9388,
+  "hon": 0,
+  "att": 60,
+  "hon_denom": 90,
+  "att_denom": 60
+ },
+ {
+  "regime": "adaptive s=6 opp.",
+  "c_min": 0.1,
+  "gamma": 4.0,
+  "f1": 0.9388,
+  "hon": 0,
+  "att": 60,
+  "hon_denom": 90,
+  "att_denom": 60
+ },
+ {
+  "regime": "adaptive s=6 opp.",
+  "c_min": 0.2,
+  "gamma": 1.5,
+  "f1": 0.9388,
+  "hon": 0,
+  "att": 60,
+  "hon_denom": 90,
+  "att_denom": 60
+ },
+ {
+  "regime": "adaptive s=6 opp.",
+  "c_min": 0.2,
+  "gamma": 2.5,
+  "f1": 0.9388,
+  "hon": 0,
+  "att": 60,
+  "hon_denom": 90,
+  "att_denom": 60
+ },
+ {
+  "regime": "adaptive s=6 opp.",
+  "c_min": 0.2,
+  "gamma": 4.0,
+  "f1": 0.9388,
+  "hon": 0,
+  "att": 60,
+  "hon_denom": 90,
+  "att_denom": 60
+ },
+ {
+  "regime": "adaptive s=6 opp.",
+  "c_min": 0.4,
+  "gamma": 1.5,
+  "f1": 0.9388,
+  "hon": 0,
+  "att": 60,
+  "hon_denom": 90,
+  "att_denom": 60
+ },
+ {
+  "regime": "adaptive s=6 opp.",
+  "c_min": 0.4,
+  "gamma": 2.5,
+  "f1": 0.9388,
+  "hon": 0,
+  "att": 60,
+  "hon_denom": 90,
+  "att_denom": 60
+ },
+ {
+  "regime": "adaptive s=6 opp.",
+  "c_min": 0.4,
+  "gamma": 4.0,
+  "f1": 0.9388,
+  "hon": 0,
+  "att": 60,
+  "hon_denom": 90,
+  "att_denom": 60
+ },
+ {
+  "regime": "adaptive s=6 opp.",
+  "c_min": 0.6,
+  "gamma": 1.5,
+  "f1": 0.9388,
+  "hon": 0,
+  "att": 60,
+  "hon_denom": 90,
+  "att_denom": 60
+ },
+ {
+  "regime": "adaptive s=6 opp.",
+  "c_min": 0.6,
+  "gamma": 2.5,
+  "f1": 0.9388,
+  "hon": 0,
+  "att": 60,
+  "hon_denom": 90,
+  "att_denom": 60
+ },
+ {
+  "regime": "adaptive s=6 opp.",
+  "c_min": 0.6,
+  "gamma": 4.0,
+  "f1": 0.9388,
+  "hon": 0,
+  "att": 60,
+  "hon_denom": 90,
+  "att_denom": 60
+ },
+ {
+  "regime": "adaptive s=6 opp.",
+  "c_min": 0.8,
+  "gamma": 1.5,
+  "f1": 0.9388,
+  "hon": 0,
+  "att": 60,
+  "hon_denom": 90,
+  "att_denom": 60
+ },
+ {
+  "regime": "adaptive s=6 opp.",
+  "c_min": 0.8,
+  "gamma": 2.5,
+  "f1": 0.9388,
+  "hon": 0,
+  "att": 60,
+  "hon_denom": 90,
+  "att_denom": 60
+ },
+ {
+  "regime": "adaptive s=6 opp.",
+  "c_min": 0.8,
+  "gamma": 4.0,
+  "f1": 0.9388,
+  "hon": 0,
+  "att": 60,
+  "hon_denom": 90,
+  "att_denom": 60
+ }
+]

@@ -1,0 +1,362 @@
+[
+ {
+  "K": 5,
+  "seed": 42,
+  "attack": "none",
+  "orig": {
+   "f1": 0.9711,
+   "hon": 0,
+   "att": 0
+  },
+  "fixed": {
+   "f1": 0.9711,
+   "hon": 0,
+   "att": 0
+  }
+ },
+ {
+  "K": 5,
+  "seed": 42,
+  "attack": "scale",
+  "orig": {
+   "f1": 0.9711,
+   "hon": 0,
+   "att": 10
+  },
+  "fixed": {
+   "f1": 0.9711,
+   "hon": 0,
+   "att": 10
+  }
+ },
+ {
+  "K": 5,
+  "seed": 43,
+  "attack": "none",
+  "orig": {
+   "f1": 0.9705,
+   "hon": 0,
+   "att": 0
+  },
+  "fixed": {
+   "f1": 0.9705,
+   "hon": 0,
+   "att": 0
+  }
+ },
+ {
+  "K": 5,
+  "seed": 43,
+  "attack": "scale",
+  "orig": {
+   "f1": 0.9703,
+   "hon": 0,
+   "att": 10
+  },
+  "fixed": {
+   "f1": 0.9703,
+   "hon": 0,
+   "att": 10
+  }
+ },
+ {
+  "K": 5,
+  "seed": 44,
+  "attack": "none",
+  "orig": {
+   "f1": 0.9704,
+   "hon": 0,
+   "att": 0
+  },
+  "fixed": {
+   "f1": 0.9704,
+   "hon": 0,
+   "att": 0
+  }
+ },
+ {
+  "K": 5,
+  "seed": 44,
+  "attack": "scale",
+  "orig": {
+   "f1": 0.9708,
+   "hon": 0,
+   "att": 10
+  },
+  "fixed": {
+   "f1": 0.9708,
+   "hon": 0,
+   "att": 10
+  }
+ },
+ {
+  "K": 10,
+  "seed": 42,
+  "attack": "none",
+  "orig": {
+   "f1": 0.9392,
+   "hon": 4,
+   "att": 0
+  },
+  "fixed": {
+   "f1": 0.9393,
+   "hon": 4,
+   "att": 0
+  }
+ },
+ {
+  "K": 10,
+  "seed": 42,
+  "attack": "scale",
+  "orig": {
+   "f1": 0.9386,
+   "hon": 3,
+   "att": 10
+  },
+  "fixed": {
+   "f1": 0.9393,
+   "hon": 3,
+   "att": 10
+  }
+ },
+ {
+  "K": 10,
+  "seed": 43,
+  "attack": "none",
+  "orig": {
+   "f1": 0.9387,
+   "hon": 3,
+   "att": 0
+  },
+  "fixed": {
+   "f1": 0.9387,
+   "hon": 1,
+   "att": 0
+  }
+ },
+ {
+  "K": 10,
+  "seed": 43,
+  "attack": "scale",
+  "orig": {
+   "f1": 0.9513,
+   "hon": 0,
+   "att": 10
+  },
+  "fixed": {
+   "f1": 0.9313,
+   "hon": 0,
+   "att": 10
+  }
+ },
+ {
+  "K": 10,
+  "seed": 44,
+  "attack": "none",
+  "orig": {
+   "f1": 0.9387,
+   "hon": 6,
+   "att": 0
+  },
+  "fixed": {
+   "f1": 0.9387,
+   "hon": 6,
+   "att": 0
+  }
+ },
+ {
+  "K": 10,
+  "seed": 44,
+  "attack": "scale",
+  "orig": {
+   "f1": 0.9387,
+   "hon": 5,
+   "att": 10
+  },
+  "fixed": {
+   "f1": 0.9387,
+   "hon": 5,
+   "att": 10
+  }
+ },
+ {
+  "K": 20,
+  "seed": 42,
+  "attack": "none",
+  "orig": {
+   "f1": 0.9568,
+   "hon": 80,
+   "att": 0
+  },
+  "fixed": {
+   "f1": 0.9693,
+   "hon": 0,
+   "att": 0
+  }
+ },
+ {
+  "K": 20,
+  "seed": 42,
+  "attack": "scale",
+  "orig": {
+   "f1": 0.9568,
+   "hon": 70,
+   "att": 10
+  },
+  "fixed": {
+   "f1": 0.9694,
+   "hon": 0,
+   "att": 10
+  }
+ },
+ {
+  "K": 20,
+  "seed": 43,
+  "attack": "none",
+  "orig": {
+   "f1": 0.9164,
+   "hon": 80,
+   "att": 0
+  },
+  "fixed": {
+   "f1": 0.9353,
+   "hon": 10,
+   "att": 0
+  }
+ },
+ {
+  "K": 20,
+  "seed": 43,
+  "attack": "scale",
+  "orig": {
+   "f1": 0.9164,
+   "hon": 70,
+   "att": 10
+  },
+  "fixed": {
+   "f1": 0.9353,
+   "hon": 10,
+   "att": 10
+  }
+ },
+ {
+  "K": 20,
+  "seed": 44,
+  "attack": "none",
+  "orig": {
+   "f1": 0.9127,
+   "hon": 82,
+   "att": 0
+  },
+  "fixed": {
+   "f1": 0.9591,
+   "hon": 4,
+   "att": 0
+  }
+ },
+ {
+  "K": 20,
+  "seed": 44,
+  "attack": "scale",
+  "orig": {
+   "f1": 0.9127,
+   "hon": 72,
+   "att": 10
+  },
+  "fixed": {
+   "f1": 0.9699,
+   "hon": 2,
+   "att": 10
+  }
+ },
+ {
+  "K": 50,
+  "seed": 42,
+  "attack": "none",
+  "orig": {
+   "f1": 0.9211,
+   "hon": 90,
+   "att": 0
+  },
+  "fixed": {
+   "f1": 0.9636,
+   "hon": 0,
+   "att": 0
+  }
+ },
+ {
+  "K": 50,
+  "seed": 42,
+  "attack": "scale",
+  "orig": {
+   "f1": 0.9211,
+   "hon": 80,
+   "att": 10
+  },
+  "fixed": {
+   "f1": 0.9636,
+   "hon": 0,
+   "att": 10
+  }
+ },
+ {
+  "K": 50,
+  "seed": 43,
+  "attack": "none",
+  "orig": {
+   "f1": 0.9509,
+   "hon": 90,
+   "att": 0
+  },
+  "fixed": {
+   "f1": 0.9528,
+   "hon": 0,
+   "att": 0
+  }
+ },
+ {
+  "K": 50,
+  "seed": 43,
+  "attack": "scale",
+  "orig": {
+   "f1": 0.9509,
+   "hon": 80,
+   "att": 10
+  },
+  "fixed": {
+   "f1": 0.9528,
+   "hon": 0,
+   "att": 10
+  }
+ },
+ {
+  "K": 50,
+  "seed": 44,
+  "attack": "none",
+  "orig": {
+   "f1": 0.8989,
+   "hon": 90,
+   "att": 0
+  },
+  "fixed": {
+   "f1": 0.9672,
+   "hon": 0,
+   "att": 0
+  }
+ },
+ {
+  "K": 50,
+  "seed": 44,
+  "attack": "scale",
+  "orig": {
+   "f1": 0.8989,
+   "hon": 80,
+   "att": 10
+  },
+  "fixed": {
+   "f1": 0.9672,
+   "hon": 0,
+   "att": 10
+  }
+ }
+]

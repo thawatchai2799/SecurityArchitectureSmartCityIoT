@@ -1,0 +1,32 @@
+[
+ {
+  "attack": "1 modify payload",
+  "keys": "no keys",
+  "detected": true,
+  "msg": "block 2: merkle root mismatch (tx tampered)"
+ },
+ {
+  "attack": "2 delete one tx",
+  "keys": "no keys",
+  "detected": true,
+  "msg": "block 2: merkle root mismatch (tx tampered)"
+ },
+ {
+  "attack": "3 truncate last block",
+  "keys": "no keys",
+  "detected": false,
+  "msg": "chain intact  (chain shrank 4->3; undetectable without an external height anchor)"
+ },
+ {
+  "attack": "4 delete + re-sign, minority keys",
+  "keys": "3/5 keys",
+  "detected": true,
+  "msg": "block 2: signature quorum failed"
+ },
+ {
+  "attack": "5 delete + re-sign, quorum keys",
+  "keys": "4/5 keys",
+  "detected": false,
+  "msg": "chain intact"
+ }
+]
