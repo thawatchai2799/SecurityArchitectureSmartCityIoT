@@ -33,6 +33,17 @@ function table(headers, rows, widths, fs = 17) {
   return new Table({ width: { size: total, type: WidthType.DXA }, columnWidths: widths, borders: { top: { style: BorderStyle.SINGLE, size: 6 }, bottom: { style: BorderStyle.SINGLE, size: 6 }, left: { style: BorderStyle.NONE }, right: { style: BorderStyle.NONE }, insideHorizontal: { style: BorderStyle.SINGLE, size: 2, color: "999999" }, insideVertical: { style: BorderStyle.NONE } }, rows: [mk(headers, true, true), ...rows.map(r => mk(r, false, false))] });
 }
 
+
+// ---- revision (v2.0): supplementary items regenerated from review_response/*.json
+const RR = path.join(ROOT, "review_response") + path.sep;
+const RJ = (n) => fs.existsSync(RR + n) ? JSON.parse(fs.readFileSync(RR + n, "utf8")) : null;
+const f3 = (x) => (Math.round(x * 1000) / 1000).toFixed(3);
+function rrTable(headers, file, mapper, widths, fs2 = 17) {
+  const d = RJ(file);
+  if (!d) return table(headers, [[TBD(`[${file}: run review_response/ scripts]`)].concat(Array(headers.length - 1).fill(""))], widths, fs2);
+  return table(headers, mapper(d), widths, fs2);
+}
+
 const rules = [
   ["41,084", "ATTACK", "0.999", "backdoor, scanning", "TCP · pkt_ratio > 0.159 · no TLS · http_status ≤ 50 · src_pkts ≤ 6 · not ICMP · not DNS"],
   ["6,788", "normal", "0.998", "normal", "no reply pkts (pkt_ratio ≫ 1) · 4.5 µs < duration ≤ 0.315 s · src_ip_bytes > 113 · not HTTP · src_pkts ≤ 160"],
@@ -65,18 +76,21 @@ const supp = new Document({ styles: { default: { document: { run: { font: F, siz
     h1("Table S3. Native-view edge IDS results on the additional datasets (E12; exp1c_native_*.csv)"),
     factTable(["Dataset", "Rows", "Features", "Best model", "F1", "ROC-AUC", "FPR", "Latency (µs)"],
       "tab_native_extra", [1500, 1000, 1000, 1500, 900, 1000, 900, 1226]),
-    h1("Table S4. LPRA threshold sensitivity at K = 20 districts (extreme non-IID; 4 of 20 Byzantine under 'scale'; 10 rounds; seed 42)"),
-    factTable(["γ (stage-1 floor)", "Attack", "Global F1", "Rounds all attackers caught", "Honest rejections (district-rounds)"],
-      "tab_gamma", [1700, 1900, 1400, 2200, 1826]),
-    new Paragraph({ spacing: { before: 80, after: 160 }, children:
-      P`γ = ${"gamma_lo"}–5 give identical results, showing that the remaining honest rejections at K = 20 come from the direction test (c_min = 0.2) rather than from the distance test; γ = ${"gamma_hi"} reduces them from ${"gamma_lo_rej"} to ${"gamma_hi_rej"} per 10 rounds (F1 ${"gamma_hi_f1"}) while still catching every attacker. Source: extC_lpra_gamma_sensitivity_K20.csv.`
-        .map(r => new TextRun({ ...r, size: 18 })) }),
-    h1("Table S5. The most-populated leaves of the depth-8 decision tree (test split)"),
-    factTable(["Test flows", "Prediction", "Purity", "Dominant true types", "Rule (conjunction of splits from the root)"],
-      "tab_tree_rules", [1000, 1000, 800, 1700, 4526], 15),
-    new Paragraph({ spacing: { before: 80, after: 160 }, children:
-      P`The tree has ${"tree_leaves"} leaves at depth ${"tree_depth"}. pkt_ratio = src_pkts / (dst_pkts + 10⁻⁶), so a value much larger than 1 means the flow received no reply packets; purity is the fraction of the leaf's training samples in the predicted class. Source: exp8b_tree_rules.csv.`
-        .map(r => new TextRun({ ...r, size: 18 })) }),
+    h1("Table S4. LPRA joint threshold sensitivity: c_min \u00d7 \u03b3, with and without attack (K = 5, 10 rounds, seeds 42\u201344)"),
+    rrTable(["Regime", "c_min", "\u03b3", "F1 (mean)", "Honest rejections", "Attacker rejections"], "threshold_sensitivity.json",
+      d => d.map(r => [r.regime, r.c_min.toFixed(1), r.gamma.toFixed(1), f3(r.f1), `${r.hon} / ${r.hon_denom}`, r.att_denom ? `${r.att} / ${r.att_denom}` : "n/a"]),
+      [1900, 900, 900, 1300, 2000, 2000]),
+    cap("Without an attack, c_min is inactive up to 0.2 and then excludes honest clients; \u03b3 matters only at 1.5. Under the s = 6 opposing adaptive attack all eighteen cells are identical: Stage 1 alone is sufficient and the direction test is never binding. The submitted S4 swept \u03b3 alone at K = 20; those honest rejections were a partitioning artefact (Section 5.6) and the sweep is superseded. Source: review_response/threshold_sensitivity.json."),
+    h1("Table S5. Leave-one-family-out F1 on TON_IoT: centralised tree, centralised MLP, federated MLP (E12 extension)"),
+    rrTable(["Held-out family", "Test flows", "DT-8, centralised", "MLP 32-16, centralised", "MLP 32-16, federated (LPRA v2, K = 5)"], "loao_federated.json",
+      d => { const rows = d.map(r => [r.family, r.n_test.toLocaleString(), f3(r.dt_f1), f3(r.mlp_central_f1), f3(r.lpra_f1)]);
+             const m = k => f3(d.reduce((a, r) => a + r[k], 0) / d.length); rows.push(["mean", "", m("dt_f1"), m("mlp_central_f1"), m("lpra_f1")]); return rows; },
+      [1900, 1300, 1900, 2000, 2200]),
+    cap("Train on the other eight families plus benign; test on the held-out family plus held-out benign. Model class accounts for about half the gap (ransomware: 0.363 for the MLP whether centralised or federated), federation for the rest (MITM: 0.764 \u2192 0.414). Source: review_response/loao_federated.json."),
+    h1("Table S6. Cross-dataset F1 on the nine directional features (E12)"),
+    p("Datasets that do not separate the two flow directions (CICIoT2023) cannot appear in this view; they are covered by the direction-free matrix in Table 13 of the main text."),
+    factTable(["Train \\ Test", "TON_IoT", "CIC-IDS2017", "UNSW-NB15"], "tab_cross_common",
+      [2400, 1900, 1900, 1900]),
     h1("Table S7. Aggregator behaviour without the symbols of Table 9 (E5)"),
     factTable(["Aggregator", "No-attack F1", "Honest rejections, no attack (district-rounds)",
                "Attacker catch rate, scale (1 attacker)", "Honest rejections under attack"],
@@ -85,10 +99,31 @@ const supp = new Document({ styles: { default: { document: { run: { font: F, siz
       P`Catch rate is the number of rounds out of ${"e5_rounds"} in which every attacker was quarantined, averaged over ${"e5_seeds"} seeds; rejections are counted in district-rounds over the same runs. Krum rejects K − 1 clients per round by construction, which is why its honest-rejection count is the largest and its no-attack F1 the lowest. Source: extA_byzantine_grid_summary.csv.`
         .map(r => new TextRun({ ...r, size: 18 })) }),
 
-    h1("Table S6. Cross-dataset F1 on the nine directional features (E12)"),
-    p("Datasets that do not separate the two flow directions (CICIoT2023) cannot appear in this view; they are covered by the direction-free matrix in Table 13 of the main text."),
-    factTable(["Train \\ Test", "TON_IoT", "CIC-IDS2017", "UNSW-NB15"], "tab_cross_common",
-      [2400, 1900, 1900, 1900]),
+    h1("Table S7 (extension). Krum and Multi-Krum inside and outside n > 2f + 2 (f = 2, scale attack, seeds 42\u201344)"),
+    rrTable(["K", "Aggregator", "n > 2f+2", "F1 (mean)", "Attacker rounds rejected (per seed)", "Honest \u201crejections\u201d (per seed)", "What the count is"], "krum_regime.json",
+      d => { const g = {}; for (const r of d) { const key = `${r.K}|${r.agg}`; (g[key] = g[key] || []).push(r); }
+             return Object.entries(g).map(([key, rs]) => { const [K, agg] = key.split("|"); const h = Number(K) - 2;
+               return [K, agg, Number(K) > 6 ? "yes" : "no", f3(rs.reduce((a, r) => a + r.f1, 0) / rs.length),
+                 `${rs.map(r => r.att_rej).join("/")} of 20`, `${rs.map(r => r.hon_rej).join("/")} of ${h * 10}`, agg === "lpra" ? "quarantine" : "non-selection"]; })
+               .sort((a, b) => Number(a[0]) - Number(b[0]) || a[1].localeCompare(b[1])); },
+      [600, 1500, 1000, 1200, 2400, 2200, 1500]),
+    cap("Krum\u2019s honest \u201crejections\u201d are non-selection by a single-winner rule and rise with K for that reason alone; they are not comparable to LPRA\u2019s quarantine decisions. Source: review_response/krum_regime.json."),
+    h1("Table S8. The most-populated leaves of the depth-8 decision tree (test split)"),
+    factTable(["Test flows", "Prediction", "Purity", "Dominant true types", "Rule (conjunction of splits from the root)"],
+      "tab_tree_rules", [1000, 1000, 800, 1700, 4526], 15),
+    new Paragraph({ spacing: { before: 80, after: 160 }, children:
+      P`The tree has ${"tree_leaves"} leaves at depth ${"tree_depth"}. pkt_ratio = src_pkts / (dst_pkts + 10⁻⁶), so a value much larger than 1 means the flow received no reply packets; purity is the fraction of the leaf's training samples in the predicted class. Source: exp8b_tree_rules.csv.`
+        .map(r => new TextRun({ ...r, size: 18 })) }),
+    h1("Section S9. Equivalence of the released and the corrected screen_updates()"),
+    p("The released screen_updates() ranked the majority fallback over all K clients rather than over S\u2081 and lacked the INCONCLUSIVE branch; both are corrected in v2.0.0. The grid below re-runs Table 13\u2019s configurations under both versions and counts rounds whose accepted set differed: none did, and INCONCLUSIVE was never reached, so no reported number depends on the discrepancy."),
+    rrTable(["K", "Seed", "Attack", "F1 released", "F1 corrected", "Honest rej. rel / corr", "Attacker rej. rel / corr", "Rounds differing", "INCONCLUSIVE"], "compare_scalability.json",
+      d => d.map(r => [r.K, r.seed, r.attack, f3(r.f1_rel), f3(r.f1_pap), `${r.hon_rel} / ${r.hon_pap}`, `${r.att_rel} / ${r.att_pap}`, r.rounds_differ, r.inconclusive_rounds]),
+      [500, 600, 800, 1100, 1100, 1500, 1600, 1200, 1300], 15),
+    h1("Table S10. Extended tamper test against the emulated ledger (E19)"),
+    rrTable(["Attack", "Attacker holds", "Detected", "verify_chain() result"], "tamper_extended.json",
+      d => d.map(r => [r.attack.replace(/^\d\s/, ""), r.keys, r.detected ? "yes" : "NO", r.msg.split("(")[0].trim().slice(0, 70)]),
+      [3200, 1500, 1000, 3600]),
+    cap("Five validators, quorum four. Truncation and a quorum re-sign are not detected and are stated as limits in Sections 5.5 and 6.5. Source: review_response/tamper_extended.json."),
     h1("Figure S1. Cross-dataset F1 heat maps (E12)"),
     ...(fs.existsSync(RES + "fig5_cross_dataset_dirfree4.png")
       ? [new Paragraph({ alignment: AlignmentType.CENTER, children: [new ImageRun({ type: "png", data: fs.readFileSync(RES + "fig5_cross_dataset_dirfree4.png"), transformation: { width: 380, height: 310 } })] })]

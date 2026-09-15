@@ -322,7 +322,10 @@ def fig_scalability():
     ax[0].set_xscale("log", base=2); ax[0].set_xticks(sorted(c1.K.unique()))
     ax[0].set_xticklabels(sorted(c1.K.unique()))
     ax[0].set_xlabel("districts K"); ax[0].set_ylabel("global-model F1")
-    ax[0].set_title("(a) districts"); ax[0].legend(fontsize=5.9, loc="lower left", framealpha=0.9)
+    # Legend goes below the data band: the FedAvg-under-attack points at K=5-10
+    # (0.938-0.941) sit exactly where a lower-left legend would cover them.
+    ax[0].set_ylim(0.915, 0.978)
+    ax[0].set_title("(a) districts"); ax[0].legend(fontsize=5.9, loc="lower right", framealpha=0.9, ncol=1)
 
     ax[1].plot(c2.validators, c2.tx_per_s / 1e4, marker="o", ms=3.5, lw=1.1, color="#3A6EA5")
     ax[1].set_xlabel("validators"); ax[1].set_ylabel("throughput (× 10⁴ tx/s)", color="#3A6EA5")
