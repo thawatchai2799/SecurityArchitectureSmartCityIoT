@@ -1,299 +1,434 @@
 [
  {
   "K": 5,
-  "seed": 42,
+  "attack": "flip",
   "agg": "krum",
   "in_regime": false,
-  "f1": 0.9393,
-  "att_rej": 20,
-  "hon_rej": 20,
-  "caught": 10,
-  "hon_rej_rate": 0.667
+  "f1_mean": 0.6772,
+  "f1_sd": 0.3721,
+  "att_rej": [
+   20,
+   10,
+   20
+  ],
+  "hon_rej": [
+   20,
+   30,
+   20
+  ],
+  "caught": [
+   10,
+   0,
+   10
+  ],
+  "honest_n": 3
  },
  {
   "K": 5,
-  "seed": 42,
+  "attack": "flip",
   "agg": "multi_krum",
   "in_regime": false,
-  "f1": 0.9391,
-  "att_rej": 20,
-  "hon_rej": 0,
-  "caught": 10,
-  "hon_rej_rate": 0.0
+  "f1_mean": 0.9388,
+  "f1_sd": 0.0003,
+  "att_rej": [
+   20,
+   17,
+   20
+  ],
+  "hon_rej": [
+   0,
+   3,
+   0
+  ],
+  "caught": [
+   10,
+   8,
+   10
+  ],
+  "honest_n": 3
  },
  {
   "K": 5,
-  "seed": 42,
+  "attack": "flip",
   "agg": "lpra",
   "in_regime": false,
-  "f1": 0.9392,
-  "att_rej": 20,
-  "hon_rej": 0,
-  "caught": 10,
-  "hon_rej_rate": 0.0
+  "f1_mean": 0.9387,
+  "f1_sd": 0.0003,
+  "att_rej": [
+   18,
+   20,
+   20
+  ],
+  "hon_rej": [
+   0,
+   0,
+   0
+  ],
+  "caught": [
+   9,
+   10,
+   10
+  ],
+  "honest_n": 3
+ },
+ {
+  "K": 7,
+  "attack": "flip",
+  "agg": "krum",
+  "in_regime": true,
+  "f1_mean": 0.9381,
+  "f1_sd": 0.0002,
+  "att_rej": [
+   20,
+   20,
+   20
+  ],
+  "hon_rej": [
+   40,
+   40,
+   40
+  ],
+  "caught": [
+   10,
+   10,
+   10
+  ],
+  "honest_n": 5
+ },
+ {
+  "K": 7,
+  "attack": "flip",
+  "agg": "multi_krum",
+  "in_regime": true,
+  "f1_mean": 0.9703,
+  "f1_sd": 0.0003,
+  "att_rej": [
+   20,
+   20,
+   20
+  ],
+  "hon_rej": [
+   0,
+   0,
+   0
+  ],
+  "caught": [
+   10,
+   10,
+   10
+  ],
+  "honest_n": 5
+ },
+ {
+  "K": 7,
+  "attack": "flip",
+  "agg": "lpra",
+  "in_regime": true,
+  "f1_mean": 0.9668,
+  "f1_sd": 0.0047,
+  "att_rej": [
+   20,
+   20,
+   20
+  ],
+  "hon_rej": [
+   2,
+   0,
+   0
+  ],
+  "caught": [
+   10,
+   10,
+   10
+  ],
+  "honest_n": 5
+ },
+ {
+  "K": 9,
+  "attack": "flip",
+  "agg": "krum",
+  "in_regime": true,
+  "f1_mean": 0.9383,
+  "f1_sd": 0.0003,
+  "att_rej": [
+   20,
+   20,
+   20
+  ],
+  "hon_rej": [
+   60,
+   60,
+   60
+  ],
+  "caught": [
+   10,
+   10,
+   10
+  ],
+  "honest_n": 7
+ },
+ {
+  "K": 9,
+  "attack": "flip",
+  "agg": "multi_krum",
+  "in_regime": true,
+  "f1_mean": 0.9701,
+  "f1_sd": 0.0003,
+  "att_rej": [
+   20,
+   20,
+   20
+  ],
+  "hon_rej": [
+   0,
+   0,
+   0
+  ],
+  "caught": [
+   10,
+   10,
+   10
+  ],
+  "honest_n": 7
+ },
+ {
+  "K": 9,
+  "attack": "flip",
+  "agg": "lpra",
+  "in_regime": true,
+  "f1_mean": 0.9702,
+  "f1_sd": 0.0004,
+  "att_rej": [
+   20,
+   20,
+   20
+  ],
+  "hon_rej": [
+   1,
+   0,
+   0
+  ],
+  "caught": [
+   10,
+   10,
+   10
+  ],
+  "honest_n": 7
  },
  {
   "K": 5,
-  "seed": 43,
+  "attack": "scale",
   "agg": "krum",
   "in_regime": false,
-  "f1": 0.9402,
-  "att_rej": 20,
-  "hon_rej": 20,
-  "caught": 10,
-  "hon_rej_rate": 0.667
+  "f1_mean": 0.9397,
+  "f1_sd": 0.0011,
+  "att_rej": [
+   20,
+   20,
+   20
+  ],
+  "hon_rej": [
+   20,
+   20,
+   20
+  ],
+  "caught": [
+   10,
+   10,
+   10
+  ],
+  "honest_n": 3
  },
  {
   "K": 5,
-  "seed": 43,
+  "attack": "scale",
   "agg": "multi_krum",
   "in_regime": false,
-  "f1": 0.9385,
-  "att_rej": 20,
-  "hon_rej": 0,
-  "caught": 10,
-  "hon_rej_rate": 0.0
+  "f1_mean": 0.9388,
+  "f1_sd": 0.0003,
+  "att_rej": [
+   20,
+   20,
+   20
+  ],
+  "hon_rej": [
+   0,
+   0,
+   0
+  ],
+  "caught": [
+   10,
+   10,
+   10
+  ],
+  "honest_n": 3
  },
  {
   "K": 5,
-  "seed": 43,
+  "attack": "scale",
   "agg": "lpra",
   "in_regime": false,
-  "f1": 0.9385,
-  "att_rej": 20,
-  "hon_rej": 0,
-  "caught": 10,
-  "hon_rej_rate": 0.0
- },
- {
-  "K": 5,
-  "seed": 44,
-  "agg": "krum",
-  "in_regime": false,
-  "f1": 0.941,
-  "att_rej": 20,
-  "hon_rej": 20,
-  "caught": 10,
-  "hon_rej_rate": 0.667
- },
- {
-  "K": 5,
-  "seed": 44,
-  "agg": "multi_krum",
-  "in_regime": false,
-  "f1": 0.9387,
-  "att_rej": 20,
-  "hon_rej": 0,
-  "caught": 10,
-  "hon_rej_rate": 0.0
- },
- {
-  "K": 5,
-  "seed": 44,
-  "agg": "lpra",
-  "in_regime": false,
-  "f1": 0.9387,
-  "att_rej": 20,
-  "hon_rej": 0,
-  "caught": 10,
-  "hon_rej_rate": 0.0
+  "f1_mean": 0.9388,
+  "f1_sd": 0.0004,
+  "att_rej": [
+   20,
+   20,
+   20
+  ],
+  "hon_rej": [
+   0,
+   0,
+   0
+  ],
+  "caught": [
+   10,
+   10,
+   10
+  ],
+  "honest_n": 3
  },
  {
   "K": 7,
-  "seed": 42,
+  "attack": "scale",
   "agg": "krum",
   "in_regime": true,
-  "f1": 0.9381,
-  "att_rej": 20,
-  "hon_rej": 40,
-  "caught": 10,
-  "hon_rej_rate": 0.8
+  "f1_mean": 0.9381,
+  "f1_sd": 0.0002,
+  "att_rej": [
+   20,
+   20,
+   20
+  ],
+  "hon_rej": [
+   40,
+   40,
+   40
+  ],
+  "caught": [
+   10,
+   10,
+   10
+  ],
+  "honest_n": 5
  },
  {
   "K": 7,
-  "seed": 42,
+  "attack": "scale",
   "agg": "multi_krum",
   "in_regime": true,
-  "f1": 0.9706,
-  "att_rej": 20,
-  "hon_rej": 0,
-  "caught": 10,
-  "hon_rej_rate": 0.0
+  "f1_mean": 0.9703,
+  "f1_sd": 0.0003,
+  "att_rej": [
+   20,
+   20,
+   20
+  ],
+  "hon_rej": [
+   0,
+   0,
+   0
+  ],
+  "caught": [
+   10,
+   10,
+   10
+  ],
+  "honest_n": 5
  },
  {
   "K": 7,
-  "seed": 42,
+  "attack": "scale",
   "agg": "lpra",
   "in_regime": true,
-  "f1": 0.9601,
-  "att_rej": 20,
-  "hon_rej": 3,
-  "caught": 10,
-  "hon_rej_rate": 0.06
+  "f1_mean": 0.9668,
+  "f1_sd": 0.0047,
+  "att_rej": [
+   20,
+   20,
+   20
+  ],
+  "hon_rej": [
+   2,
+   0,
+   0
+  ],
+  "caught": [
+   10,
+   10,
+   10
+  ],
+  "honest_n": 5
  },
  {
-  "K": 7,
-  "seed": 43,
+  "K": 9,
+  "attack": "scale",
   "agg": "krum",
   "in_regime": true,
-  "f1": 0.9382,
-  "att_rej": 20,
-  "hon_rej": 40,
-  "caught": 10,
-  "hon_rej_rate": 0.8
+  "f1_mean": 0.9383,
+  "f1_sd": 0.0003,
+  "att_rej": [
+   20,
+   20,
+   20
+  ],
+  "hon_rej": [
+   60,
+   60,
+   60
+  ],
+  "caught": [
+   10,
+   10,
+   10
+  ],
+  "honest_n": 7
  },
  {
-  "K": 7,
-  "seed": 43,
+  "K": 9,
+  "attack": "scale",
   "agg": "multi_krum",
   "in_regime": true,
-  "f1": 0.9593,
-  "att_rej": 20,
-  "hon_rej": 0,
-  "caught": 10,
-  "hon_rej_rate": 0.0
+  "f1_mean": 0.9701,
+  "f1_sd": 0.0003,
+  "att_rej": [
+   20,
+   20,
+   20
+  ],
+  "hon_rej": [
+   0,
+   0,
+   0
+  ],
+  "caught": [
+   10,
+   10,
+   10
+  ],
+  "honest_n": 7
  },
  {
-  "K": 7,
-  "seed": 43,
+  "K": 9,
+  "attack": "scale",
   "agg": "lpra",
   "in_regime": true,
-  "f1": 0.9701,
-  "att_rej": 20,
-  "hon_rej": 0,
-  "caught": 10,
-  "hon_rej_rate": 0.0
- },
- {
-  "K": 7,
-  "seed": 44,
-  "agg": "krum",
-  "in_regime": true,
-  "f1": 0.938,
-  "att_rej": 20,
-  "hon_rej": 40,
-  "caught": 10,
-  "hon_rej_rate": 0.8
- },
- {
-  "K": 7,
-  "seed": 44,
-  "agg": "multi_krum",
-  "in_regime": true,
-  "f1": 0.9701,
-  "att_rej": 20,
-  "hon_rej": 0,
-  "caught": 10,
-  "hon_rej_rate": 0.0
- },
- {
-  "K": 7,
-  "seed": 44,
-  "agg": "lpra",
-  "in_regime": true,
-  "f1": 0.9491,
-  "att_rej": 20,
-  "hon_rej": 3,
-  "caught": 10,
-  "hon_rej_rate": 0.06
- },
- {
-  "K": 9,
-  "seed": 42,
-  "agg": "krum",
-  "in_regime": true,
-  "f1": 0.9381,
-  "att_rej": 20,
-  "hon_rej": 60,
-  "caught": 10,
-  "hon_rej_rate": 0.857
- },
- {
-  "K": 9,
-  "seed": 42,
-  "agg": "multi_krum",
-  "in_regime": true,
-  "f1": 0.9707,
-  "att_rej": 20,
-  "hon_rej": 0,
-  "caught": 10,
-  "hon_rej_rate": 0.0
- },
- {
-  "K": 9,
-  "seed": 42,
-  "agg": "lpra",
-  "in_regime": true,
-  "f1": 0.9495,
-  "att_rej": 20,
-  "hon_rej": 3,
-  "caught": 10,
-  "hon_rej_rate": 0.043
- },
- {
-  "K": 9,
-  "seed": 43,
-  "agg": "krum",
-  "in_regime": true,
-  "f1": 0.9383,
-  "att_rej": 20,
-  "hon_rej": 60,
-  "caught": 10,
-  "hon_rej_rate": 0.857
- },
- {
-  "K": 9,
-  "seed": 43,
-  "agg": "multi_krum",
-  "in_regime": true,
-  "f1": 0.939,
-  "att_rej": 20,
-  "hon_rej": 0,
-  "caught": 10,
-  "hon_rej_rate": 0.0
- },
- {
-  "K": 9,
-  "seed": 43,
-  "agg": "lpra",
-  "in_regime": true,
-  "f1": 0.9622,
-  "att_rej": 20,
-  "hon_rej": 0,
-  "caught": 10,
-  "hon_rej_rate": 0.0
- },
- {
-  "K": 9,
-  "seed": 44,
-  "agg": "krum",
-  "in_regime": true,
-  "f1": 0.9387,
-  "att_rej": 20,
-  "hon_rej": 60,
-  "caught": 10,
-  "hon_rej_rate": 0.857
- },
- {
-  "K": 9,
-  "seed": 44,
-  "agg": "multi_krum",
-  "in_regime": true,
-  "f1": 0.9658,
-  "att_rej": 20,
-  "hon_rej": 0,
-  "caught": 10,
-  "hon_rej_rate": 0.0
- },
- {
-  "K": 9,
-  "seed": 44,
-  "agg": "lpra",
-  "in_regime": true,
-  "f1": 0.9491,
-  "att_rej": 20,
-  "hon_rej": 2,
-  "caught": 10,
-  "hon_rej_rate": 0.029
+  "f1_mean": 0.9702,
+  "f1_sd": 0.0004,
+  "att_rej": [
+   20,
+   20,
+   20
+  ],
+  "hon_rej": [
+   1,
+   0,
+   0
+  ],
+  "caught": [
+   10,
+   10,
+   10
+  ],
+  "honest_n": 7
  }
 ]

@@ -4,71 +4,80 @@
   "n_test": 9972,
   "dt_f1": 0.9954,
   "dt_recall": 0.9998,
-  "lpra_f1": 0.9428,
-  "mlp_central_f1": 0.9424
+  "mlp_central_f1": 0.9889,
+  "mlp_central_epochs": 31,
+  "lpra_f1": 0.9426
  },
  {
   "family": "ddos",
   "n_test": 9985,
   "dt_f1": 0.9854,
   "dt_recall": 0.9877,
-  "lpra_f1": 0.9351,
-  "mlp_central_f1": 0.982
+  "mlp_central_f1": 0.9354,
+  "mlp_central_epochs": 31,
+  "lpra_f1": 0.9349
  },
  {
   "family": "dos",
   "n_test": 9963,
   "dt_f1": 0.9689,
   "dt_recall": 0.9493,
-  "lpra_f1": 0.9192,
-  "mlp_central_f1": 0.9657
+  "mlp_central_f1": 0.9669,
+  "mlp_central_epochs": 31,
+  "lpra_f1": 0.9192
  },
  {
   "family": "injection",
   "n_test": 9896,
   "dt_f1": 0.995,
   "dt_recall": 0.9977,
-  "lpra_f1": 0.9412,
-  "mlp_central_f1": 0.9872
+  "mlp_central_f1": 0.9872,
+  "mlp_central_epochs": 31,
+  "lpra_f1": 0.9405
  },
  {
   "family": "mitm",
   "n_test": 4576,
   "dt_f1": 0.7836,
   "dt_recall": 0.8294,
-  "lpra_f1": 0.4135,
-  "mlp_central_f1": 0.7643
+  "mlp_central_f1": 0.7763,
+  "mlp_central_epochs": 31,
+  "lpra_f1": 0.4122
  },
  {
   "family": "password",
   "n_test": 9921,
   "dt_f1": 0.9917,
   "dt_recall": 0.9973,
-  "lpra_f1": 0.9413,
-  "mlp_central_f1": 0.9887
+  "mlp_central_f1": 0.9879,
+  "mlp_central_epochs": 31,
+  "lpra_f1": 0.9413
  },
  {
   "family": "ransomware",
   "n_test": 9992,
   "dt_f1": 0.9846,
   "dt_recall": 0.9795,
-  "lpra_f1": 0.3628,
-  "mlp_central_f1": 0.3627
+  "mlp_central_f1": 0.3653,
+  "mlp_central_epochs": 31,
+  "lpra_f1": 0.3628
  },
  {
   "family": "scanning",
   "n_test": 9977,
   "dt_f1": 0.9937,
   "dt_recall": 0.9995,
-  "lpra_f1": 0.942,
-  "mlp_central_f1": 0.9893
+  "mlp_central_f1": 0.9896,
+  "mlp_central_epochs": 31,
+  "lpra_f1": 0.942
  },
  {
   "family": "xss",
   "n_test": 9956,
   "dt_f1": 0.9881,
   "dt_recall": 0.9838,
-  "lpra_f1": 0.9412,
-  "mlp_central_f1": 0.9866
+  "mlp_central_f1": 0.9829,
+  "mlp_central_epochs": 31,
+  "lpra_f1": 0.941
  }
 ]

@@ -20,6 +20,7 @@ import os, sys, json
 import numpy as np
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 from poc import byzantine
+from poc.federated import _make_mlp
 from poc.data_loader import load_ton_iot
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.preprocessing import StandardScaler
@@ -49,6 +50,17 @@ if __name__ == "__main__":
         rec_c = recall_score(yb[te], dt.predict(X[te]))          # recall on the unseen family
         f1_c = f1_score(yb[te], dt.predict(X[te]))
 
+        # the same (32,16) MLP the federated layer uses, trained centrally by
+        # partial_fit for 31 epochs = 1 bootstrap epoch + 15 rounds x 2 local
+        # epochs (the E3 budget); this is the middle column of Table S5, which
+        # separates the model-class part of the gap from the federation part
+        sc = StandardScaler().fit(X[tr])
+        Xs = sc.transform(X[tr]).astype(np.float32); Xte = sc.transform(X[te]).astype(np.float32)
+        mlp = _make_mlp(42)
+        for _ in range(31):
+            mlp.partial_fit(Xs, yb[tr], classes=np.array([0, 1]))
+        f1_m = f1_score(yb[te], mlp.predict(Xte))
+
         # federated: the paper's own system
         r = byzantine.run_byzantine(X[tr], yb[tr], ym[tr], X[te], yb[te], k=5, rounds=10,
                                     regime="non-iid", seed=42, attack="none", n_att=0,
@@ -58,10 +70,10 @@ if __name__ == "__main__":
         # from the run's final F1 is not enough, so rebuild the scaler+eval path:
         # run_byzantine returns only F1, so we report F1 for both and recall for DT.
         out.append(dict(family=F, n_test=int(len(te)), dt_f1=round(f1_c, 4), dt_recall=round(rec_c, 4),
-                        lpra_f1=round(f1_f, 4)))
-        print(f"{F:16} {len(te):7}  F1={f1_c:.4f} rec={rec_c:.3f}   F1={f1_f:.4f}", flush=True)
+                        mlp_central_f1=round(float(f1_m), 4), mlp_central_epochs=31, lpra_f1=round(f1_f, 4)))
+        print(f"{F:16} {len(te):7}  F1={f1_c:.4f} rec={rec_c:.3f}   MLPc F1={f1_m:.4f}   F1={f1_f:.4f}", flush=True)
 
     json.dump(out, open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "loao_federated.json"), "w"), indent=1)
-    dt_m = np.mean([o["dt_f1"] for o in out]); fl_m = np.mean([o["lpra_f1"] for o in out])
-    print(f"\nmean F1 on unseen family:  centralised DT {dt_m:.4f}   federated LPRA {fl_m:.4f}")
+    dt_m = np.mean([o["dt_f1"] for o in out]); ml_m = np.mean([o["mlp_central_f1"] for o in out]); fl_m = np.mean([o["lpra_f1"] for o in out])
+    print(f"\nmean F1 on unseen family:  centralised DT {dt_m:.4f}   centralised MLP {ml_m:.4f}   federated LPRA {fl_m:.4f}")
     print("wrote loao_federated.json")

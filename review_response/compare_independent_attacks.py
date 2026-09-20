@@ -30,7 +30,7 @@ import os, sys, json, copy
 import numpy as np
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 from poc import byzantine
-from poc.byzantine import aggregate, _make_mlp, _weights_of, _set_weights, _flat, _unflat, _bootstrap
+from poc.byzantine import aggregate, _make_mlp, _weights_of, _set_weights, _flat, _unflat, _bootstrap, _bootstrap_within
 from poc.federated import partition
 from poc.data_loader import load_ton_iot
 from sklearn.preprocessing import StandardScaler
@@ -53,7 +53,7 @@ def run_new_attack(X, y_bin, y_multi, X_test, y_test, k=5, rounds=10, local_epoc
     loc_tr = []
     for idx in parts:
         idx = rng.permutation(idx); loc_tr.append(idx[:int(0.8 * len(idx))])
-    boot = _bootstrap(y_bin, rng, 500)
+    boot = _bootstrap_within(y_bin, parts[0], rng, 500)   # district-local init (Reviewer 1, C3); the first run of this script used the pooled draw
     g = _make_mlp(seed, hidden); g.fit(Xs[boot], y_bin[boot]); classes = np.array([0, 1])
     tc, ti = _weights_of(g)
     hist, caught, att_rej_tot, hon_rej_tot = [], 0, 0, 0

@@ -8,7 +8,7 @@
    "hon_rej": 0
   },
   "flame": {
-   "f1": 0.9432,
+   "f1": 0.9468,
    "att_rej": 0,
    "hon_rej": 0
   },
@@ -22,17 +22,17 @@
   "attack": "scale",
   "n_att": 1,
   "fedavg": {
-   "f1": 0.9354,
+   "f1": 0.9413,
    "att_rej": 0,
    "hon_rej": 0
   },
   "flame": {
-   "f1": 0.9493,
+   "f1": 0.9519,
    "att_rej": 0,
    "hon_rej": 0
   },
   "lpra": {
-   "f1": 0.9707,
+   "f1": 0.9708,
    "att_rej": 30,
    "hon_rej": 0
   }
@@ -41,7 +41,7 @@
   "attack": "flip",
   "n_att": 1,
   "fedavg": {
-   "f1": 0.97,
+   "f1": 0.9529,
    "att_rej": 0,
    "hon_rej": 0
   },
@@ -51,7 +51,7 @@
    "hon_rej": 0
   },
   "lpra": {
-   "f1": 0.9707,
+   "f1": 0.9708,
    "att_rej": 30,
    "hon_rej": 0
   }
@@ -60,17 +60,17 @@
   "attack": "noise",
   "n_att": 1,
   "fedavg": {
-   "f1": 0.7832,
+   "f1": 0.8226,
    "att_rej": 0,
    "hon_rej": 0
   },
   "flame": {
-   "f1": 0.9706,
+   "f1": 0.9707,
    "att_rej": 0,
    "hon_rej": 0
   },
   "lpra": {
-   "f1": 0.9707,
+   "f1": 0.9708,
    "att_rej": 30,
    "hon_rej": 0
   }
@@ -79,17 +79,17 @@
   "attack": "stealth",
   "n_att": 1,
   "fedavg": {
-   "f1": 0.9706,
+   "f1": 0.9708,
    "att_rej": 0,
    "hon_rej": 0
   },
   "flame": {
-   "f1": 0.9706,
+   "f1": 0.9707,
    "att_rej": 0,
    "hon_rej": 0
   },
   "lpra": {
-   "f1": 0.9706,
+   "f1": 0.9708,
    "att_rej": 0,
    "hon_rej": 0
   }
@@ -98,12 +98,12 @@
   "attack": "adaptive",
   "n_att": 2,
   "fedavg": {
-   "f1": 0.3066,
+   "f1": 0.291,
    "att_rej": 0,
    "hon_rej": 0
   },
   "flame": {
-   "f1": 0.5891,
+   "f1": 0.5888,
    "att_rej": 0,
    "hon_rej": 0
   },

@@ -19,7 +19,7 @@ from poc.blockchain import PermissionedLedger
 
 if __name__ == "__main__":
     # Same ledger configuration as the simulation's default.
-    led = PermissionedLedger(members=["Gateway-Healthcare"])
+    led = PermissionedLedger(block_size=50, block_interval_s=0.5, members=["Gateway-Healthcare"])   # E11 config (city_simulation.py)
     print(f"block_size={led.block_size}  block_interval_s={led.block_interval}")
 
     submit_ms = []

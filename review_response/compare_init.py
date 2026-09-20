@@ -27,23 +27,22 @@ from poc.federated import partition
 from poc.data_loader import load_ton_iot
 from sklearn.model_selection import train_test_split
 
-_orig_bootstrap = byzantine._bootstrap
 _POOL = {"idx": None, "n": 500}
+_orig_within = byzantine._bootstrap_within
 
-def _bootstrap_restricted(y, rng, n=500):
-    """Same class-balanced draw, but only from _POOL['idx'] (a district's
-    own indices) and of size _POOL['n']."""
-    if _POOL["idx"] is None:
-        return _orig_bootstrap(y, rng, n)
-    idx_all = np.asarray(_POOL["idx"]); n = _POOL["n"]
-    out = []
-    for c in np.unique(y[idx_all]):
-        pool = idx_all[y[idx_all] == c]
-        take = min(len(pool), max(1, n // max(len(np.unique(y[idx_all])), 1)))
-        out.append(rng.choice(pool, take, replace=False))
-    return np.concatenate(out)
+def _bootstrap_variant(y, idx_pool, rng, n=500):
+    """Replaces byzantine._bootstrap_within for the duration of one run.
+    'pooled'    -> the submitted behaviour: class-balanced draw over ALL indices
+    'district0' -> the v2 behaviour: draw from district 0 only (n = 500)
+    'minimal'   -> district 0, two examples (one per class)
+    The v2.0 code calls _bootstrap_within(y, parts[0], rng, 500), so patching
+    that name is what varies the initialisation; the first version of this
+    script (run against the v1.0 code) patched byzantine._bootstrap instead."""
+    if _POOL["idx"] is None:                        # pooled
+        return byzantine._bootstrap(y, rng, n)
+    return _orig_within(y, _POOL["idx"], rng, _POOL["n"])
 
-byzantine._bootstrap = _bootstrap_restricted
+byzantine._bootstrap_within = _bootstrap_variant
 
 def run(init, X, yb, ym, Xt, yt, K, seed, attack, n_att):
     if init == "pooled":

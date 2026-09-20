@@ -1,20 +1,12 @@
-"""Reviewer 1, Comment 5(a) and 5(b).
+"""Reviewer 1, Comment 5(a)/(b) -- corrected version.
 
-(a) Table 9 runs Krum with K = 5 and f = 2.  Krum's resilience condition is
-    n > 2f + 2, i.e. n >= 7 for f = 2.  At n = 5 the condition fails, and
-    the code shows why it is not a formality: _krum_scores uses
-    m = n - f - 2 = 1 nearest neighbour, so each client's score is its
-    distance to its single closest peer.  Two colluding attackers placing
-    identical updates are each other's nearest neighbour at distance ~0 and
-    therefore win.  This runs Krum in regime (K = 7, 9 with f = 2) to show
-    it is not Krum that fails in Table 9, but Krum used outside its bound.
+The earlier run tested Krum in and out of regime under the SCALE attack, but
+the 0.677 +- 0.456 instability the paper reports (Table 9) is under FLIP with
+two attackers.  This runs both attacks so the in-regime claim is supported
+for the attack that actually showed the instability.
 
-(b) The "honest rejections" column is not comparable across aggregators.
-    LPRA's accepted mask is a quarantine decision.  Krum's is a selection:
-    aggregate() marks exactly one client accepted, so K-1 honest clients are
-    counted as "rejected" every round by construction, whatever they did.
-    This separates the two properties the paper conflates: global-model
-    robustness (F1) and malicious-client identification.
+Krum's condition is n > 2f + 2; for f = 2 that means K >= 7.  At K = 5
+_krum_scores() uses m = n - f - 2 = 1 nearest neighbour.
 """
 import os, sys, json
 import numpy as np
@@ -29,30 +21,21 @@ if __name__ == "__main__":
     tr, te = train_test_split(np.arange(len(yall)), test_size=0.3, stratify=mall, random_state=42)
     X, yb, ym, Xt, yt = Xall[tr], yall[tr], mall[tr], Xall[te], yall[te]
 
-    print("Krum resilience condition n > 2f + 2:")
-    for K in (5, 7, 9):
-        print(f"  K={K}, f=2 -> {K} > 6 is {K > 6}   (m = n-f-2 = {K-2-2} nearest neighbours used)")
-    print()
-
     out = []
-    for K in (5, 7, 9):
-        for seed in (42, 43, 44):
+    for attack in ("flip", "scale"):
+        print(f"\n=== attack = {attack}, f = 2 ===")
+        for K in (5, 7, 9):
             for agg in ("krum", "multi_krum", "lpra"):
-                r = byzantine.run_byzantine(X, yb, ym, Xt, yt, k=K, rounds=10, regime="non-iid",
-                                            seed=seed, attack="scale", n_att=2, aggregator=agg,
-                                            lpra_version="v2")
-                # attackers are districts 0..n_att-1; honest are the rest
-                honest = K - 2
-                row = dict(K=K, seed=seed, agg=agg, in_regime=bool(K > 6),
-                           f1=round(r["mean_last3_f1"], 4),
-                           att_rej=r["attacker_rejections"], hon_rej=r["honest_rejections"],
-                           caught=r["rounds_all_attackers_rejected"],
-                           hon_rej_rate=round(r["honest_rejections"] / (honest * 10), 3))
+                f1s, att, hon, caught = [], [], [], []
+                for seed in (42, 43, 44):
+                    r = byzantine.run_byzantine(X, yb, ym, Xt, yt, k=K, rounds=10, regime="non-iid",
+                                                seed=seed, attack=attack, n_att=2, aggregator=agg, lpra_version="v2")
+                    f1s.append(r["mean_last3_f1"]); att.append(r["attacker_rejections"])
+                    hon.append(r["honest_rejections"]); caught.append(r["rounds_all_attackers_rejected"])
+                row = dict(K=K, attack=attack, agg=agg, in_regime=bool(K > 6), f1_mean=round(float(np.mean(f1s)), 4),
+                           f1_sd=round(float(np.std(f1s)), 4), att_rej=att, hon_rej=hon, caught=caught, honest_n=K - 2)
                 out.append(row)
-                print(f"  K={K} seed={seed} {agg:11} in-regime={str(row['in_regime']):5}  "
-                      f"F1={row['f1']:.4f}  attackers_rejected={row['att_rej']:2}/20  "
-                      f"honest_'rejected'={row['hon_rej']:3}/{honest*10} ({row['hon_rej_rate']:.0%})  "
-                      f"caught={row['caught']}/10", flush=True)
-        print()
+                print(f"  K={K} {agg:11} in-regime={str(row['in_regime']):5}  F1={row['f1_mean']:.4f} \u00b1 {row['f1_sd']:.4f}  "
+                      f"att_rej={att}/20  hon_rej={hon}/{(K-2)*10}  caught={caught}/10", flush=True)
     json.dump(out, open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "krum_regime.json"), "w"), indent=1)
-    print("wrote krum_regime.json")
+    print("\nwrote evidence/krum_regime.json")

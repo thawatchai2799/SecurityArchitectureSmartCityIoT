@@ -1,0 +1,14 @@
+{
+ "repeats": 5,
+ "config": {
+  "block_size": 50,
+  "block_interval_s": 0.5
+ },
+ "submit_ms_mean": 0.0202,
+ "commit_ms_mean": 0.788,
+ "commit_ms_range": [
+  0.771,
+  0.802
+ ],
+ "commit_p95_mean": 1.007
+}
