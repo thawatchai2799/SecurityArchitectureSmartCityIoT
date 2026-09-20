@@ -63,7 +63,7 @@ const supp = new Document({ styles: { default: { document: { run: { font: F, siz
   children: [
     new Paragraph({ children: [new TextRun({ text: "Supplementary Material", font: F, size: 28, bold: true })] }),
     p([t("Thawatchai Chomsiri 1 and Suwichai Phunsa 2,* — 1 Department of Information Technology, Research Center of Information Technology for the Future; 2 Department of Creative Media, Digital Contents for Development Research Unit; both Faculty of Informatics, Mahasarakham University, Mahasarakham 44150, Thailand. * Correspondence: suwichai.p@msu.ac.th", { size: 18 })]),
-    p([t("for: A Multi-Layer Trustworthy Security Architecture for Smart-City IoT: Edge AI Intrusion Detection, Poisoning-Resilient Federated Learning and Ledger-Anchored Model Provenance", { italics: true })]),
+    p([t("for: A Multi-Layer Security Architecture for Smart-City IoT with Measured Limits: Edge Intrusion Detection, Screened Federated Learning and Ledger-Anchored Model Provenance", { italics: true })]),
     p([t("Experiment identifiers refer to Table 3 of the main text; result files are produced by run_poc.py and run_extended.py in the released code.", { size: 18 })]),
     h1("Table S1. Multi-class attack typing on TON_IoT (random forest 30 × 12, 54 native features, 70/30 stratified split)"),
     factTable(["Class", "Precision", "Recall", "F1", "Test support"], "tab_multiclass", [2200, 1600, 1600, 1600, 2026]),
@@ -86,7 +86,7 @@ const supp = new Document({ styles: { default: { document: { run: { font: F, siz
       d => { const rows = d.map(r => [r.family, r.n_test.toLocaleString(), f3(r.dt_f1), f3(r.mlp_central_f1), f3(r.lpra_f1)]);
              const m = k => f3(d.reduce((a, r) => a + r[k], 0) / d.length); rows.push(["mean", "", m("dt_f1"), m("mlp_central_f1"), m("lpra_f1")]); return rows; },
       [1900, 1300, 1900, 2000, 2200]),
-    cap("Train on the other eight families plus benign; test on the held-out family plus held-out benign. Model class accounts for about half the gap (ransomware: 0.363 for the MLP whether centralised or federated), federation for the rest (MITM: 0.764 \u2192 0.414). Source: review_response/loao_federated.json."),
+    cap("Train on the other eight families plus benign; test on the held-out family plus held-out benign, on the 60k-flow sample used by the federated experiments (so the tree column is not the full-data run of Table 11: on ransomware the tree\u2019s recall on the unseen family is 0.81 there and 0.98 here). Model class accounts for about half the gap (ransomware: 0.365 centralised and 0.363 federated for the MLP), federation for the rest (MITM: 0.776 \u2192 0.412). Source: review_response/loao_federated.json."),
     h1("Table S6. Cross-dataset F1 on the nine directional features (E12)"),
     p("Datasets that do not separate the two flow directions (CICIoT2023) cannot appear in this view; they are covered by the direction-free matrix in Table 13 of the main text."),
     factTable(["Train \\ Test", "TON_IoT", "CIC-IDS2017", "UNSW-NB15"], "tab_cross_common",
@@ -99,15 +99,14 @@ const supp = new Document({ styles: { default: { document: { run: { font: F, siz
       P`Catch rate is the number of rounds out of ${"e5_rounds"} in which every attacker was quarantined, averaged over ${"e5_seeds"} seeds; rejections are counted in district-rounds over the same runs. Krum rejects K − 1 clients per round by construction, which is why its honest-rejection count is the largest and its no-attack F1 the lowest. Source: extA_byzantine_grid_summary.csv.`
         .map(r => new TextRun({ ...r, size: 18 })) }),
 
-    h1("Table S7 (extension). Krum and Multi-Krum inside and outside n > 2f + 2 (f = 2, scale attack, seeds 42\u201344)"),
-    rrTable(["K", "Aggregator", "n > 2f+2", "F1 (mean)", "Attacker rounds rejected (per seed)", "Honest \u201crejections\u201d (per seed)", "What the count is"], "krum_regime.json",
-      d => { const g = {}; for (const r of d) { const key = `${r.K}|${r.agg}`; (g[key] = g[key] || []).push(r); }
-             return Object.entries(g).map(([key, rs]) => { const [K, agg] = key.split("|"); const h = Number(K) - 2;
-               return [K, agg, Number(K) > 6 ? "yes" : "no", f3(rs.reduce((a, r) => a + r.f1, 0) / rs.length),
-                 `${rs.map(r => r.att_rej).join("/")} of 20`, `${rs.map(r => r.hon_rej).join("/")} of ${h * 10}`, agg === "lpra" ? "quarantine" : "non-selection"]; })
-               .sort((a, b) => Number(a[0]) - Number(b[0]) || a[1].localeCompare(b[1])); },
-      [600, 1500, 1000, 1200, 2400, 2200, 1500]),
-    cap("Krum\u2019s honest \u201crejections\u201d are non-selection by a single-winner rule and rise with K for that reason alone; they are not comparable to LPRA\u2019s quarantine decisions. Source: review_response/krum_regime.json."),
+    h1("Table S7 (extension). Krum and Multi-Krum inside and outside n > 2f + 2 (f = 2; flip and scale attacks; seeds 42\u201344)"),
+    rrTable(["K", "Attack", "Aggregator", "n > 2f+2", "F1 (mean \u00b1 s.d.)", "Attacker rej. (per seed)", "Honest \u201crej.\u201d (per seed)", "Rounds all caught", "What the count is"], "krum_regime.json",
+      d => d.map(r => [r.K, r.attack, r.agg, r.in_regime ? "yes" : "no", `${f3(r.f1_mean)} \u00b1 ${f3(r.f1_sd)}`, `${r.att_rej.join("/")} of 20`, `${r.hon_rej.join("/")} of ${r.honest_n * 10}`, `${r.caught.join("/")} of 10`, r.agg === "lpra" ? "quarantine" : "non-selection"])
+             .sort((a, b) => a[1].localeCompare(b[1]) || a[0] - b[0] || a[2].localeCompare(b[2])),
+      [500, 700, 1200, 800, 1500, 1500, 1500, 1300, 1400], 15),
+    cap("Under flip with two attackers, K = 5 reproduces Table 9\u2019s Krum instability (0.677 \u00b1 0.372) and it disappears at K = 7 and 9, where the condition holds. Krum\u2019s honest \u201crejections\u201d are non-selection by a single-winner rule and are not comparable to LPRA\u2019s quarantine decisions. Source: review_response/krum_regime.json."),
+    // v2.1: the decision-tree leaves table (Table S5 in the submitted supplement) is renumbered S8; it was dropped by
+    // mistake when S5 became the leave-one-family-out table in v2.0. Content unchanged.
     h1("Table S8. The most-populated leaves of the depth-8 decision tree (test split)"),
     factTable(["Test flows", "Prediction", "Purity", "Dominant true types", "Rule (conjunction of splits from the root)"],
       "tab_tree_rules", [1000, 1000, 800, 1700, 4526], 15),

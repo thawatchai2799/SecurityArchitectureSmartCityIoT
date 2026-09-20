@@ -306,6 +306,13 @@ def fig_ledger():
 # Figure 6 — scalability (districts, validators, block size)
 # --------------------------------------------------------------------------- #
 def fig_scalability():
+    # NOTE (v2.0 revision): panel (a) is regenerated from table13_definitive
+    # (review_response/) via extC_districts_scaling.csv.  Panels (b) and (c)
+    # must be drawn from the MEASURED extC_validators_scaling.csv and
+    # extC_blocksize_sweep.csv of the original run; the three-point CSVs
+    # shipped in results/ for those two panels are placeholders reconstructed
+    # from the text and are NOT measurements -- the committed figure keeps the
+    # original measured panels.  See CHANGELOG, "Figure 7".
     c1, c2, c3 = (rd_csv("extC_districts_scaling.csv"), rd_csv("extC_validators_scaling.csv"),
                   rd_csv("extC_blocksize_sweep.csv"))
     if c1 is None or c2 is None or c3 is None:
