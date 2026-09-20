@@ -306,7 +306,11 @@ git tag -a v1.0-manuscript -m "Numbers reported in the Smart Cities submission"
 git push origin v1.0-manuscript
 ```
 
-and cite that tag (or the commit hash) in the paper. `results/paper_facts.json` and the CSV files it is
+and cite that tag (or the commit hash) in the paper.  The peer-review revision is tagged `v2.1.0`
+(the Data Availability statement of the revised manuscript cites it); `v1.0-manuscript` remains the
+submitted version.  Note that `paper_src/make_paper.js` regenerates the *submitted* manuscript text; the
+revised text was edited in the manuscript file, and the numbers it reports come from `results/` as
+regenerated under this release plus the harnesses in `review_response/` (see `CHANGELOG.md`, v2.0 and v2.1).  The revised manuscript is delivered with every changed passage shaded by source (green Reviewer 1, pink Reviewer 3, yellow Reviewer 2, purple Editor, grey authors' own corrections); the key is at the top of `CHANGELOG.md`. `results/paper_facts.json` and the CSV files it is
 built from are the audit trail: every number in the manuscript can be traced to one of them, and
 `python paper_src/make_figures.py` prints, per figure, which file and which table each value comes from.
 The Fabric measurements live in `fabric/fabric_facts.json` because they are produced by a Docker network

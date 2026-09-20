@@ -1,4 +1,93 @@
-# Development log
+# Colour key of the revised manuscript (revise-v15) and its companions
+
+The manuscript file `smartcities-4547789_revise-v15.docx`, the Supplementary
+addendum and the response letter shade every passage that differs from the
+submitted version by the source of the change:
+
+| colour | hex | source |
+|---|---|---|
+| green  | `#C6EFCE` | changed in response to Reviewer 1 |
+| pink   | `#FFC7CE` | changed in response to Reviewer 3 |
+| yellow | `#FFEB9C` | changed in response to Reviewer 2 |
+| purple | `#E4D0F5` | changed at the Editor's request (none yet; the length decision is deferred to the Editor) |
+| grey   | `#D9D9D9` | errors found and corrected by the authors in self-review (this file, v2.1) |
+
+The shading is produced by `review_response/highlight_changes.py` from the
+submitted and the revised manuscript and is removed at proof stage.
+
+# What changed in v2.1 (code + results + supplement) — second self-review
+
+## A. Results regenerated under the v2.1 code (district-local initialisation)
+
+The v2.0 code initialises the global model from one district's own data
+(`_bootstrap_within`), but the K = 5 tables of the manuscript (Tables 6–10)
+still carried the submitted runs, made with the pooled draw, and several
+review_response/ JSONs had also been produced before the change landed
+(`compare_independent_attacks.py` even imported the pooled `_bootstrap`
+explicitly).  Everything is now regenerated under the released code:
+
+* `results/extA_byzantine_grid_{raw,summary}.csv` (Table 9, Figure 4) —
+  `run_extended.py --part A`.  LPRA and Multi-Krum cells unchanged; FedAvg,
+  Median and Trimmed-Mean cells under attack moved (e.g. FedAvg scale×1
+  0.923 → 0.950 ± 0.036, scale×2 0.959 → 0.926 ± 0.042, noise×2 0.748 → 0.672).
+* `results/exp17_adaptive_sweep.csv` (Table 10, Figure 5) —
+  `run_advanced.py --part A --n-att {1,2}`.  F1 unchanged to three decimals;
+  six "rounds caught" counts moved by one or two.
+* `results/extB_*.csv` (Section 5.4 five-seed values) — `run_extended.py --part B`:
+  FedAvg 0.9708 ± 0.0007, centralised 0.9942 ± 0.0003, local-only 0.9516 ± 0.0024
+  (were 0.0006 / 0.9944 ± 0.0004 / 0.9517); edge-model F1 and FPR unchanged.
+  (`extended_results.json` here holds only the extA and extB blocks of these
+  runs — merge, do not replace.)
+* `review_response/exp3_exp9_rerun.{py,json}` (Tables 6–8, full data): only
+  FedAvg under Gaussian noise moved (0.686 → 0.780); every LPRA and no-attack
+  number and every personalised-FL number is identical.
+* `review_response/independent_attacks.json`: sign-flip FedAvg 0.609–0.879 →
+  0.607–0.886; backdoor LPRA 0.939–0.949 (31/60 quarantined) → 0.950–0.960
+  (29/60), FedAvg 0.970 → 0.952–0.971.  The earlier "screening cost" claim is
+  correspondingly softened in Section 5.3.
+* `review_response/threshold_sensitivity.json`: honest rejections at
+  c_min = 0.4 / 0.6 / 0.8 are 11 / 31 / 51 of 150 (were 10 / 32 / 50).
+* `review_response/krum_regime.json`: the Krum rows are unchanged (K = 5 flip
+  0.677 ± 0.372; K = 7, 9 0.938); the LPRA and Multi-Krum rows at K = 7, 9
+  moved (e.g. LPRA 0.960 → 0.967 / 0.970).
+* `review_response/flame_comparison.json`: FLAME no-attack 0.943 → 0.947
+  (cost 0.024, not 0.028); adaptive 0.589 unchanged.
+* `review_response/loao_federated.json`: now also carries the centralised-MLP
+  column (31 partial-fit epochs, computed inside `compare_loao.py`; the
+  v2.0 column came from an unshuffled ad-hoc run that was never committed):
+  mean 0.885 → 0.887, MITM 0.764 → 0.776; federated MITM 0.414 → 0.412.
+* `review_response/compare_scalability.json` (Section S9) re-run: still 0 of
+  240 rounds differ, INCONCLUSIVE never reached.
+
+## B. Table 13 provenance
+
+`table13_definitive.json` was a one-attacker run and did not match Table 13
+(20% Byzantine).  Replaced by `table13_perseed.{py,json}`: every per-seed
+value, from which `results/extC_districts_scaling.csv` (mean of the last three
+rounds; population s.d. over seeds) is reproduced exactly.  Seven s.d. cells
+of the manuscript's Table 13 had been mistyped and are corrected.
+
+## C. Supplement
+
+* `paper_src/make_supp.js`: the decision-tree leaves table (S5 in the submitted
+  supplement) had been dropped when S5 became the leave-one-family-out table
+  in v2.0.  Restored as **Table S8**, content unchanged; the title line carries
+  the revised manuscript title.  Main text Section 5.1 now cites S8.
+* `review_response/build_supp_addendum.js`: the S7-extension note still said
+  Krum was "stable in and out of regime" (the conclusion of the first,
+  scale-only run); rewritten to match `krum_regime.json`.
+* Leave-one-family-out federated mean 0.8155 → reported as 0.815.
+
+## D. Housekeeping
+
+* `results/extC_validators_scaling.csv` and `extC_blocksize_sweep.csv`
+  (interpolated, never measured) removed; `results/figures/fig7_scalability.png`
+  is the composite with the original panels (b), (c).
+* `review_response/compare_krum.py`, `compare_ledger_latency.py`,
+  `ledger_latency_5x.json` added (see v2.0 D/E).
+* The `RESPONSE_*_draft.md` files are superseded by the response letter and
+  removed.
+
 
 # What changed in v2.0 (code) — the peer-review revision
 
@@ -60,12 +149,23 @@ Table 13 is regenerated from this code (`table13_definitive.json`).
 `city_simulation.EdgeGateway.process()` stopped its timer when
 `ledger.submit()` returned, i.e. after a mempool append.  The block is cut
 later.  The 0.03 ms "anchoring" figure was submission cost; commit latency
-on the same ledger is 0.80 ms mean (`ledger_latency.json`).  The manuscript
+at E11's own settings (block 50, interval 0.5 s) is 0.79 ms mean over five repeats (`ledger_latency_5x.json`).  The manuscript
 is corrected; the code is unchanged, since `_cut_block()` already recorded
 the right quantity in `metrics["tx_latencies"]` -- the harness simply
 reported the wrong one.
 
-## E. Added, not changed
+## E. Figure 7
+
+Panel (a) is redrawn from the corrected Table 13.  Panels (b) validators and
+(c) block size are the original measured curves, kept pixel-for-pixel: a
+first revision pass redrew them from three-point CSVs reconstructed from the
+prose (endpoints correct, intermediate points interpolated) and that figure
+was withdrawn once the interpolation was noticed.  The measured
+extC_validators_scaling.csv and extC_blocksize_sweep.csv are not in this
+release because results/ is not distributed; regenerate them with
+run_extended.py before re-running make_figures.fig_scalability().
+
+## F. Added, not changed
 
 - `review_response/` -- every comparison harness, its raw output, and the
   extended tamper test (deletion, truncation, re-signing with minority and

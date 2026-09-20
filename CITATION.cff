@@ -1,7 +1,10 @@
 cff-version: 1.2.0
 title: >-
-  Security Architecture for Smart-City IoT: edge AI intrusion detection,
-  poisoning-resilient federated learning and ledger-anchored model provenance
+  A Multi-Layer Security Architecture for Smart-City IoT with Measured Limits:
+  edge intrusion detection, screened federated learning and ledger-anchored
+  model provenance
+version: 2.1.0
+date-released: '2026-09-20'
 message: If you use this software, please cite the accompanying article.
 type: software
 authors:
