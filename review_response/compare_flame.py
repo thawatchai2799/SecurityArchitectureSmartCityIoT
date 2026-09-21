@@ -1,6 +1,6 @@
 """Reviewer 3, point 2: no FLAME comparison, though FLAME is the standard
 clustering-based defence.  This implements FLAME's three steps as
-described in Nguyen et al. (NDSS 2022):
+described in Nguyen et al. (USENIX Security 2022):
 
   1  cluster client updates by pairwise cosine distance (HDBSCAN with
      min_cluster_size = K/2 + 1); keep the largest cluster
@@ -21,6 +21,8 @@ from poc.data_loader import load_ton_iot
 from sklearn.model_selection import train_test_split
 from sklearn.cluster import HDBSCAN
 
+FLAME_CALLS = [0]
+CLUSTER_LOG = []   # (n_clusters, kept) per FLAME aggregation round
 _orig_aggregate = byzantine.aggregate
 
 def flame(V, ns, gvec, lam=0.001, seed=0):
@@ -28,16 +30,23 @@ def flame(V, ns, gvec, lam=0.001, seed=0):
     norms = np.linalg.norm(deltas, axis=1) + 1e-12
     cos_dist = 1 - (deltas @ deltas.T) / np.outer(norms, norms)
     np.fill_diagonal(cos_dist, 0); cos_dist = np.clip(cos_dist, 0, 2)
-    labels = HDBSCAN(min_cluster_size=max(2, K // 2 + 1), metric="precomputed").fit(cos_dist).labels_
+    # FLAME's reference settings (Nguyen et al., USENIX Security 2022): min_samples = 1 and a single cluster allowed, so the
+    # benign majority can form one cluster. scikit-learn's defaults (min_samples = min_cluster_size,
+    # allow_single_cluster = False) cannot return that cluster and found none in any round; those runs are
+    # kept in *_sklearn_defaults.json for the record.
+    labels = HDBSCAN(min_cluster_size=max(2, K // 2 + 1), min_samples=1, allow_single_cluster=True,
+                     metric="precomputed").fit(cos_dist).labels_
     if (labels >= 0).sum() == 0:
         keep = np.ones(K, bool)                         # no cluster found: keep all
     else:
         big = np.bincount(labels[labels >= 0]).argmax(); keep = labels == big
-    med_norm = np.median(norms[keep])
+    CLUSTER_LOG.append(dict(n_clusters=int(len(set(labels[labels >= 0]))), kept=int(keep.sum())))
+    med_norm = np.median(norms)                       # FLAME step 7: S_t = median over ALL n clients' update norms
     clipped = np.array([gvec + d * min(1.0, med_norm / n) for d, n in zip(deltas, norms)])
-    w = ns * keep; w = w / w.sum()
+    w = keep / keep.sum()                             # FLAME step 10: plain mean over the admitted set L
     agg = (clipped * w[:, None]).sum(0)
-    rng = np.random.default_rng(seed)
+    FLAME_CALLS[0] += 1
+    rng = np.random.default_rng(seed + FLAME_CALLS[0])  # fresh noise every round (a fixed seed would add the same vector each round)
     agg = agg + rng.normal(0, lam * med_norm, size=agg.shape)
     return agg, keep, dict(kept=int(keep.sum()))
 
@@ -67,9 +76,14 @@ if __name__ == "__main__":
                                             attack=attack, n_att=n_att, aggregator=agg, lpra_version="v2", **kw)
                 f1s.append(r["mean_last3_f1"]); ar += r["attacker_rejections"]; hr += r["honest_rejections"]
             row[agg] = dict(f1=round(float(np.mean(f1s)), 4), att_rej=ar, hon_rej=hr)
+            if agg == "flame":
+                log = CLUSTER_LOG[-30:]
+                row[agg]["rounds_with_cluster"] = sum(1 for e in log if e["n_clusters"] > 0)
+                row[agg]["mean_kept"] = round(float(np.mean([e["kept"] for e in log])), 2)
         out.append(row)
         d = 30 * n_att if n_att else 0
         print(f"{attack:10} {n_att:5}  {row['fedavg']['f1']:7.4f} {row['flame']['f1']:7.4f} {row['lpra']['f1']:7.4f}   "
               f"{row['flame']['att_rej']:>6}/{d:<6} {row['lpra']['att_rej']:>5}/{d:<6}  hon: FLAME {row['flame']['hon_rej']} LPRA {row['lpra']['hon_rej']}", flush=True)
     json.dump(out, open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "flame_comparison.json"), "w"), indent=1)
+    json.dump(CLUSTER_LOG, open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "flame_comparison_clusterlog.json"), "w"))
     print("\nwrote flame_comparison.json")

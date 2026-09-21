@@ -49,11 +49,11 @@ if __name__ == "__main__":
     X, yb, ym, Xt, yt = Xall[tr], yall[tr], mall[tr], Xall[te], yall[te]
 
     out = []
-    # Table 13's grid: K in {5,10,20,50}, one attacker (scale), non-iid.  Seed
+    # Table 13's grid: K in {5,10,20,50}, 20% Byzantine (n_att = K//5, scale), non-iid.  Seed
     # 42 is the paper's; 43 and 44 added because Reviewer 1 asks for more.
     for K in (5, 10, 20, 50):
         for seed in (42, 43, 44):
-            for attack, n_att in (("none", 0), ("scale", 1)):
+            for attack, n_att in (("none", 0), ("scale", max(1, K // 5))):   # 20% Byzantine, as in Table 13 (an earlier run used one attacker at every K; kept as compare_scalability_one_attacker.json)
                 res = {}
                 for mode in ("released", "paper"):
                     t0 = time.perf_counter()

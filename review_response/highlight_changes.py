@@ -1,7 +1,7 @@
 """Shade every passage of the revised manuscript that differs from the submitted one, by source of
-the change (green R1, pink R3, yellow R2, purple Editor, grey authors).
+the change (green R1, pink R3, yellow R2, purple Academic Editor, grey authors).
 Usage: python highlight_changes.py revised.docx out.docx submitted.docx
-The DEF/OVR maps below are the attribution used for revise-v15."""
+The DEF/OVR/SPAN/EXEMPT maps below are the attribution used for revise-v30."""
 from docx import Document
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
@@ -10,18 +10,34 @@ import copy, difflib, re, sys
 G, P, Y, V, GR = 'C6EFCE', 'FFC7CE', 'FFEB9C', 'E4D0F5', 'D9D9D9'   # R1 green, R3 pink, R2 yellow, Editor purple, self grey
 
 # ---- paragraph defaults (index in the list of non-empty paragraphs of v14)
-DEF = {1: P, 6: Y, 10: G, 12: P, 13: G, 15: G, 23: G, 25: G, 27: G, 30: P, 34: P, 38: G, 39: Y, 41: G, 42: P,
-       50: G, 53: G, 54: Y, 60: GR, 61: P, 64: G, 68: GR, 71: G, 72: G, 75: GR, 77: GR, 78: G, 79: G, 80: P,
-       84: GR, 89: P, 92: G, 93: G, 94: G, 95: G, 100: G, 104: G, 105: G, 109: G, 118: G, 128: G, 135: GR,
-       137: G, 141: P, 142: P, 143: G, 144: G, 147: G, 194: G, 195: G, 196: G, 197: G}
+DEF = { 1: P, 6: Y, 10: G, 12: P, 13: G, 15: G, 23: G, 25: G, 27: G, 30: P, 34: P, 38: G, 39: Y, 40: GR, 41: G,
+       42: P, 50: G, 53: G, 54: Y, 60: GR, 61: P, 64: G, 68: V, 71: G, 72: G, 75: GR, 76: GR, 77: GR,
+       78: G, 79: G, 80: GR, 84: GR, 89: P, 92: G, 93: G, 94: G, 95: GR, 96: G, 101: G, 104: GR, 105: G,
+       106: G, 110: G, 119: G, 129: G, 136: GR, 138: G, 142: P, 143: P, 144: G, 145: G, 148: G,
+       195: G, 196: G, 197: G, 198: G}
 # ---- sentence-level overrides, applied in order; first match wins
+# span-only overrides: only the matched text is recoloured; the rest of the sentence keeps its sentence colour
+SPAN = [
+    # Academic Editor (purple): values that moved when the experiments were re-run under the corrected code,
+    # and the algorithm-implementation equivalence clause of Section 4.4
+    (r'and the released screen_updates\(\) implements Algorithm 1 step for step[^;]*\(Supplementary Section S9\)|'
+     r'0\.780 \(Gaussian-noise weights\)|0\.780|34\.1 against 1\.7–2\.0|cosine 0\.09 against 0\.79–0\.89|0\.950 ± 0\.036 \(scale\) and 0\.780 ± 0\.161 \(noise\)|'
+     r'0\.920 \(flip\), 0\.926 \(scale\) and 0\.672 \(noise\)|0\.939–0\.941|about 0\.939 \(0\.939–0\.945\)|0\.9393|0\.607–0\.886|29/60|0\.950–0\.960 against FedAvg’s 0\.952–0\.971|'
+     r'0\.00–0\.41% of test flows under LPRA and 0\.00–0\.47% under FedAvg|11/150 at 0\.4, 31/150 at 0\.6, 51/150 at 0\.8|0\.024 F1 with no attack \(0\.947 against 0\.971\)|'
+     r'0\.887 when trained centrally|0\.365 centralised and 0\.363 federated|six of nine|0\.776 to 0\.412|0\.9708 ± 0\.0007 versus centralised 0\.9942 ± 0\.0003 and local-only 0\.9516 ± 0\.0024', V),
+    # self-found corrections (grey): mistyped or missing statements, not re-run values
+    (r'\(60k-flow sample; recall 0\.81 on the full data of Table 11\)|Supplementary Table S8|Table S8 the twelve[^;]*|tied with Trimmed Mean under noise|population s\.d\. over seeds|an estimated 0\.19|threshold sweep is reported separately \(Table S4\)|0\.01–0\.16|and against the colluding pair never both colluders in the same round', GR),
+    # author-driven wording refinements prompted by informal pre-submission review (grey), revise-v26
+    (r'the ledger’s guarantee ends at a validator-quorum collusion|Hyperledger Fabric test network|LPRA loses no F1 when no attack is present at five districts|loses no F1 when there is no attack at five districts', GR),   # revise-v30
+    (r'scaling, label-flip, Gaussian-noise and stealth poisoning attacks|its aggregation guarantee assumes an honest majority of districts, and the ledger’s guarantee ends at a validator-quorum collusion|Two distinct majority assumptions therefore apply: LPRA \(L4\) assumes an honest majority of districts, whereas the ledger \(L3\) holds only while fewer than ⌈2N/3⌉ validators collude \(Section 5\.5\)|and the backdoor trial was inconclusive, so no backdoor resistance is claimed; LPRA assumes an honest majority of districts, the ledger’s guarantees end at a colluding validator quorum', GR),   # revise-v30
+    (r'a majority cluster is only three districts|it is a majority-cluster decision that excludes legitimately different honest districts whether or not an attacker is present|at 20 and 50 districts FLAME’s majority cluster still discards about two fifths of the honest district-rounds, at a no-attack cost of 0\.033 and 0\.011 F1 against LPRA’s 0\.007 and zero|at five districts \(at 20 it costs 0\.007 F1, Section 5\.6\)|no F1 when no attack is present|no F1 when there is no attack|at five districts \(0\.007 F1 at 20 districts, Section 5\.6; |between the delta of client i and|; a comparison of design, not of measured performance', GR),   # revise-v30
+    (r'at five districts, lost no F1 without an attack|, unlike them and(?= FLAME;)|although in Sections 5\.3 and 5\.6 that assignment never rejected an attacker at any district count tested|the comparison at K = 20 and 50 under the corrected partition is reported in Section 5\.6 and Table S11|extend the large-K FLAME comparison of Section 5\.6 beyond the scaling attack|and at five districts lost no F1 when no attack was present, unlike Median, Trimmed Mean, Krum, Multi-Krum and FLAME; at 20 and 50 districts FLAME’s no-attack cost shrinks to 0\.001–0\.002 F1 \(below LPRA’s own at 20\), but its clustering still rejected no attacker|removed them at 50 districts and cut them to at most 6 of 160 at 20 districts|within one between-seed standard deviation \(LPRA’s own\) of FedAvg’s|quarantined the scaled, flipped, noisy and sign-flipped attackers it was given in every round but one, held F1 within 0\.001 against the adaptive attacker at every strength and direction tested, quarantined the scaled attackers at every size from 5 to 50 districts and, at five districts,|\(Supplementary Table S3\) show|the submitted version’s Supplementary Table S4 sweep|removes the effect entirely at K = 50 and, at K = 20, reduces it to at most 6 of 160 honest district-rounds|manuscript’s numbers|S9, S10 and S11, are in review_response/|Table S11 FLAME at K = 20 and 50 under the Table 13 protocol; |The three-way trade-off is systematic, not incidental[^;]*(?:;[^;]*){0,20}?None of the three offers a formal confidentiality guarantee for the exchanged weights\.', GR),
+]
 OVR = [
-    # self-found corrections (grey)
-    (r'0\.780|34\.1 against|0\.79–0\.89|cosine 0\.09|0\.950 ± 0\.036|0\.926 \(scale\)|0\.939–0\.941|least repeatable|0\.9393|0\.607–0\.886|'
-     r'0\.887 when|0\.365 centralised|six of nine|0\.776 to 0\.412|0\.0007|0\.9942|0\.9516|Table S8|60k-flow sample of the federated|'
-     r'recall 0\.81 on the full|11/150|0\.024 F1|29/60|0\.950–0\.960|0\.00–0\.41|Tables 7, 9 and 10 and Figures|tied with Trimmed Mean under noise|'
-     r'0\.939–0\.945|scaled, flipped, noisy|is the path this paper offers|threshold sweep is reported|population s\.d\.|an estimated 0\.19|'
-     r'Table S8 the twelve', GR),
+    # Academic Editor, sentence-level (purple)
+    (r'regenerated under it|Undefended FedAvg under attack is also the least repeatable', V),
+    # self-found corrections, sentence-level (grey)
+    (r'60k-flow sample of the federated|the run uses the 60k-flow sample|scaled, flipped, noisy|is the path this paper offers', GR),
     # Reviewer 2 (yellow)
     (r'Generative AI|Claude Opus|GPT-5|MDPI’s policy', Y),
     # Reviewer 3 (pink)
@@ -45,7 +61,10 @@ def sentences(text):
         if i >= len(text): break
     return out
 
-def colour_for(sentence, default):
+EXEMPT = {13, 25, 27, 38, 80, 95}   # contribution 2, Sections 2.3, 2.4, 3.4 main paragraph, FLAME paragraph, FLAME-at-large-K paragraph (S11): one source each
+
+def colour_for(sentence, default, exempt=False):
+    if exempt: return default
     for rx, col in OVR:
         if re.search(rx, sentence): return col
     return default
@@ -93,20 +112,33 @@ def changed_ranges(old, new):
         if tag in ('insert', 'replace') and j2 > j1: out.append((pos[j1], pos[j2]))
     return out
 
-def colour_paragraph(par, old_text, default):
+def colour_paragraph(par, old_text, default, exempt=False):
     new = par.text
     ch = changed_ranges(old_text, new) if old_text is not None else [(0, len(new))]
     if not ch: return
     ranges = []
     for ss, se in sentences(new):
         if any(cs < se and ce > ss for cs, ce in ch):
-            col = colour_for(new[ss:se], default)
+            col = colour_for(new[ss:se], default, exempt)
             # shade only the changed sub-spans inside this sentence
             for cs, ce in ch:
                 lo, hi = max(cs, ss), min(ce, se)
                 if lo < hi:
                     # extend to whole words already (tokens); keep
                     ranges.append((lo, hi, col))
+    # span-only overrides carve sub-ranges out of the sentence-level ranges
+    for rx, col in SPAN:
+        for m in re.finditer(rx, new):
+            # recolour only the parts of the match that actually changed
+            for cs, ce in ch:
+                lo, hi = max(m.start(), cs), min(m.end(), ce)
+                if lo >= hi: continue
+                nr = []
+                for a, b, f in ranges:
+                    if b <= lo or a >= hi: nr.append((a, b, f)); continue
+                    if a < lo: nr.append((a, lo, f))
+                    if b > hi: nr.append((hi, b, f))
+                nr.append((lo, hi, col)); ranges = nr
     apply_ranges(par, ranges)
 
 def main(src, dst):
@@ -120,11 +152,16 @@ def main(src, dst):
         for k, j in enumerate(range(j1, j2)):
             default = DEF.get(j)
             if default is None: print('NO DEFAULT for paragraph', j, vp[j].text[:60]); default = GR
-            old = olds[k] if (tag == 'replace' and k < len(olds) and (j2 - j1) == (i2 - i1)) else (None if tag == 'insert' else (olds[0] if len(olds) == 1 else None))
-            colour_paragraph(vp[j], old, default); n += 1
+            old = None
+            if tag == 'replace':
+                if (j2 - j1) == (i2 - i1): old = olds[k]
+                else:   # unequal block: pair with the most similar old paragraph, else treat as wholly new
+                    best = max(olds, key=lambda o_: difflib.SequenceMatcher(None, o_, vp[j].text, autojunk=False).ratio())
+                    if difflib.SequenceMatcher(None, best, vp[j].text, autojunk=False).ratio() > 0.5: old = best
+            colour_paragraph(vp[j], old, default, exempt=(j in EXEMPT)); n += 1
     # ---- tables: new[i] <-> old[i-1] for i>=2 ; new[1] (Algorithm) all yellow
     T = d.tables; OT = o.tables
-    tab_default = {0: P, 3: G, 7: GR, 9: GR, 10: GR, 13: G}
+    tab_default = {0: P, 3: G, 7: V, 9: V, 10: V, 13: G}
     for ti, t in enumerate(T):
         if ti == 1:
             for r in t.rows:
@@ -140,15 +177,24 @@ def main(src, dst):
                 default = tab_default.get(ti, GR)
                 # per-cell overrides
                 txt = cell.text
-                if ti == 3 and txt.startswith('E18'): default = P
-                if ti == 3 and txt.startswith('E19'): default = P
+                row0 = row.cells[0].text.strip()
+                if ti == 3 and (row0.startswith('E18') or row0.startswith('E19')): default = P
                 if ti == 3 and 'threshold sweep' in txt: default = GR
                 if ti == 3 and ('E17' in txt or 'independent validation' in txt or 'four attacks' in txt): default = G
                 if ti == 0: default = P
+                if ti == 0 and 'every round but one' in txt: default = GR     # Table 1 A2-iii evidence cell, authors' correction
                 if ti == 13 and ci in (6, 7): default = G          # Table 13 quarantine / honest columns (R1 C6)
-                if ti == 9 and ('†' in txt and ci in (4, 5)) and oldtxt is not None and oldtxt.replace('0.938', '0.939') == txt: default = GR
                 for p in cell.paragraphs:
                     for run in p.runs: shade_run(run, default)
+                if ti == 3 and 'Table S11' in txt:                   # E18 row: the K = 20/50 extension is the authors' own (grey run inside an R3 cell)
+                    for p in cell.paragraphs:
+                        for run in p.runs:
+                            if 'K = 20 and 50 under the E9 protocol' in run.text: shade_run(run, GR)
+    # revise-v30: the four markdown leftovers (*mean*, *median*, *are*) became italic runs; the token changed, so it is
+    # shaded, and the change is the authors' own
+    for p in vp:
+        for r in p.runs:
+            if r.italic and r.text.strip() in ('mean', 'median', 'are'): shade_run(r, GR)
     d.save(dst); print('paragraphs coloured:', n)
 
 if __name__ == '__main__':

@@ -8,11 +8,9 @@
    "hon_rej": 0
   },
   "flame": {
-   "f1": 0.939,
+   "f1": 0.9468,
    "att_rej": 0,
-   "hon_rej": 55,
-   "rounds_with_cluster": 30,
-   "mean_kept": 3.17
+   "hon_rej": 0
   },
   "lpra": {
    "f1": 0.9707,
@@ -29,11 +27,9 @@
    "hon_rej": 0
   },
   "flame": {
-   "f1": 0.9448,
-   "att_rej": 2,
-   "hon_rej": 56,
-   "rounds_with_cluster": 30,
-   "mean_kept": 3.07
+   "f1": 0.9519,
+   "att_rej": 0,
+   "hon_rej": 0
   },
   "lpra": {
    "f1": 0.9708,
@@ -50,11 +46,9 @@
    "hon_rej": 0
   },
   "flame": {
-   "f1": 0.9391,
-   "att_rej": 30,
-   "hon_rej": 29,
-   "rounds_with_cluster": 30,
-   "mean_kept": 3.03
+   "f1": 0.9703,
+   "att_rej": 0,
+   "hon_rej": 0
   },
   "lpra": {
    "f1": 0.9708,
@@ -71,11 +65,9 @@
    "hon_rej": 0
   },
   "flame": {
-   "f1": 0.9486,
-   "att_rej": 30,
-   "hon_rej": 30,
-   "rounds_with_cluster": 30,
-   "mean_kept": 3.0
+   "f1": 0.9707,
+   "att_rej": 0,
+   "hon_rej": 0
   },
   "lpra": {
    "f1": 0.9708,
@@ -92,11 +84,9 @@
    "hon_rej": 0
   },
   "flame": {
-   "f1": 0.9602,
-   "att_rej": 3,
-   "hon_rej": 55,
-   "rounds_with_cluster": 30,
-   "mean_kept": 3.07
+   "f1": 0.9707,
+   "att_rej": 0,
+   "hon_rej": 0
   },
   "lpra": {
    "f1": 0.9708,
@@ -113,11 +103,9 @@
    "hon_rej": 0
   },
   "flame": {
-   "f1": 0.9388,
-   "att_rej": 60,
-   "hon_rej": 0,
-   "rounds_with_cluster": 30,
-   "mean_kept": 3.0
+   "f1": 0.5888,
+   "att_rej": 0,
+   "hon_rej": 0
   },
   "lpra": {
    "f1": 0.9388,

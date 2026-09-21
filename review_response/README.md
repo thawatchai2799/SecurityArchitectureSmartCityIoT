@@ -26,6 +26,13 @@ the 60,000-flow sample and 70/30 stratified split of `run_advanced.py`.
 | `exp3_exp9_rerun.py` | Exp-3 and Exp-9 (Tables 6–8) under the v2.1 code, to measure the initialisation change | R1 C3 |
 | `compare_tamper.py` | five tamper attacks incl. truncation and quorum re-signing | R3 4 |
 | `compare_flame.py` | FLAME baseline beside LPRA and FedAvg | R3 2 |
+| `table13_flame_k20_50.py` | FLAME added to the Table 13 grid at K = 20 and 50 (Table S11); per-round HDBSCAN cluster log | authors, pre-resubmission |
+
+`compare_flame.py` and `table13_flame_k20_50.py` run HDBSCAN with FLAME's own settings (min_samples = 1,
+single cluster allowed). Their first runs used scikit-learn's defaults, which cannot return the single
+majority cluster FLAME relies on; those outputs are kept as `*_sklearn_defaults.json` and are superseded.
+`compare_scale.py` uses 20% Byzantine districts (n_att = K // 5) as Table 13 does; its first run used one
+attacker at every K and is kept as `compare_scalability_one_attacker.json`.
 
 `screen_updates_corrected.py` is the Algorithm-1-faithful function that now
 lives in `poc/robust_fl.py`; it is kept here so the diff against the released

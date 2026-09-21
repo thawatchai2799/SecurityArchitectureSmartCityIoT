@@ -123,6 +123,15 @@ const supp = new Document({ styles: { default: { document: { run: { font: F, siz
       d => d.map(r => [r.attack.replace(/^\d\s/, ""), r.keys, r.detected ? "yes" : "NO", r.msg.split("(")[0].trim().slice(0, 70)]),
       [3200, 1500, 1000, 3600]),
     cap("Five validators, quorum four. Truncation and a quorum re-sign are not detected and are stated as limits in Sections 5.5 and 6.5. Source: review_response/tamper_extended.json."),
+    h1("Table S11. FLAME at K = 20 and 50 under the Table 13 protocol (20% Byzantine under the scaling attack, 10 rounds, seeds 42\u201344, F1 averaged over the last three rounds, mean \u00b1 population s.d. over seeds, 60k-flow sample, orphan-free partition)"),
+    rrTable(["K", "Aggregator", "Attack", "Attackers", "F1 (mean \u00b1 s.d.)", "Honest rejections (mean per seed, of honest district-rounds)", "Attacker rejections (all seeds)", "Rounds all attackers rejected (mean per seed)"], "table13_flame_k20_50_summary.json",
+      d => d.map(r => [r.K, { fedavg: "FedAvg", flame: "FLAME", lpra: "LPRA v2" }[r.aggregator], r.attack, r.n_att,
+        `${(Math.round(r.f1 * 10000) / 10000).toFixed(4)} \u00b1 ${(Math.round(r.f1_sd * 10000) / 10000).toFixed(4)}`,
+        `${r.honest_rej} of ${(r.K - r.n_att) * 10}`,
+        r.aggregator === "fedavg" || !r.n_att ? "\u2014" : `${r.att_rej_sum} of ${r.n_att * 30}`,
+        r.aggregator === "fedavg" || !r.n_att ? "\u2014" : `${r.caught_mean.toFixed(0)} of 10`]),
+      [500, 1000, 800, 900, 1500, 2000, 1500, 1500], 15),
+    cap("Section 5.3 tested FLAME only at K = 5, the regime its authors identify as weakest for clustering. FedAvg and LPRA rows reproduce Table 13 exactly (same seeds, partition and sample). HDBSCAN is run with FLAME\u2019s own settings (min_cluster_size = \u230aK/2\u230b + 1, min_samples = 1, single cluster allowed, cosine distance; every round logged in review_response/table13_flame_k20_50_clusterlog.json): it forms a cluster in every round and keeps about 11 of 20 and 30 of 50 districts (the \u230aK/2\u230b + 1 floor is 11 and 26), so FLAME discards about 87 of 200 and 195 of 500 honest district-rounds per seed with no attack (cost 0.033 and 0.011 F1 against FedAvg) and, under the scaling attack, excludes only 35 of 120 and 112 of 300 attacker-rounds, finishing at K = 20 below undefended FedAvg. An earlier run with scikit-learn\u2019s HDBSCAN defaults (no single cluster allowed) found no cluster in any round; it is kept as review_response/table13_flame_k20_50_sklearn_defaults.json and superseded. Only the scaling attack was run at K = 20 and 50. Source: review_response/table13_flame_k20_50_summary.json (table13_flame_k20_50.py)."),
     h1("Figure S1. Cross-dataset F1 heat maps (E12)"),
     ...(fs.existsSync(RES + "fig5_cross_dataset_dirfree4.png")
       ? [new Paragraph({ alignment: AlignmentType.CENTER, children: [new ImageRun({ type: "png", data: fs.readFileSync(RES + "fig5_cross_dataset_dirfree4.png"), transformation: { width: 380, height: 310 } })] })]

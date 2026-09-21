@@ -1,6 +1,6 @@
-# Colour key of the revised manuscript (revise-v15) and its companions
+# Colour key of the revised manuscript (revise-v30) and its companions
 
-The manuscript file `smartcities-4547789_revise-v15.docx`, the Supplementary
+The manuscript file `smartcities-4547789_revise-v30.docx`, the Supplementary
 addendum and the response letter shade every passage that differs from the
 submitted version by the source of the change:
 
@@ -9,8 +9,8 @@ submitted version by the source of the change:
 | green  | `#C6EFCE` | changed in response to Reviewer 1 |
 | pink   | `#FFC7CE` | changed in response to Reviewer 3 |
 | yellow | `#FFEB9C` | changed in response to Reviewer 2 |
-| purple | `#E4D0F5` | changed at the Editor's request (none yet; the length decision is deferred to the Editor) |
-| grey   | `#D9D9D9` | errors found and corrected by the authors in self-review (this file, v2.1) |
+| purple | `#E4D0F5` | changed at the Academic Editor's request: algorithm–implementation agreement (Section 4.4) and every value that moved when the experiments were re-run after the correction |
+| grey   | `#D9D9D9` | changed by the authors on their own initiative: errors found and corrected in self-review, and the pre-submission additions of entries DM and DN (this file, v2.1) |
 
 The shading is produced by `review_response/highlight_changes.py` from the
 submitted and the revised manuscript and is removed at proof stage.
@@ -77,6 +77,7 @@ of the manuscript's Table 13 had been mistyped and are corrected.
   Krum was "stable in and out of regime" (the conclusion of the first,
   scale-only run); rewritten to match `krum_regime.json`.
 * Leave-one-family-out federated mean 0.8155 → reported as 0.815.
+* Section 5.3: the between-seed s.d. range quoted for undefended FedAvg under attack is 0.01–0.16 (flip×2 has s.d. 0.012), not 0.03–0.16; the E17 sentence now states that the "never both colluders in the same round" clause refers to the colluding-median attack only (the inside-envelope attackers were both quarantined in 26 of 30 rounds).
 
 ## D. Housekeeping
 
@@ -934,3 +935,351 @@ phrases remain anywhere in either file. Confirmed separately that the already-de
 Paper_Draft_SmartCities_v31.docx needs no changes — it already has the correct wording in every location;
 this audit only affects what a *future* rebuild from source would produce. No new manuscript version was
 issued for this; the fix is to the repository, not the article.
+
+## DQ. Three wording points from a second informal read (no number changes; all grey)
+
+* Abstract: "the ledger's ends at a validator-quorum collusion" → "the ledger's guarantee ends at …" (the
+  elliptical possessive was grammatical but read badly).
+* Abstract: "on a two-organisation Fabric network" → "on a two-organisation Hyperledger Fabric test network"
+  (Section 5.7, Table 15 and Section 6.5 already say v2.5.9, one host).
+* Sections 3.4 (Cost paragraph) and 6 (RQ2): "does not lose accuracy" / "loses no accuracy" → "loses no F1",
+  the metric reported (Abstract and Conclusions already said F1).
+
+Raised by the same read but not changed, with the reason: "matched the best robust baselines" is kept (Table 9:
+LPRA equals Multi-Krum in every cell and exceeds no best cell, so "or exceeded" would widen the claim); the
+Conclusions' "in every round but one" is kept (it is the count; "nearly all rounds" and "all but one condition"
+are less exact and the second is wrong); the Abstract keeps stealth in its attack list (Table 9's fourth attack,
+distinct from the Table 10 adaptive attacker) and does not add the backdoor trial (E17, not a headline
+result); the energy figure keeps "estimated" without the 3 W assumption (Section 5.12 and Table 18 state it);
+the DOI placeholder and the clean-manuscript point are as in DP.
+
+## DP. Two majority assumptions separated; the Abstract's four attacks named; the backdoor trial stated in Section 6
+
+From a colleague's informal read of revise-v28; no reviewer request; all grey; no number changes.
+
+* **Two majority assumptions.** The Abstract ("its guarantees end at a validator-majority collusion") and the last
+  paragraph of Section 6 ("its guarantees end at a colluding validator majority") attributed to LPRA a bound that
+  belongs to the ledger. LPRA's aggregation guarantee assumes an honest majority of districts (Table 1, A2-iii:
+  a colluding majority of districts is outside the model); the ledger's guarantee holds while fewer than ⌈2N/3⌉
+  validators collude (Section 5.5, measured by E19). Both passages now state the two separately, and Section 3.1
+  adds one sentence saying that the two assumptions are distinct and where each is established.
+* **Abstract.** "Under four poisoning attacks" now reads "Under scaling, label-flip, Gaussian-noise and stealth
+  poisoning attacks" — the Table 9 set, which is what the sentence summarises (the adaptive and sign-flip attacks
+  were already named; E17's inside-envelope, colluding-pair and backdoor trials are not headline results and stay
+  out of the Abstract).
+* **Section 6.** The last paragraph now says that the backdoor trial (E17) was inconclusive and that no backdoor
+  resistance is claimed, beside the stealth miss it already stated; the Conclusions' quarantine sentence, which
+  names exactly the attacks quarantined, is unchanged.
+
+Raised by the same read but not changed: the DOI placeholder (an MDPI template field, filled at acceptance);
+the clean manuscript (already in the submission pack since revise-v15); the response letter's statement that
+FedAvg/LPRA under the chronological protocol has not been run (Reviewer 1, C7, already explicit); spelling
+(organisation ×11, no -ize forms; "e-Government" is the district's name, "e-government" the generic term).
+
+## DO. FLAME baseline re-run with FLAME's own HDBSCAN settings; S9 re-run with 20% Byzantine; no-attack claim scoped
+
+The two open points of DN, decided and done, plus the smaller items from a second informal read.
+
+**FLAME (E18 and Table S11).** `compare_flame.py` and `table13_flame_k20_50.py` now call HDBSCAN with
+`min_samples = 1` and `allow_single_cluster = True`, as FLAME's reference implementation does; the earlier
+outputs (scikit-learn defaults) are kept as `flame_comparison_sklearn_defaults.json` and
+`table13_flame_k20_50*_sklearn_defaults.json`. With the reference settings HDBSCAN forms a cluster in
+every round (logged per round in `flame_comparison_clusterlog.json` and
+`table13_flame_k20_50_clusterlog.json`), and the results change materially:
+
+* K = 5 (three seeds, 10 rounds): the majority cluster is three of five districts in almost every round.
+  No attack: FLAME 0.9390 (cost 0.032 against FedAvg 0.9707; 55 of 150 honest district-rounds discarded).
+  Scale ×1: 0.9448 (attacker excluded 2/30; FedAvg 0.9413, LPRA 0.9708). Flip ×1: 0.9391 (30/30).
+  Noise ×1: 0.9486 (30/30). Stealth ×1: 0.9602 (3/30). Adaptive ×2, s = 6: 0.9388 (60/60; LPRA 0.9388).
+  The 0.589 adaptive-attack figure of the earlier run is therefore an artefact of the settings and is
+  withdrawn from Section 5.3 and the Reviewer 3 reply.
+* K = 20 / 50 (Table 13 protocol): cluster kept about 11 of 20 and 30 of 50 districts (cluster log: means 11.3 and 30.4); no-attack F1
+  0.9340 / 0.9482 (cost 0.033 / 0.011; honest district-rounds discarded about 87 of 200 / 195 of 500 per
+  seed); under scaling 0.9349 / 0.9482 with 35 of 120 / 112 of 300 attacker-rounds excluded. FedAvg and
+  LPRA rows unchanged (they reproduce Table 13).
+
+Fidelity check of the implementation against FLAME's Algorithm 1 (independent, after the first re-run) found
+three further deviations, all fixed before the numbers above were produced: the clipping bound is now the
+median norm over all K updates (FLAME step 7; it had been the median over the admitted set), the admitted
+updates are averaged with equal weights (FLAME step 10; they had been sample-weighted like the paper's other
+aggregators), and the Gaussian noise is drawn fresh each round (a fixed seed had added the same vector every
+round). The settings-only run (before these three fixes) gave K = 5 F1 of 0.9389 / 0.9425 / 0.9530 / 0.9530
+/ 0.9531 / 0.9388 (none / scale / flip / noise / stealth / adaptive), i.e. the fixes lowered FLAME's flip and
+noise F1 by 0.014 and 0.004, raised stealth by 0.007 and scale by 0.002, and left the conclusions unchanged.
+
+FLAME's 0.032 no-attack cost at K = 5 is in effect the cost of the two discarded districts, which the ⌊K/2⌋ + 1
+floor of three forces: clipping and noise alone cost 0.024 in the superseded run, which excluded no district, yet
+under the adaptive attack, where FLAME and LPRA keep the same three honest districts, the two score identically
+(0.9388), so the parts do not add; at K = 20/50 the superseded run's clipping-and-noise cost was 0.0013/0.0019, so there the
+cost is almost entirely exclusion (floors 11 and 26; clusters kept 11.3 and 30.4). The correction cuts both
+ways: FLAME's adaptive-attack F1 rises 0.589 → 0.939, its flip/noise F1 fall 0.970/0.971 → 0.939/0.949, its no-attack
+F1 0.947 → 0.939. The manuscript and the letter say all of this, including, in one sentence each in Section 5.3 and the
+Reviewer 3 Point 2 reply, the three Algorithm-1 fixes and that they moved the K = 5 F1 by at most 0.014 (the
+self-review paragraph names the fixes).
+
+Rewritten on these numbers, all grey: Section 5.3's FLAME paragraph (now also states the settings and
+discloses the earlier run), the Section 5.6 paragraph, the Section 3.4 clause on FLAME's cluster
+assignment, the Conclusions' FLAME clause, Table S11's note (addendum and `make_supp.js`), the Reviewer 3
+Point 2 reply and its table, and the self-review paragraph of the letter. The reading of the comparison
+is now: FLAME's clustering does reject direction-changing attackers, but it also discards legitimately
+different honest districts (the heterogeneity tax of Median, Trimmed Mean, Krum and Multi-Krum), so the paper's
+no-attack claim for LPRA holds against FLAME outright at five districts and by a wide margin at 20 and 50
+(LPRA's own cost 0.007 and zero against FLAME's 0.033 and 0.011); the scaled attacker, which
+keeps its direction, is met by clipping alone at K = 5 and only partly excluded at K = 20/50.
+
+**S9.** `compare_scale.py` now uses `n_att = K // 5` (20% Byzantine), as Table 13 does, instead of one
+attacker at every K; the earlier output is kept as `compare_scalability_one_attacker.json`. Outcome
+unchanged — 0 of 240 rounds differ, INCONCLUSIVE never reached — and S9's LPRA rows now equal Table 13's
+per-seed values, so the addendum's and the Reviewer 1 C1 reply's description of S9 as Table 13's grid is
+now literally true (the C1 reply's parenthesis now says "20% scaled attackers").
+
+**Smaller items (second informal read; all grey):** the no-attack claim is scoped to five districts in
+Section 3.4's Cost paragraph and in Section 6 (it already was in the Abstract and the Conclusions);
+"the client's delta (the client's delta)" in Section 3.4, a duplication inherited from the submitted
+version, now reads "the delta of client i"; the four words still carrying markdown asterisks (*mean*
+twice, *median*, *are*) are italic; contribution 2 says the four-system comparison is one of design, not
+of measured performance; the Reviewer 1 C7 reply states plainly that FedAvg/LPRA under the chronological
+protocol has not been run and what the paper does and does not claim from E14; the Reviewer 3 Point 2
+reply states that FLTrust's exclusion is deliberate and that no result should be read as LPRA
+outperforming it. Not changed, on purpose: the DOI placeholder (an MDPI template field), and the
+"validator-majority" wording noted in DN.
+
+## DN. FLAME at K = 20 and 50 (Table S11): the comparison Section 5.3 had deferred, run before resubmission
+
+Not a reviewer request. Section 5.3 compared FLAME only at K = 5, said that this is the regime FLAME's
+authors identify as weakest for its clustering, and deferred the balanced comparison to future work.
+Running it took under two minutes (`review_response/table13_flame_k20_50.py`: the Table 13 protocol —
+20% Byzantine under the scaling attack, 10 rounds, seeds 42–44, orphan-free partition, 60k-flow sample —
+with FLAME added as a third aggregator at K = 20 and 50; the FedAvg and LPRA rows it produces reproduce
+Table 13 to four decimals, which is the check that the protocol is the same). Results in
+`review_response/table13_flame_k20_50.json` (per seed) and `_summary.json` (mean ± population s.d.).
+
+What the run shows, reported as found:
+
+* FLAME's no-attack cost falls from 0.024 F1 at K = 5 to 0.0013 at K = 20 and 0.0019 at K = 50; at
+  K = 20 it is smaller than LPRA's own no-attack cost from honest rejections (0.0073, already in Table 13).
+* FLAME's clustering still never fires: HDBSCAN found no cluster in any round at either size, so
+  FLAME rejected no attacker in 120 attacker-rounds at K = 20 or 300 at K = 50, exactly as at K = 5. Its
+  defence is clipping and noise alone — which holds F1 under the scaling attack at K = 20 (0.9656 vs
+  FedAvg 0.9451, LPRA 0.9642) and is moot at K = 50, where ten scaled updates among fifty are diluted
+  enough that undefended FedAvg is not hurt (0.9683) and FLAME (0.9594) and LPRA (0.9598) sit at FedAvg's
+  no-attack level. That HDBSCAN found no cluster is logged per round
+  (`table13_flame_k20_50_clusterlog.json`: 0 clusters in all 120 FLAME rounds), not inferred from the
+  rejection counts.
+* Only the scaling attack was run at K = 20 and 50; the adaptive and stealth attacks of Table 9 were not.
+
+Manuscript changes (all grey — author-driven):
+
+* Section 5.6: one new paragraph ("FLAME at larger district counts") before Table 13, citing Table S11.
+* Section 5.3: the closing clause "would be the balanced one and is planned" now points at Section 5.6
+  and Table S11.
+* Abstract: the v26 qualifier "at the one district count tested" (DM) is superseded — FLAME is now tested
+  at three — and becomes "at five districts", which is the scope at which the no-attack claim against
+  FLAME holds.
+* Section 3.4 (the v26 three-way sentence, DM): "at the cost of the five-district clustering weakness
+  measured above" becomes "although in Sections 5.3 and 5.6 that assignment never rejected an attacker at
+  any district count tested".
+* Conclusions: the future-work item "compare against FLAME at district counts where its clustering is
+  effective" becomes "extend the large-K FLAME comparison of Section 5.6 beyond the scaling attack".
+* Conclusions, first paragraph: "while, unlike Median, Trimmed Mean, Krum and FLAME, costing nothing when
+  no attack was present" claimed the no-attack result for 5–50 districts, which Table S11 now contradicts at
+  K = 20 (LPRA's honest-rejection cost exceeds FLAME's). Scoped to five districts, with the K = 20/50
+  finding stated in the same sentence. (Found in the review of this version, not in the first pass.)
+* Supplementary Materials statement: Table S11 added to the list.
+* Table 3, row E18: the K = 20/50 run recorded as an extension of E18 (script and Table S11 named), as
+  the other review-round experiments are.
+* Supplementary addendum: Table S11 added (grey heading); response letter: Reviewer 3 Point 2 and the
+  self-review paragraph updated to say the comparison was run and what it showed.
+* `paper_src/make_supp.js` (the generator of the full Supplementary Material) now emits Table S11 from
+  the same summary file, so the regenerated supplement and the reviewers' addendum agree;
+  `review_response/README.md` lists the new script.
+
+Corrected on independent re-check of this entry's numbers: the summary file had computed the seed mean and
+s.d. from values already rounded to four decimals, which put FLAME's K = 50 under-attack F1 at 0.9595
+instead of 0.9594 and two s.d. values one unit off in the last place. Recomputed from unrounded values
+(the FedAvg and LPRA rows now match Table 13's s.d. exactly); the manuscript text, Table S11 and this
+entry carry the corrected values. The Conclusions sentence "FLAME's no-attack cost falls below LPRA's
+own" at 20 and 50 districts was also wrong at 50 (LPRA's cost there is zero) and now says "shrinks to
+about 0.002 F1 (below LPRA's own at 20)"; the Abstract's "at five districts" was moved so it plainly
+scopes LPRA's no-attack claim, not only the FLAME comparison.
+
+Second independent re-check (letter, addendum and this entry against the data and the manuscript):
+"honest rejections in one of the three seeds" was wrong — they occurred in two seeds (0, 9 and 3 of
+200; the F1 loss is concentrated in one) and the text now says so; "no usable cluster" is now "no
+cluster" in the text added this round (Section 5.3's own K = 5 sentence, already reviewed, keeps its wording), which is what the log shows, and the same instrumentation run at K = 5 confirms
+Section 5.3's statement (0 clusters in 180 FLAME rounds); "120 rounds at either size" is now "across
+the two sizes"; and the Conclusions' "a corrected partition removed them" (the honest rejections at 20
+and 50 districts) overstated K = 20, where Table 13 still shows up to 6 of 160 — it now says removed at
+50 and cut to at most 6 of 160 at 20. The colour-key sentences in the manuscript, letter and addendum
+were reworded so none lists a subset of what grey covers.
+
+Third re-check: Section 5.6's E9 summary said LPRA's no-attack F1 "stays within one standard deviation of
+FedAvg's at every K"; at K = 20 the gap (0.0073) exceeds FedAvg's between-seed s.d. (0.0046) and is
+covered only by LPRA's own (0.0149), so the sentence now says whose s.d. is meant. The Conclusions'
+"about 0.002 F1" for FLAME's large-K no-attack cost (0.0013 and 0.0019) is now "0.001–0.002 F1".
+
+Whole-manuscript sweep against the new result (independent): three older sentences corrected. Conclusions:
+"quarantined every scaled, flipped, noisy, adaptive and sign-flipped attacker it was given, from 5 to 50
+districts" — Table 10 shows adaptive attackers inside the honest envelope (s ≤ 2.5) are not quarantined
+(and do no harm), and only the scaling attack was run beyond five districts; now "every scaled, flipped,
+noisy and sign-flipped attacker it was given, every adaptive attacker that left the honest envelope, and
+the scaled attackers at every size from 5 to 50 districts". Section 5.6: "removes the effect entirely"
+(the orphan-partition honest rejections) now "removes the effect at K = 50 and all but 0–6 of 160 honest
+district-rounds of it at K = 20", matching Table 13. Data Availability Statement: S11 added to the list
+of review_response/ outputs. The new Section 5.6 paragraph now says which denominator its honest-rejection
+counts use (200 honest district-rounds without an attack; Table 13's 0–6 of 160 is the attacked condition).
+
+Fourth sweep (independent, whole manuscript): the corrected Conclusions clause "every adaptive attacker
+that left the honest envelope" was itself too strong — Table 10 shows the orthogonal attacker at s = 3
+quarantined in 4/10 and 3/10 rounds — and now reads "held F1 against the adaptive attacker at every
+strength and direction tested", which Table 10 supports in every row. Two stale items unrelated to the new
+result, found by the same sweep and corrected: Section 5.9 cited "(Table 2)" for per-dataset F1 values
+that this revision moved to Supplementary Table S3 (Table 2's own caption says so); Section 5.6's
+"the Supplementary Table S4 sweep … is superseded" now says "the submitted version's", since the joint
+sweep now in Table S4 is current. Noted but deliberately left: the Abstract's and Conclusions'
+"validator-majority collusion" (the measured bound is a validator quorum, Section 5.5; the phrase is the
+PoA honest-majority framing used throughout), and two pre-existing s.d. conventions (Krum 0.456 sample vs
+0.372 population) — outside this round's scope.
+
+Fifth check (claims in the changed paragraphs against the manuscript's own tables): the Conclusions'
+"quarantined every scaled, flipped, noisy and sign-flipped attacker" was still one round too strong —
+under label flipping with two attackers at K = 5, one seed missed one round (caught 9/10; Table 9's ✓
+means ≥ 8 of 10) — and now reads "in every round but one"; "held F1 against the adaptive attacker" is
+now "held F1 within 0.001" (Table 10: 0.938 against an honest 0.939 for two opposing attackers at
+s = 1); and the new Section 5.6 paragraph now says its four-decimal K = 20 values are Table 13's cells
+to four decimals, since Table 13 prints three.
+
+Sixth check (letter and addendum against the manuscript, whole documents): the Reviewer 3 Point 2 reply
+repeated the old "within one standard deviation of FedAvg's" and now matches Section 5.6; the addendum's
+preamble called S9 a table. Pre-existing points the same check raised and that are NOT changed here, for
+the authors to decide: Section S9's grid (compare_scale.py) uses one scaled attacker at every K, not the
+20% of Table 13, so its honest-rejection and F1 values are not those of Table 13 although the addendum
+and the Reviewer 1 C1 reply describe it as "Table 13's configurations"; Section 5.3 still says Krum
+"quarantines" where Table S7 says non-selection; the LPRA acronym expansion (Sections 3.4 and 5.3
+headings) still reads "Poisoning-Resilient" after the title change; the R3 2(iv) reply's "E16–E18 … all
+on the same sample and say so" is only stated by Table 13 and S5.
+
+Packaging bug found in the same check and fixed in the build: the SuSy upload folder was not emptied
+between builds, so the "Manuscript" zip inside the upload pack also contained a stale copy of the
+Supplementary addendum from the previous build (true of the last three packs delivered). The folder is
+now recreated on every build and the manuscript zip holds only the highlighted and clean manuscript.
+
+Seventh check (whole manuscript, independent): Table 1's evidence cell for A2-iii read "quarantined every
+round" — the same one-round overstatement as the Conclusions (E5, flip, two attackers, one seed) — and now
+reads "in every round but one"; the Conclusions' list of rules that pay a no-attack cost now includes
+Multi-Krum (Table 9: 0.939), which it had omitted.
+
+(Resolved in DO below.) Found by a reviewer-simulation check and, at the time of this entry, left for the authors to decide:
+the E18 FLAME implementation (compare_flame.py, reused unchanged for Table S11) calls scikit-learn's
+HDBSCAN with its defaults, i.e. min_samples = min_cluster_size and allow_single_cluster = False. FLAME's
+reference implementation uses min_samples = 1 and allow_single_cluster = True, and with
+allow_single_cluster = False HDBSCAN can never return the single benign-majority cluster FLAME expects,
+which is why every reported round (K = 5, 20, 50) logged no cluster. A quick re-run with the reference
+settings (same data, seeds and protocol; not shipped) found a cluster in every round and changes the
+picture materially: at K = 5 FLAME keeps about 3 of 5 clients even with no attack (F1 0.9389, cost 0.032
+rather than 0.024), rejects the flip and noise attackers in 10/10 rounds and the s = 6 opposing adaptive
+pair in 60/60 attacker-rounds (F1 0.9388, i.e. no 0.589-vs-0.939 gap), still passes the scaled attacker
+(direction preserved), and at K = 20/50 keeps roughly half the districts (F1 0.935–0.948, honest
+rejections 67–210 per seed). Either the current configuration must be stated in Section 5.3 and Table S11
+with the caveat that it is stricter than FLAME's own, or E18 and S11 should be re-run with the reference
+settings and Sections 3.4, 5.3, 5.6, the Abstract, the Conclusions, Table S11 and the Reviewer 3 reply
+rewritten accordingly. The second is the honest option; it changes reported numbers and the FLAME narrative.
+
+Table 13, Table 9 and every previously reported number are unchanged.
+
+Housekeeping found on the way: the version label in the DK and DL headings above had been advanced by
+every build since they were written (the same blanket find-and-replace DL itself warns about, which
+this file's own header legitimately needs). Restored to the revision each entry actually describes, and
+the build now confines that substitution to the header lines, so headings and body text are no longer
+touched.
+
+## DM. Two wording refinements from an informal pre-submission read, and a build-script bug that would have shipped the wrong manuscript
+
+Not a reviewer or Editor request: a colleague read the response-letter package informally, before
+resubmission, and flagged two places where the wording claimed more than the results support.
+Both are text-only; no experiment was re-run and no reported number changed.
+
+* Abstract: "cost nothing without an attack" was read as claiming LPRA has zero cost of any kind
+  relative to the baselines. The intended claim is narrower — no F1 loss — and the FLAME
+  comparison holds only at the one district count actually tested. Reworded to "lost no F1
+  without an attack" and added "at the one district count tested" against FLAME.
+* "Relation to other defences" (Section 3.4): the paragraph explained why FLTrust is excluded but
+  did not say why FLAME and LPRA are both viable candidates for a ledger-writable decision while
+  FLTrust is not. Added one sentence making that three-way trade-off explicit (FLTrust's score is
+  continuous and reference-based, so it has no natural ledger-writable form here; FLAME's cluster
+  assignment and LPRA's accept/quarantine set are both discrete and recordable; none of the three
+  gives a formal confidentiality guarantee on the exchanged weights).
+
+Both insertions are shaded grey, as author-driven changes rather than reviewer- or Editor-driven
+ones. One sub-phrase of the Abstract edit — "F1 without an attack" — is not itself shaded, even
+though it sits inside a grey sentence: those exact words also occur, in an unrelated clause, in
+the originally submitted Abstract, so the shading tool's word-level comparison against the
+submission (not against the immediately preceding version) correctly treats them as carried-over
+rather than new. Forcing them grey regardless was tried and reverted, because it reintroduced the
+one failure mode the two-way shading audit exists to catch (shaded text with no corresponding
+change against the submitted manuscript); leaving the words unshaded is consistent with how every
+earlier version's shading has behaved and with the colour key's own definition, which is stated
+relative to the submitted manuscript, not to the previous revision round.
+
+Separately, building this version surfaced a tooling bug before anything shipped: the build
+script for a new version is derived from the previous version's build script by a blanket
+find-and-replace of the version string. Several lines instead name the *specific prior* version
+literally (which manuscript file to copy as the starting point, which cover-letter script to
+derive from, which CHANGELOG/addendum string to update) rather than being expressed relative to
+"the version before this one". A blanket rename of only the new version's own number leaves those
+literals pointing one revision further behind every time, so left unchecked the script would
+silently start the next build from a stale manuscript instead of the one actually being revised.
+Caught by inspecting the derived script's diff against its source before running it, and fixed by
+hand for this build; this is the same class of fragility as the DK/DL letter-filename bug, and
+the same caution applies: any future derivation of a build script should recheck these lines
+rather than trust the automatic version bump to reach them.
+
+A second, more serious build-script bug was found the same way, after the first fix: the script's
+own step that seeds the new version's editable manuscript copy from the previous version's clean
+file runs before that new version's content edits are applied, but nothing in the script actually
+applies them — they had only ever been applied by hand, out of band, in earlier versions that
+happened to carry no manuscript-content changes (process/tooling fixes only), so the gap was never
+exercised. This is the first version in the current pass with an actual wording edit, and running
+the script as inherited would have quietly reproduced the previous version's manuscript unchanged
+while still generating a highlighted copy, a colour key, and a CHANGELOG entry that claimed edits
+had been made. Caught before anything was delivered, by diffing the built file's paragraph text
+against the previous version and finding no difference where two were expected. Fixed by having
+the build script apply the version's own content-edit script immediately after seeding the copy,
+so the two steps can no longer run out of order.
+
+## DL. The "fixed" stale-filename bug (DK) recurred, and the CHANGELOG fix for it broke itself (fifth self-review pass, revise-v25)
+
+Two errors, both in the review process's own tooling rather than in anything a reviewer reads:
+
+* The DK fix above edited `letter.js`'s hardcoded file names by hand for that one build. It was
+  never a real fix: the next version bump needed the same hand edit again and, being manual, was
+  skipped — the letter shipped naming the previous revision's files a second time. Replaced the
+  hardcoded names with a `__VERSION__` placeholder that the build script fills by substitution
+  before running `letter.js`, and the build now refuses to ship a docx if the placeholder is
+  still unfilled. This is a process fix, not a one-off edit, so it should not recur.
+* The DK entry's own wording, in the paragraph above, originally spelled out the specific old and
+  new version numbers — exactly the pattern that the CHANGELOG's own blanket version-bump
+  find-and-replace then rewrote on the very next build, turning a description of the bug into a
+  sentence that no longer made sense. Reworded in relative terms so no future version bump can
+  corrupt it, and left as a caution for any future entry that names a specific version pair.
+
+## DK. Repository housekeeping and a stale file reference (fourth self-review pass, revise-v24)
+
+Three packaging/process issues found while auditing the release, none of which changes any
+reported number, table, figure or code behaviour:
+
+* `README.md`'s title heading and tagline still read "A Multi-Layer **Trustworthy** Security
+  Architecture ... **poisoning-resilient** federated learning", the title and framing this
+  revision removed (Reviewer 3, Comment 1). Updated to the current title and to "screened
+  federated learning (LPRA)".
+* Added a `.gitignore` (`__pycache__/`, `*.pyc`, `*.pyo`, `.DS_Store`). None of these had reached
+  the published repository, but they were present in the working checkout and would otherwise be
+  picked up by the next zip export.
+* The response letter's own "Files submitted with this response" line named the manuscript
+  file one revision number behind the letter's own (the build script updates every other file
+  name in the letter but had not touched this hand-written line). Corrected; the build step is
+  now a plain find-and-replace of the whole line instead of a literal that has to be remembered.
+  (Note for future passes: this CHANGELOG's own automated version bump — a blanket
+  find-and-replace of "revise-vNN" across the whole file — will silently rewrite this bullet's
+  wording too if it ever names a specific old/new version pair the same way; described in
+  relative terms above for exactly that reason.)
