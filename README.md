@@ -1,7 +1,8 @@
-# A Multi-Layer Trustworthy Security Architecture for Smart-City IoT
+# A Multi-Layer Security Architecture for Smart-City IoT with Measured Limits
 
-Edge AI intrusion detection · poisoning-resilient federated learning (LPRA) · permissioned-ledger
-model provenance · cloud orchestration — evaluated end to end on real network traffic.
+Edge intrusion detection · screened federated learning (LPRA) · permissioned-ledger
+model provenance · cloud orchestration — evaluated end to end on real network traffic, with the
+limits of each layer stated and measured (v2.1.0; see CHANGELOG.md).
 
 This repository reproduces every number, table and figure in the accompanying article. No special
 hardware is required: the full pipeline runs on a laptop in well under an hour. Only the optional
