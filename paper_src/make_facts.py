@@ -377,7 +377,16 @@ if sc:
     F["sce_delay_water"] = f"{dd.get('Water', float('nan')):.1f}"
     F["sce_delay_transport"] = f"{dd.get('Transport', float('nan')):.1f}"
     F["sce_delay_max"] = f"{max(dd.values()):.1f}"
-    F["sce_anchor_ms"] = f"{sc['L3_mean_anchor_delay_ms']:.2f}"
+    # v2.2.0: E11 records the submission latency and the commit latency separately (Reviewer 1, round 2, C1);
+    # extD_scenario_v2.1.0.json (archived) still carries the old single key L3_mean_anchor_delay_ms.
+    F["sce_submit_ms"] = f"{sc.get('L3_mean_submit_latency_ms', sc.get('L3_mean_anchor_delay_ms', float('nan'))):.2f}"
+    F["sce_anchor_ms"] = F["sce_submit_ms"]          # kept for older templates: this was always the submission latency
+    if "L3_mean_commit_latency_ms" in sc:
+        F["sce_commit_mean_ms"] = f"{sc['L3_mean_commit_latency_ms']:.1f}"
+        F["sce_commit_p50_ms"] = f"{sc['L3_p50_commit_latency_ms']:.1f}"
+        F["sce_commit_p95_ms"] = f"{sc['L3_p95_commit_latency_ms']:.0f}"
+        F["sce_commit_max_s"] = f"{sc['L3_max_commit_latency_ms'] / 1000:.2f}"
+        F["sce_ledger_cfg"] = f"{sc['L3_ledger_config']['block_size']} transactions / {sc['L3_ledger_config']['block_interval_s']} s"
     F["sce_declared_s"] = f"{sc['L4_campaign_declared_s']:.0f}"
     F["sce_after_third_s"] = f"{sc['L4_campaign_declared_s'] - max(sc['onset_s'].values()):.0f}"
     F["sce_from_first_s"] = f"{sc['L4_time_from_first_onset_s']:.0f}"
@@ -459,6 +468,8 @@ F["ciciot_or_cic_ratio"] = "19%"
 # Measured by hand on the authors' laptop with fabric/bench/bench.mjs; kept in a small
 # side-car file so that re-running make_facts.py never loses them.
 fab_path = os.path.join(RES, "fabric_facts.json")
+if not os.path.exists(fab_path):            # the committed copy lives beside the Fabric runbook (v2.2.0: one canonical location)
+    fab_path = os.path.join(os.path.dirname(RES.rstrip(os.sep)), "fabric", "fabric_facts.json")
 if os.path.exists(fab_path):
     with open(fab_path, encoding="utf-8") as fh:
         F.update(json.load(fh))

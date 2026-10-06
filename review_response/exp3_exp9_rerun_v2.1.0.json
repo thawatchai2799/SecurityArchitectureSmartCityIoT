@@ -1,0 +1,71 @@
+{
+ "exp3_iid": {
+  "federated_f1": 0.9736333754740835,
+  "centralised_f1": 0.9945183701700234,
+  "local_only_f1_mean": 0.9721283819796505,
+  "raw_bytes_not_shared": 31909680,
+  "weight_bytes_per_round": 92200
+ },
+ "exp3_non-iid": {
+  "federated_f1": 0.9709411418660554,
+  "centralised_f1": 0.9945183701700234,
+  "local_only_f1_mean": 0.9518493433436234,
+  "raw_bytes_not_shared": 31909680,
+  "weight_bytes_per_round": 92200
+ },
+ "exp9_none/LPRA": {
+  "global_f1": 0.9705419748952276,
+  "byzantine_caught_rounds": 0,
+  "personalised": [
+   {
+    "district": "Transport",
+    "global_f1_local_test": 0.9771749298409729,
+    "personalised_f1_local_test": 0.9828185328185328
+   },
+   {
+    "district": "Energy",
+    "global_f1_local_test": 0.9726256983240223,
+    "personalised_f1_local_test": 0.9749350167099888
+   },
+   {
+    "district": "Water",
+    "global_f1_local_test": 0.9689813513260238,
+    "personalised_f1_local_test": 0.9820267686424474
+   },
+   {
+    "district": "Healthcare",
+    "global_f1_local_test": 0.9780046403712297,
+    "personalised_f1_local_test": 0.9806957186544343
+   },
+   {
+    "district": "e-Gov",
+    "global_f1_local_test": 0.9188490139023602,
+    "personalised_f1_local_test": 0.9323308270676691
+   }
+  ]
+ },
+ "exp9_scale/plain FedAvg": {
+  "global_f1": 0.8656227043878666,
+  "byzantine_caught_rounds": 0
+ },
+ "exp9_scale/LPRA": {
+  "global_f1": 0.9706550856400682,
+  "byzantine_caught_rounds": 15
+ },
+ "exp9_flip/plain FedAvg": {
+  "global_f1": 0.9717875962707743,
+  "byzantine_caught_rounds": 0
+ },
+ "exp9_flip/LPRA": {
+  "global_f1": 0.9706550856400682,
+  "byzantine_caught_rounds": 15
+ },
+ "exp9_noise/plain FedAvg": {
+  "global_f1": 0.7798108989171028,
+  "byzantine_caught_rounds": 0
+ },
+ "exp9_noise/LPRA": {
+  "global_f1": 0.9706550856400682,
+  "byzantine_caught_rounds": 15
+ }
+}

@@ -1,0 +1,34 @@
+{
+  "scenario": "ransomware campaign Healthcare->Water->Transport, zero-day detector (ransomware unseen)",
+  "onset_s": {
+    "Healthcare": 60.0,
+    "Water": 180.0,
+    "Transport": 300.0
+  },
+  "first_true_alert_s": {
+    "Transport": 301.98999999987035,
+    "Water": 182.1699999999793,
+    "Healthcare": 61.56999999999632
+  },
+  "detection_delay_s": {
+    "Transport": 1.99,
+    "Water": 2.17,
+    "Healthcare": 1.57
+  },
+  "L3_mean_anchor_delay_ms": 0.048995804525611246,
+  "L4_district_anomaly_flag_s": {
+    "Healthcare": 70.0,
+    "Water": 190.0,
+    "Transport": 310.0
+  },
+  "L4_campaign_declared_s": 320.0,
+  "L4_time_from_first_onset_s": 260.0,
+  "no_L4_baseline_s": "24 h (daily inter-agency report) or never",
+  "total_alerts": 23113,
+  "true_alerts": 20807,
+  "false_alerts": 2306,
+  "normal_flows_replayed": 240000,
+  "ledger_blocks": 1156,
+  "ledger_intact": true,
+  "note": "E11 as released in v2.1.0 (ledger 20 tx / 1.0 s; L3_mean_anchor_delay_ms times submit() only), archived in round 2 before the commit-latency correction"
+}

@@ -1,63 +1,33 @@
-"""Reviewer 3, point 2: no FLAME comparison, though FLAME is the standard
-clustering-based defence.  This implements FLAME's three steps as
-described in Nguyen et al. (USENIX Security 2022):
+"""Reviewer 3 (round 1), point 2: FLAME as a baseline.  K = 5, three seeds, the attacks of
+Table 9 plus the colluding adaptive attacker (s = 6, opposite), FedAvg / FLAME / LPRA v2.
 
-  1  cluster client updates by pairwise cosine distance (HDBSCAN with
-     min_cluster_size = K/2 + 1); keep the largest cluster
-  2  clip every kept update to the median L2 norm of the kept set
-  3  add Gaussian noise (sigma = lambda * median norm) to the aggregate
+FLAME itself is implemented in flame_impl.py, step for step after Algorithm 1 of
+Nguyen et al. (USENIX Security 2022); see that file for the two round-2 corrections
+(cosine distance on the local models W_i rather than on the updates W_i - G, and
+lambda = 0.01 -- FLAME's own NIDS value -- as the default, with a sensitivity sweep).
 
-and runs it beside LPRA v2 and FedAvg on the attacks in the paper plus the
-sign-flip attack from the Comment 4 response, K=5, three seeds.
-sklearn's HDBSCAN is used; with K=5 the clustering degenerates to
-"largest group by cosine", which is the regime FLAME's authors note it is
-weakest in, so this is a fair-but-unflattering setting for FLAME too.
+Usage:  python compare_flame.py [--lam 0.01]
+Output: flame_comparison_lam<lam>.json (+ _clusterlog); with the default lambda the
+        same content is also written to flame_comparison.json, the file the
+        manuscript's Section 5.3 and Reviewer 3 Point 2 table are built from.
+Earlier runs are kept for the record: *_sklearn_defaults.json (HDBSCAN defaults,
+first revised submission) and *_v2.1.0.json (cosine on updates, lambda = 0.001).
 """
-import os, sys, json, copy
+import os, sys, json, argparse
 import numpy as np
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+HERE = os.path.dirname(os.path.abspath(__file__))
 from poc import byzantine
 from poc.data_loader import load_ton_iot
 from sklearn.model_selection import train_test_split
-from sklearn.cluster import HDBSCAN
-
-FLAME_CALLS = [0]
-CLUSTER_LOG = []   # (n_clusters, kept) per FLAME aggregation round
-_orig_aggregate = byzantine.aggregate
-
-def flame(V, ns, gvec, lam=0.001, seed=0):
-    K = len(V); deltas = V - gvec
-    norms = np.linalg.norm(deltas, axis=1) + 1e-12
-    cos_dist = 1 - (deltas @ deltas.T) / np.outer(norms, norms)
-    np.fill_diagonal(cos_dist, 0); cos_dist = np.clip(cos_dist, 0, 2)
-    # FLAME's reference settings (Nguyen et al., USENIX Security 2022): min_samples = 1 and a single cluster allowed, so the
-    # benign majority can form one cluster. scikit-learn's defaults (min_samples = min_cluster_size,
-    # allow_single_cluster = False) cannot return that cluster and found none in any round; those runs are
-    # kept in *_sklearn_defaults.json for the record.
-    labels = HDBSCAN(min_cluster_size=max(2, K // 2 + 1), min_samples=1, allow_single_cluster=True,
-                     metric="precomputed").fit(cos_dist).labels_
-    if (labels >= 0).sum() == 0:
-        keep = np.ones(K, bool)                         # no cluster found: keep all
-    else:
-        big = np.bincount(labels[labels >= 0]).argmax(); keep = labels == big
-    CLUSTER_LOG.append(dict(n_clusters=int(len(set(labels[labels >= 0]))), kept=int(keep.sum())))
-    med_norm = np.median(norms)                       # FLAME step 7: S_t = median over ALL n clients' update norms
-    clipped = np.array([gvec + d * min(1.0, med_norm / n) for d, n in zip(deltas, norms)])
-    w = keep / keep.sum()                             # FLAME step 10: plain mean over the admitted set L
-    agg = (clipped * w[:, None]).sum(0)
-    FLAME_CALLS[0] += 1
-    rng = np.random.default_rng(seed + FLAME_CALLS[0])  # fresh noise every round (a fixed seed would add the same vector each round)
-    agg = agg + rng.normal(0, lam * med_norm, size=agg.shape)
-    return agg, keep, dict(kept=int(keep.sum()))
-
-def aggregate_with_flame(name, V, ns, gvec, f, lpra_gamma=2.5, lpra_version="v2"):
-    if name == "flame":
-        return flame(V, ns, gvec)
-    return _orig_aggregate(name, V, ns, gvec, f, lpra_gamma, lpra_version)
-
-byzantine.aggregate = aggregate_with_flame
+import flame_impl
+from flame_impl import CLUSTER_LOG
 
 if __name__ == "__main__":
+    ap = argparse.ArgumentParser(); ap.add_argument("--lam", type=float, default=flame_impl.LAMBDA_DEFAULT)
+    a = ap.parse_args(); lam = a.lam
+    flame_impl.install(byzantine, lam=lam)
+
     ton = load_ton_iot(sample=60000)
     Xall, yall, mall = ton["X_native"].values.astype(np.float32), ton["y_bin"], ton["y_multi"]
     tr, te = train_test_split(np.arange(len(yall)), test_size=0.3, stratify=mall, random_state=42)
@@ -66,16 +36,25 @@ if __name__ == "__main__":
     conds = [("none", 0, {}), ("scale", 1, {}), ("flip", 1, {}), ("noise", 1, {}), ("stealth", 1, {}),
              ("adaptive", 2, dict(strength=6.0, direction="opposite"))]
     out = []
+    print(f"lambda = {lam}")
     print(f"{'attack':10} {'n_att':>5}  {'FedAvg':>7} {'FLAME':>7} {'LPRA':>7}   {'FLAME att_rej':>13} {'LPRA att_rej':>12}")
     for attack, n_att, kw in conds:
-        row = dict(attack=attack, n_att=n_att)
+        row = dict(attack=attack, n_att=n_att, lam=lam)
         for agg in ("fedavg", "flame", "lpra"):
-            f1s, ar, hr = [], 0, 0
+            f1s, ar, hr, per_seed = [], 0, 0, []
             for seed in (42, 43, 44):
+                n0 = len(CLUSTER_LOG)
                 r = byzantine.run_byzantine(X, yb, ym, Xt, yt, k=5, rounds=10, regime="non-iid", seed=seed,
                                             attack=attack, n_att=n_att, aggregator=agg, lpra_version="v2", **kw)
                 f1s.append(r["mean_last3_f1"]); ar += r["attacker_rejections"]; hr += r["honest_rejections"]
-            row[agg] = dict(f1=round(float(np.mean(f1s)), 4), att_rej=ar, hon_rej=hr)
+                ps = dict(seed=seed, f1=round(float(r["mean_last3_f1"]), 4), final_f1=round(float(r["final_f1"]), 4),
+                          att_rej=r["attacker_rejections"], hon_rej=r["honest_rejections"], caught=r["rounds_all_attackers_rejected"])
+                if agg == "flame":
+                    log = CLUSTER_LOG[n0:]
+                    ps["rounds_with_cluster"] = sum(1 for e in log if e["n_clusters"] > 0)
+                    ps["kept_per_round"] = [e["kept"] for e in log]
+                per_seed.append(ps)
+            row[agg] = dict(f1=round(float(np.mean(f1s)), 4), f1_sd=round(float(np.std(f1s)), 4), att_rej=ar, hon_rej=hr, per_seed=per_seed)
             if agg == "flame":
                 log = CLUSTER_LOG[-30:]
                 row[agg]["rounds_with_cluster"] = sum(1 for e in log if e["n_clusters"] > 0)
@@ -83,7 +62,12 @@ if __name__ == "__main__":
         out.append(row)
         d = 30 * n_att if n_att else 0
         print(f"{attack:10} {n_att:5}  {row['fedavg']['f1']:7.4f} {row['flame']['f1']:7.4f} {row['lpra']['f1']:7.4f}   "
-              f"{row['flame']['att_rej']:>6}/{d:<6} {row['lpra']['att_rej']:>5}/{d:<6}  hon: FLAME {row['flame']['hon_rej']} LPRA {row['lpra']['hon_rej']}", flush=True)
-    json.dump(out, open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "flame_comparison.json"), "w"), indent=1)
-    json.dump(CLUSTER_LOG, open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "flame_comparison_clusterlog.json"), "w"))
-    print("\nwrote flame_comparison.json")
+              f"{row['flame']['att_rej']:>6}/{d:<6} {row['lpra']['att_rej']:>5}/{d:<6}  hon: FLAME {row['flame']['hon_rej']} LPRA {row['lpra']['hon_rej']}"
+              f"  kept {row['flame']['mean_kept']}", flush=True)
+    tag = f"lam{lam:g}"
+    json.dump(out, open(os.path.join(HERE, f"flame_comparison_{tag}.json"), "w"), indent=1)
+    json.dump(CLUSTER_LOG, open(os.path.join(HERE, f"flame_comparison_clusterlog_{tag}.json"), "w"))
+    if abs(lam - flame_impl.LAMBDA_DEFAULT) < 1e-12:
+        json.dump(out, open(os.path.join(HERE, "flame_comparison.json"), "w"), indent=1)
+        json.dump(CLUSTER_LOG, open(os.path.join(HERE, "flame_comparison_clusterlog.json"), "w"))
+    print(f"\nwrote flame_comparison_{tag}.json")

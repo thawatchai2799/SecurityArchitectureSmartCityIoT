@@ -1,0 +1,58 @@
+[
+ {
+  "case": "5 near-identical",
+  "n": 5,
+  "floor": 3,
+  "sklearn_admitted": 3,
+  "hdbscan_lib_admitted": 3,
+  "max_cos_dist": 1.025667366261196e-06
+ },
+ {
+  "case": "5: 4 tight + 1 outlier",
+  "n": 5,
+  "floor": 3,
+  "sklearn_admitted": 3,
+  "hdbscan_lib_admitted": 3,
+  "max_cos_dist": 0.10505446648988492
+ },
+ {
+  "case": "9 near-identical",
+  "n": 9,
+  "floor": 5,
+  "sklearn_admitted": 5,
+  "hdbscan_lib_admitted": 5,
+  "max_cos_dist": 1.0751872607794866e-06
+ },
+ {
+  "case": "20 near-identical",
+  "n": 20,
+  "floor": 11,
+  "sklearn_admitted": 11,
+  "hdbscan_lib_admitted": 11,
+  "max_cos_dist": 1.0630786537735304e-06
+ },
+ {
+  "case": "20: 16 tight + 4 outliers",
+  "n": 20,
+  "floor": 11,
+  "sklearn_admitted": 11,
+  "hdbscan_lib_admitted": 11,
+  "max_cos_dist": 0.21280868572181777
+ },
+ {
+  "case": "50 near-identical",
+  "n": 50,
+  "floor": 26,
+  "sklearn_admitted": 26,
+  "hdbscan_lib_admitted": 26,
+  "max_cos_dist": 1.1022171718666485e-06
+ },
+ {
+  "case": "50: 40 tight + 10 outliers",
+  "n": 50,
+  "floor": 26,
+  "sklearn_admitted": 26,
+  "hdbscan_lib_admitted": 26,
+  "max_cos_dist": 0.21537641653564998
+ }
+]

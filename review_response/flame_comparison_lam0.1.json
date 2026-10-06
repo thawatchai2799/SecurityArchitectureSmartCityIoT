@@ -1,0 +1,854 @@
+[
+ {
+  "attack": "none",
+  "n_att": 0,
+  "lam": 0.1,
+  "fedavg": {
+   "f1": 0.9707,
+   "f1_sd": 0.0003,
+   "att_rej": 0,
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9711,
+     "final_f1": 0.9711,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 43,
+     "f1": 0.9705,
+     "final_f1": 0.9705,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 44,
+     "f1": 0.9705,
+     "final_f1": 0.9705,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    }
+   ]
+  },
+  "flame": {
+   "f1": 0.941,
+   "f1_sd": 0.0056,
+   "att_rej": 0,
+   "hon_rej": 57,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9488,
+     "final_f1": 0.9385,
+     "att_rej": 0,
+     "hon_rej": 18,
+     "caught": 0,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      4,
+      4,
+      3
+     ]
+    },
+    {
+     "seed": 43,
+     "f1": 0.9376,
+     "final_f1": 0.939,
+     "att_rej": 0,
+     "hon_rej": 19,
+     "caught": 0,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "seed": 44,
+     "f1": 0.9365,
+     "final_f1": 0.9382,
+     "att_rej": 0,
+     "hon_rej": 20,
+     "caught": 0,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    }
+   ],
+   "rounds_with_cluster": 30,
+   "mean_kept": 3.1
+  },
+  "lpra": {
+   "f1": 0.9707,
+   "f1_sd": 0.0003,
+   "att_rej": 0,
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9711,
+     "final_f1": 0.9711,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 43,
+     "f1": 0.9705,
+     "final_f1": 0.9705,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 44,
+     "f1": 0.9705,
+     "final_f1": 0.9705,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    }
+   ]
+  }
+ },
+ {
+  "attack": "scale",
+  "n_att": 1,
+  "lam": 0.1,
+  "fedavg": {
+   "f1": 0.9413,
+   "f1_sd": 0.0199,
+   "att_rej": 0,
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9131,
+     "final_f1": 0.9084,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 43,
+     "f1": 0.956,
+     "final_f1": 0.9707,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 44,
+     "f1": 0.9547,
+     "final_f1": 0.9716,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    }
+   ]
+  },
+  "flame": {
+   "f1": 0.9594,
+   "f1_sd": 0.0082,
+   "att_rej": 30,
+   "hon_rej": 30,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.953,
+     "final_f1": 0.9697,
+     "att_rej": 10,
+     "hon_rej": 10,
+     "caught": 10,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "seed": 43,
+     "f1": 0.9709,
+     "final_f1": 0.9701,
+     "att_rej": 10,
+     "hon_rej": 10,
+     "caught": 10,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "seed": 44,
+     "f1": 0.9542,
+     "final_f1": 0.9684,
+     "att_rej": 10,
+     "hon_rej": 10,
+     "caught": 10,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    }
+   ],
+   "rounds_with_cluster": 30,
+   "mean_kept": 3.0
+  },
+  "lpra": {
+   "f1": 0.9708,
+   "f1_sd": 0.0003,
+   "att_rej": 30,
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9712,
+     "final_f1": 0.9712,
+     "att_rej": 10,
+     "hon_rej": 0,
+     "caught": 10
+    },
+    {
+     "seed": 43,
+     "f1": 0.9704,
+     "final_f1": 0.9704,
+     "att_rej": 10,
+     "hon_rej": 0,
+     "caught": 10
+    },
+    {
+     "seed": 44,
+     "f1": 0.9708,
+     "final_f1": 0.9709,
+     "att_rej": 10,
+     "hon_rej": 0,
+     "caught": 10
+    }
+   ]
+  }
+ },
+ {
+  "attack": "flip",
+  "n_att": 1,
+  "lam": 0.1,
+  "fedavg": {
+   "f1": 0.9529,
+   "f1_sd": 0.0137,
+   "att_rej": 0,
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9701,
+     "final_f1": 0.9701,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 43,
+     "f1": 0.9518,
+     "final_f1": 0.9698,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 44,
+     "f1": 0.9367,
+     "final_f1": 0.9209,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    }
+   ]
+  },
+  "flame": {
+   "f1": 0.9499,
+   "f1_sd": 0.0101,
+   "att_rej": 30,
+   "hon_rej": 30,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9537,
+     "final_f1": 0.9693,
+     "att_rej": 10,
+     "hon_rej": 10,
+     "caught": 10,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "seed": 43,
+     "f1": 0.9599,
+     "final_f1": 0.9388,
+     "att_rej": 10,
+     "hon_rej": 10,
+     "caught": 10,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "seed": 44,
+     "f1": 0.9362,
+     "final_f1": 0.957,
+     "att_rej": 10,
+     "hon_rej": 10,
+     "caught": 10,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    }
+   ],
+   "rounds_with_cluster": 30,
+   "mean_kept": 3.0
+  },
+  "lpra": {
+   "f1": 0.9708,
+   "f1_sd": 0.0003,
+   "att_rej": 30,
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9712,
+     "final_f1": 0.9712,
+     "att_rej": 10,
+     "hon_rej": 0,
+     "caught": 10
+    },
+    {
+     "seed": 43,
+     "f1": 0.9704,
+     "final_f1": 0.9704,
+     "att_rej": 10,
+     "hon_rej": 0,
+     "caught": 10
+    },
+    {
+     "seed": 44,
+     "f1": 0.9708,
+     "final_f1": 0.9709,
+     "att_rej": 10,
+     "hon_rej": 0,
+     "caught": 10
+    }
+   ]
+  }
+ },
+ {
+  "attack": "noise",
+  "n_att": 1,
+  "lam": 0.1,
+  "fedavg": {
+   "f1": 0.8226,
+   "f1_sd": 0.0872,
+   "att_rej": 0,
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.6992,
+     "final_f1": 0.5949,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 43,
+     "f1": 0.8847,
+     "final_f1": 0.8839,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 44,
+     "f1": 0.8839,
+     "final_f1": 0.8625,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    }
+   ]
+  },
+  "flame": {
+   "f1": 0.9594,
+   "f1_sd": 0.0082,
+   "att_rej": 30,
+   "hon_rej": 30,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.953,
+     "final_f1": 0.9697,
+     "att_rej": 10,
+     "hon_rej": 10,
+     "caught": 10,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "seed": 43,
+     "f1": 0.9709,
+     "final_f1": 0.9701,
+     "att_rej": 10,
+     "hon_rej": 10,
+     "caught": 10,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "seed": 44,
+     "f1": 0.9542,
+     "final_f1": 0.9684,
+     "att_rej": 10,
+     "hon_rej": 10,
+     "caught": 10,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    }
+   ],
+   "rounds_with_cluster": 30,
+   "mean_kept": 3.0
+  },
+  "lpra": {
+   "f1": 0.9708,
+   "f1_sd": 0.0003,
+   "att_rej": 30,
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9712,
+     "final_f1": 0.9712,
+     "att_rej": 10,
+     "hon_rej": 0,
+     "caught": 10
+    },
+    {
+     "seed": 43,
+     "f1": 0.9704,
+     "final_f1": 0.9704,
+     "att_rej": 10,
+     "hon_rej": 0,
+     "caught": 10
+    },
+    {
+     "seed": 44,
+     "f1": 0.9708,
+     "final_f1": 0.9709,
+     "att_rej": 10,
+     "hon_rej": 0,
+     "caught": 10
+    }
+   ]
+  }
+ },
+ {
+  "attack": "stealth",
+  "n_att": 1,
+  "lam": 0.1,
+  "fedavg": {
+   "f1": 0.9708,
+   "f1_sd": 0.0003,
+   "att_rej": 0,
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9711,
+     "final_f1": 0.9712,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 43,
+     "f1": 0.9703,
+     "final_f1": 0.9703,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 44,
+     "f1": 0.9708,
+     "final_f1": 0.9709,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    }
+   ]
+  },
+  "flame": {
+   "f1": 0.951,
+   "f1_sd": 0.0127,
+   "att_rej": 4,
+   "hon_rej": 55,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.933,
+     "final_f1": 0.9593,
+     "att_rej": 3,
+     "hon_rej": 17,
+     "caught": 3,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "seed": 43,
+     "f1": 0.96,
+     "final_f1": 0.9706,
+     "att_rej": 0,
+     "hon_rej": 19,
+     "caught": 0,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "seed": 44,
+     "f1": 0.96,
+     "final_f1": 0.9707,
+     "att_rej": 1,
+     "hon_rej": 19,
+     "caught": 1,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    }
+   ],
+   "rounds_with_cluster": 30,
+   "mean_kept": 3.03
+  },
+  "lpra": {
+   "f1": 0.9708,
+   "f1_sd": 0.0003,
+   "att_rej": 0,
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9711,
+     "final_f1": 0.9712,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 43,
+     "f1": 0.9703,
+     "final_f1": 0.9703,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 44,
+     "f1": 0.9708,
+     "final_f1": 0.9709,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    }
+   ]
+  }
+ },
+ {
+  "attack": "adaptive",
+  "n_att": 2,
+  "lam": 0.1,
+  "fedavg": {
+   "f1": 0.291,
+   "f1_sd": 0.2512,
+   "att_rej": 0,
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.0041,
+     "final_f1": 0.0041,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 43,
+     "f1": 0.6159,
+     "final_f1": 0.5825,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 44,
+     "f1": 0.253,
+     "final_f1": 0.3392,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    }
+   ]
+  },
+  "flame": {
+   "f1": 0.9446,
+   "f1_sd": 0.0044,
+   "att_rej": 60,
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.947,
+     "final_f1": 0.9596,
+     "att_rej": 20,
+     "hon_rej": 0,
+     "caught": 10,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "seed": 43,
+     "f1": 0.9384,
+     "final_f1": 0.9391,
+     "att_rej": 20,
+     "hon_rej": 0,
+     "caught": 10,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "seed": 44,
+     "f1": 0.9484,
+     "final_f1": 0.938,
+     "att_rej": 20,
+     "hon_rej": 0,
+     "caught": 10,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    }
+   ],
+   "rounds_with_cluster": 30,
+   "mean_kept": 3.0
+  },
+  "lpra": {
+   "f1": 0.9388,
+   "f1_sd": 0.0004,
+   "att_rej": 60,
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9393,
+     "final_f1": 0.9393,
+     "att_rej": 20,
+     "hon_rej": 0,
+     "caught": 10
+    },
+    {
+     "seed": 43,
+     "f1": 0.9383,
+     "final_f1": 0.9383,
+     "att_rej": 20,
+     "hon_rej": 0,
+     "caught": 10
+    },
+    {
+     "seed": 44,
+     "f1": 0.9388,
+     "final_f1": 0.9389,
+     "att_rej": 20,
+     "hon_rej": 0,
+     "caught": 10
+    }
+   ]
+  }
+ }
+]

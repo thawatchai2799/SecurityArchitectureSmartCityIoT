@@ -2,127 +2,853 @@
  {
   "attack": "none",
   "n_att": 0,
+  "lam": 0.01,
   "fedavg": {
    "f1": 0.9707,
+   "f1_sd": 0.0003,
    "att_rej": 0,
-   "hon_rej": 0
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9711,
+     "final_f1": 0.9711,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 43,
+     "f1": 0.9705,
+     "final_f1": 0.9705,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 44,
+     "f1": 0.9705,
+     "final_f1": 0.9705,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    }
+   ]
   },
   "flame": {
-   "f1": 0.939,
+   "f1": 0.9389,
+   "f1_sd": 0.0004,
    "att_rej": 0,
-   "hon_rej": 55,
+   "hon_rej": 60,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9395,
+     "final_f1": 0.9395,
+     "att_rej": 0,
+     "hon_rej": 20,
+     "caught": 0,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "seed": 43,
+     "f1": 0.9388,
+     "final_f1": 0.9388,
+     "att_rej": 0,
+     "hon_rej": 20,
+     "caught": 0,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "seed": 44,
+     "f1": 0.9386,
+     "final_f1": 0.9385,
+     "att_rej": 0,
+     "hon_rej": 20,
+     "caught": 0,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    }
+   ],
    "rounds_with_cluster": 30,
-   "mean_kept": 3.17
+   "mean_kept": 3.0
   },
   "lpra": {
    "f1": 0.9707,
+   "f1_sd": 0.0003,
    "att_rej": 0,
-   "hon_rej": 0
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9711,
+     "final_f1": 0.9711,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 43,
+     "f1": 0.9705,
+     "final_f1": 0.9705,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 44,
+     "f1": 0.9705,
+     "final_f1": 0.9705,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    }
+   ]
   }
  },
  {
   "attack": "scale",
   "n_att": 1,
+  "lam": 0.01,
   "fedavg": {
    "f1": 0.9413,
+   "f1_sd": 0.0199,
    "att_rej": 0,
-   "hon_rej": 0
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9131,
+     "final_f1": 0.9084,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 43,
+     "f1": 0.956,
+     "final_f1": 0.9707,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 44,
+     "f1": 0.9547,
+     "final_f1": 0.9716,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    }
+   ]
   },
   "flame": {
-   "f1": 0.9448,
-   "att_rej": 2,
-   "hon_rej": 56,
-   "rounds_with_cluster": 30,
-   "mean_kept": 3.07
-  },
-  "lpra": {
-   "f1": 0.9708,
-   "att_rej": 30,
-   "hon_rej": 0
-  }
- },
- {
-  "attack": "flip",
-  "n_att": 1,
-  "fedavg": {
-   "f1": 0.9529,
-   "att_rej": 0,
-   "hon_rej": 0
-  },
-  "flame": {
-   "f1": 0.9391,
+   "f1": 0.9386,
+   "f1_sd": 0.0,
    "att_rej": 30,
    "hon_rej": 29,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9386,
+     "final_f1": 0.9386,
+     "att_rej": 10,
+     "hon_rej": 9,
+     "caught": 10,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "seed": 43,
+     "f1": 0.9387,
+     "final_f1": 0.9387,
+     "att_rej": 10,
+     "hon_rej": 10,
+     "caught": 10,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "seed": 44,
+     "f1": 0.9386,
+     "final_f1": 0.9387,
+     "att_rej": 10,
+     "hon_rej": 10,
+     "caught": 10,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    }
+   ],
    "rounds_with_cluster": 30,
    "mean_kept": 3.03
   },
   "lpra": {
    "f1": 0.9708,
+   "f1_sd": 0.0003,
    "att_rej": 30,
-   "hon_rej": 0
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9712,
+     "final_f1": 0.9712,
+     "att_rej": 10,
+     "hon_rej": 0,
+     "caught": 10
+    },
+    {
+     "seed": 43,
+     "f1": 0.9704,
+     "final_f1": 0.9704,
+     "att_rej": 10,
+     "hon_rej": 0,
+     "caught": 10
+    },
+    {
+     "seed": 44,
+     "f1": 0.9708,
+     "final_f1": 0.9709,
+     "att_rej": 10,
+     "hon_rej": 0,
+     "caught": 10
+    }
+   ]
+  }
+ },
+ {
+  "attack": "flip",
+  "n_att": 1,
+  "lam": 0.01,
+  "fedavg": {
+   "f1": 0.9529,
+   "f1_sd": 0.0137,
+   "att_rej": 0,
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9701,
+     "final_f1": 0.9701,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 43,
+     "f1": 0.9518,
+     "final_f1": 0.9698,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 44,
+     "f1": 0.9367,
+     "final_f1": 0.9209,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    }
+   ]
+  },
+  "flame": {
+   "f1": 0.9386,
+   "f1_sd": 0.0,
+   "att_rej": 30,
+   "hon_rej": 29,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9386,
+     "final_f1": 0.9386,
+     "att_rej": 10,
+     "hon_rej": 9,
+     "caught": 10,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "seed": 43,
+     "f1": 0.9386,
+     "final_f1": 0.9386,
+     "att_rej": 10,
+     "hon_rej": 10,
+     "caught": 10,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "seed": 44,
+     "f1": 0.9386,
+     "final_f1": 0.9386,
+     "att_rej": 10,
+     "hon_rej": 10,
+     "caught": 10,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    }
+   ],
+   "rounds_with_cluster": 30,
+   "mean_kept": 3.03
+  },
+  "lpra": {
+   "f1": 0.9708,
+   "f1_sd": 0.0003,
+   "att_rej": 30,
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9712,
+     "final_f1": 0.9712,
+     "att_rej": 10,
+     "hon_rej": 0,
+     "caught": 10
+    },
+    {
+     "seed": 43,
+     "f1": 0.9704,
+     "final_f1": 0.9704,
+     "att_rej": 10,
+     "hon_rej": 0,
+     "caught": 10
+    },
+    {
+     "seed": 44,
+     "f1": 0.9708,
+     "final_f1": 0.9709,
+     "att_rej": 10,
+     "hon_rej": 0,
+     "caught": 10
+    }
+   ]
   }
  },
  {
   "attack": "noise",
   "n_att": 1,
+  "lam": 0.01,
   "fedavg": {
    "f1": 0.8226,
+   "f1_sd": 0.0872,
    "att_rej": 0,
-   "hon_rej": 0
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.6992,
+     "final_f1": 0.5949,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 43,
+     "f1": 0.8847,
+     "final_f1": 0.8839,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 44,
+     "f1": 0.8839,
+     "final_f1": 0.8625,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    }
+   ]
   },
   "flame": {
-   "f1": 0.9486,
+   "f1": 0.9386,
+   "f1_sd": 0.0,
    "att_rej": 30,
-   "hon_rej": 30,
+   "hon_rej": 29,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9386,
+     "final_f1": 0.9386,
+     "att_rej": 10,
+     "hon_rej": 9,
+     "caught": 10,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "seed": 43,
+     "f1": 0.9387,
+     "final_f1": 0.9387,
+     "att_rej": 10,
+     "hon_rej": 10,
+     "caught": 10,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "seed": 44,
+     "f1": 0.9386,
+     "final_f1": 0.9387,
+     "att_rej": 10,
+     "hon_rej": 10,
+     "caught": 10,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    }
+   ],
    "rounds_with_cluster": 30,
-   "mean_kept": 3.0
+   "mean_kept": 3.03
   },
   "lpra": {
    "f1": 0.9708,
+   "f1_sd": 0.0003,
    "att_rej": 30,
-   "hon_rej": 0
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9712,
+     "final_f1": 0.9712,
+     "att_rej": 10,
+     "hon_rej": 0,
+     "caught": 10
+    },
+    {
+     "seed": 43,
+     "f1": 0.9704,
+     "final_f1": 0.9704,
+     "att_rej": 10,
+     "hon_rej": 0,
+     "caught": 10
+    },
+    {
+     "seed": 44,
+     "f1": 0.9708,
+     "final_f1": 0.9709,
+     "att_rej": 10,
+     "hon_rej": 0,
+     "caught": 10
+    }
+   ]
   }
  },
  {
   "attack": "stealth",
   "n_att": 1,
+  "lam": 0.01,
   "fedavg": {
    "f1": 0.9708,
+   "f1_sd": 0.0003,
    "att_rej": 0,
-   "hon_rej": 0
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9711,
+     "final_f1": 0.9712,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 43,
+     "f1": 0.9703,
+     "final_f1": 0.9703,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 44,
+     "f1": 0.9708,
+     "final_f1": 0.9709,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    }
+   ]
   },
   "flame": {
-   "f1": 0.9602,
-   "att_rej": 3,
-   "hon_rej": 55,
+   "f1": 0.9389,
+   "f1_sd": 0.0004,
+   "att_rej": 0,
+   "hon_rej": 59,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9393,
+     "final_f1": 0.9394,
+     "att_rej": 0,
+     "hon_rej": 19,
+     "caught": 0,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      4,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "seed": 43,
+     "f1": 0.9385,
+     "final_f1": 0.9385,
+     "att_rej": 0,
+     "hon_rej": 20,
+     "caught": 0,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "seed": 44,
+     "f1": 0.9388,
+     "final_f1": 0.9388,
+     "att_rej": 0,
+     "hon_rej": 20,
+     "caught": 0,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    }
+   ],
    "rounds_with_cluster": 30,
-   "mean_kept": 3.07
+   "mean_kept": 3.03
   },
   "lpra": {
    "f1": 0.9708,
+   "f1_sd": 0.0003,
    "att_rej": 0,
-   "hon_rej": 0
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9711,
+     "final_f1": 0.9712,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 43,
+     "f1": 0.9703,
+     "final_f1": 0.9703,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 44,
+     "f1": 0.9708,
+     "final_f1": 0.9709,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    }
+   ]
   }
  },
  {
   "attack": "adaptive",
   "n_att": 2,
+  "lam": 0.01,
   "fedavg": {
    "f1": 0.291,
+   "f1_sd": 0.2512,
    "att_rej": 0,
-   "hon_rej": 0
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.0041,
+     "final_f1": 0.0041,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 43,
+     "f1": 0.6159,
+     "final_f1": 0.5825,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    },
+    {
+     "seed": 44,
+     "f1": 0.253,
+     "final_f1": 0.3392,
+     "att_rej": 0,
+     "hon_rej": 0,
+     "caught": 0
+    }
+   ]
   },
   "flame": {
-   "f1": 0.9388,
+   "f1": 0.9389,
+   "f1_sd": 0.0003,
    "att_rej": 60,
    "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9393,
+     "final_f1": 0.9394,
+     "att_rej": 20,
+     "hon_rej": 0,
+     "caught": 10,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "seed": 43,
+     "f1": 0.9386,
+     "final_f1": 0.9387,
+     "att_rej": 20,
+     "hon_rej": 0,
+     "caught": 10,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    },
+    {
+     "seed": 44,
+     "f1": 0.9387,
+     "final_f1": 0.9387,
+     "att_rej": 20,
+     "hon_rej": 0,
+     "caught": 10,
+     "rounds_with_cluster": 10,
+     "kept_per_round": [
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+     ]
+    }
+   ],
    "rounds_with_cluster": 30,
    "mean_kept": 3.0
   },
   "lpra": {
    "f1": 0.9388,
+   "f1_sd": 0.0004,
    "att_rej": 60,
-   "hon_rej": 0
+   "hon_rej": 0,
+   "per_seed": [
+    {
+     "seed": 42,
+     "f1": 0.9393,
+     "final_f1": 0.9393,
+     "att_rej": 20,
+     "hon_rej": 0,
+     "caught": 10
+    },
+    {
+     "seed": 43,
+     "f1": 0.9383,
+     "final_f1": 0.9383,
+     "att_rej": 20,
+     "hon_rej": 0,
+     "caught": 10
+    },
+    {
+     "seed": 44,
+     "f1": 0.9388,
+     "final_f1": 0.9389,
+     "att_rej": 20,
+     "hon_rej": 0,
+     "caught": 10
+    }
+   ]
   }
  }
 ]

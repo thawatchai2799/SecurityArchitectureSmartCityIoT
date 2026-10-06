@@ -1,7 +1,10 @@
 """Exp-3 (Table 6) and Exp-9 (Tables 7, 8) re-run under the v2.1 code (district-local
 initialisation), full TON_IoT, seed 42, exactly as run_poc.py runs them.  Used to check
 which K = 5 numbers the initialisation change touched: none of the LPRA or no-attack
-numbers; undefended FedAvg under the Gaussian-noise attack moved (0.686 -> 0.780)."""
+numbers; undefended FedAvg under the Gaussian-noise attack moved (0.686 -> 0.780).
+Round 2 (Reviewer 1, C4): re-run after the bootstrap was moved to loc_tr[0]; Table 8 Energy
+pFL 0.975 -> 0.974 and the same undefended noise cell 0.780 -> 0.904; the pre-fix output is kept
+as exp3_exp9_rerun_v2.1.0.json."""
 import os,sys,json,numpy as np,pandas as pd,warnings; warnings.filterwarnings("ignore")
 R=os.path.join(os.path.dirname(os.path.abspath(__file__)),".."); sys.path.insert(0,R)
 from poc import data_loader as dl, federated, blockchain, robust_fl

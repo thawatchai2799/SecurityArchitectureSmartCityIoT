@@ -1,4 +1,10 @@
-"""Reviewer 1, Comment 2(c): the ~0.03 ms "ledger anchoring" figure in E11.
+"""Reviewer 1, Comment 2(c), round 1: the ~0.03 ms "ledger anchoring" figure.
+
+ROUND-2 NOTE (Reviewer 1, C1): this script is an auxiliary benchmark with a saturated
+mempool (2,000 back-to-back submits, so a 50-tx block fills in under 1 ms); its 0.8 ms is the
+block-processing cost, NOT the commit latency inside the E11 replay.  E11 itself
+(run_extended.py city_scenario, now 50 tx / 0.5 s) measures per-alert submit-to-commit latency
+from the ledger's tx_latencies: about 20 ms mean, 9 ms p50, 93 ms p95 (block-fill waiting).
 
 city_simulation.EdgeGateway.process() starts a timer before model.predict(),
 calls ledger.submit(), and stops the timer as soon as submit() returns.
@@ -19,7 +25,7 @@ from poc.blockchain import PermissionedLedger
 
 if __name__ == "__main__":
     # Same ledger configuration as the simulation's default.
-    led = PermissionedLedger(block_size=50, block_interval_s=0.5, members=["Gateway-Healthcare"])   # E11 config (city_simulation.py)
+    led = PermissionedLedger(block_size=50, block_interval_s=0.5, members=["Gateway-Healthcare"])   # the setting Section 5.8 states; city_simulation.py (E10) uses it, E11 used 20/1.0 s until round 2
     print(f"block_size={led.block_size}  block_interval_s={led.block_interval}")
 
     submit_ms = []
@@ -27,7 +33,7 @@ if __name__ == "__main__":
         payload = dict(kind="ALERT", district="Healthcare", evidence_hash="a" * 64,
                        model="DecisionTreeClassifier", ts=time.time())
         t0 = time.perf_counter()
-        led.submit(payload, submitter="Gateway-Healthcare")   # what E11 times
+        led.submit(payload, submitter="Gateway-Healthcare")   # the submission call (E11 records this and, since v2.2.0, the commit latency too)
         submit_ms.append((time.perf_counter() - t0) * 1000)
     led.flush()
 
@@ -42,7 +48,7 @@ if __name__ == "__main__":
     out = dict(n_tx=len(submit_ms), blocks=led.metrics["blocks"],
                submit_ms=stat(submit_ms), commit_ms=stat(commit_ms), block_cut_ms=stat(block_ms))
     print()
-    print(f"  submission latency (what E11 reports): mean {out['submit_ms']['mean']:.4f} ms  "
+    print(f"  submission latency (E11 reports this and, since v2.2.0, the commit latency): mean {out['submit_ms']['mean']:.4f} ms  "
           f"p95 {out['submit_ms']['p95']:.4f} ms")
     print(f"  commit latency (submit -> on chain)  : mean {out['commit_ms']['mean']:.4f} ms  "
           f"p95 {out['commit_ms']['p95']:.4f} ms")

@@ -3,9 +3,9 @@
 run_extended.py -- experiments added for manuscript v0.3 (all on TON_IoT, no hardware)
   ExtA  Byzantine grid : {none,scale,flip,noise,stealth} x {1,2 attackers} x 6 aggregators x 3 seeds
   ExtB  Multi-seed CIs : Exp-1 edge benchmark and Exp-3 FedAvg (5 seeds, mean +/- SD)
-  ExtC  Scalability    : districts K in {5,10,20,50}; validators in {3..15}; ledger block size sweep
+  ExtC  Scalability    : districts K in {5,10,20,50} (Table 13 protocol: seeds 42-44, last-3-round F1); validators in {3..15}; ledger block size sweep
   ExtD  City scenario  : ransomware campaign Healthcare -> Water -> Transport; time-to-detect per layer
-Usage: python run_extended.py [--quick]
+Usage: python run_extended.py [--quick] [--part A|B|C|D|fig|all] [--seed N]   (see README Step 3 and MANIFEST.md)
 """
 import os, sys, json, time, argparse, warnings
 warnings.filterwarnings("ignore")
@@ -32,9 +32,11 @@ def main():
     a = ap.parse_args()
     T0 = time.time(); rep = load_rep()
     import platform
-    rep["machine"] = dict(python=platform.python_version(), platform=platform.platform(),
-                          cpu_count=os.cpu_count(), run_date=time.strftime("%Y-%m-%d %H:%M"))
-    print("machine:", rep["machine"])
+    machine = dict(python=platform.python_version(), platform=platform.platform(),
+                   cpu_count=os.cpu_count(), run_date=time.strftime("%Y-%m-%d %H:%M"))
+    # provenance per part: a partial run must not re-stamp results produced by an earlier run
+    rep["machine" if a.part == "all" else f"machine_{a.part}"] = machine
+    print("machine:", machine)
     run = lambda x: a.part in ("all", x)
     seeds_A = [42, 43, 44] if not a.quick else [42]
     seeds_B = [42, 43, 44, 45, 46] if not a.quick else [42, 43]
@@ -95,15 +97,29 @@ def main():
     # ================================================================== #
     if run("C"):
       print("\n[ExtC] Scalability")
+      # District grid under the Table 13 protocol (release v2.2.0, Reviewer 1 round 2, C5):
+      # seeds 42-44, F1 = mean over the last three rounds, population s.d. over seeds,
+      # orphan-free partition and district-local initialisation (poc/byzantine.py), 20% Byzantine
+      # under the scaling attack with the fixed placement range(n_att).  review_response/
+      # table13_perseed.py keeps the per-seed records this file is the aggregate of.
+      seeds_C = seeds_A
       rowsC1 = []
       for K in ([5, 10, 20, 50] if not a.quick else [5, 10, 20]):
           for agg in ("fedavg", "lpra"):
               for att, n in (("none", 0), ("scale", max(1, K // 5))):
-                  r = byzantine.run_byzantine(Xn[tr], yb[tr], ym[tr], Xn[te], yb[te], k=K, rounds=roundsA, seed=42,
-                                              attack=att, n_att=n, aggregator=agg)
-                  rowsC1.append(dict(K=K, aggregator=agg, attack=att, n_att=n, f1=r["final_f1"], caught=r["rounds_all_attackers_rejected"],
-                                     honest_rej=r["honest_rejections"], round_time_s=r["time_s"] / roundsA))
-                  print(f"  K={K:2d} {agg:7s} {att:5s} n_att={n:2d} F1={r['final_f1']:.4f} caught={r['rounds_all_attackers_rejected']}/{roundsA} t/round={r['time_s']/roundsA:.2f}s")
+                  per = []
+                  for seed in seeds_C:
+                      r = byzantine.run_byzantine(Xn[tr], yb[tr], ym[tr], Xn[te], yb[te], k=K, rounds=roundsA, seed=seed,
+                                                  attack=att, n_att=n, aggregator=agg, lpra_version="v2")
+                      per.append(dict(f1=r["mean_last3_f1"], caught=r["rounds_all_attackers_rejected"],
+                                      honest_rej=r["honest_rejections"], round_time_s=r["time_s"] / roundsA))
+                  f1s = np.array([q["f1"] for q in per])
+                  rowsC1.append(dict(K=K, aggregator=agg, attack=att, n_att=n, f1=round(float(f1s.mean()), 4),
+                                     f1_sd=round(float(f1s.std()), 4),
+                                     caught=int(round(np.mean([q["caught"] for q in per]))),
+                                     honest_rej=round(float(np.mean([q["honest_rej"] for q in per])), 1)))
+                  print(f"  K={K:2d} {agg:7s} {att:5s} n_att={n:2d} F1(last3, {len(per)} seeds)={rowsC1[-1]['f1']:.4f}±{rowsC1[-1]['f1_sd']:.4f} "
+                        f"caught={rowsC1[-1]['caught']}/{roundsA} honest_rej={rowsC1[-1]['honest_rej']}")
       dfC1 = pd.DataFrame(rowsC1); dfC1.to_csv(os.path.join(RES, "extC_districts_scaling.csv"), index=False)
       print("  gamma sensitivity of LPRA at K=20 (extreme non-IID)")
       rowsC1b = []
@@ -187,7 +203,7 @@ def city_scenario(X, y, ytype, seed=42, k=5, dt_flow=0.01, window_s=10.0, min_di
     campaign starts in Healthcare at t=60 s, spreads to Water at t=180 s and Transport at
     t=300 s (attack share ramps 0 -> 30 %).  Detector = depth-8 tree trained on a disjoint split
     that EXCLUDES ransomware (zero-day setting).  We measure per layer:
-      L2 first alert per district, L3 anchoring delay, L4 time when >= 3 districts show an
+      L2 first alert per district, L3 submit-to-commit latency per alert (and submission latency), L4 time when >= 3 districts show an
       alert-rate anomaly in the same 10 s bin (campaign declared) vs. 'no-L4' baseline where
       districts only exchange daily reports (24 h)."""
     rng = np.random.default_rng(seed)
@@ -198,9 +214,12 @@ def city_scenario(X, y, ytype, seed=42, k=5, dt_flow=0.01, window_s=10.0, min_di
                                                                        np.concatenate([np.zeros(len(n_tr)), np.ones(len(other))]))
     districts = ["Transport", "Energy", "Water", "Healthcare", "e-Gov"]
     onset = {"Healthcare": 60.0, "Water": 180.0, "Transport": 300.0}
-    led = PermissionedLedger(block_size=20, block_interval_s=1.0,
+    # E11 ledger settings as stated in the manuscript (Section 5.8): 50 transactions
+    # per block, 0.5 s block interval.  v2.1.0 constructed this ledger with 20/1.0 s
+    # and timed only submit(); see CHANGELOG (round 2, Reviewer 1, C1).
+    led = PermissionedLedger(block_size=50, block_interval_s=0.5,
                              members=[f"Gateway-{d}" for d in districts])
-    first_alert, alerts, anchor_delay = {}, [], []
+    first_alert, alerts, submit_delay = {}, [], []
     T_end = 480.0; flows_per_s = 100; rate = 1.0 / flows_per_s
     for d in districts:
         t = 0.0; ni = 0; ri = 0
@@ -215,12 +234,16 @@ def city_scenario(X, y, ytype, seed=42, k=5, dt_flow=0.01, window_s=10.0, min_di
             if model.predict(X[idx].reshape(1, -1))[0] == 1:
                 sub = time.perf_counter()
                 led.submit(dict(kind="ALERT", district=d, evidence_hash=sha256(str(int(idx))), sim_t=t), submitter=f"Gateway-{d}")
-                anchor_delay.append(time.perf_counter() - sub)
+                submit_delay.append(time.perf_counter() - sub)      # mempool submission only (not commit)
                 alerts.append((t, d, bool(ytype[idx] == "ransomware")))
                 if d not in first_alert and ytype[idx] == "ransomware":
                     first_alert[d] = t
             t += rate
     led.flush()
+    # Per-alert submit-to-commit latency, from the ledger's own transaction records
+    # (metrics["tx_latencies"] is filled in _cut_block for every committed tx).
+    # This is the quantity Section 5.8 reports; submission latency is kept beside it.
+    commit = np.asarray(led.metrics["tx_latencies"], dtype=float)
     # L4 correlation on the simulated clock: rate-based (a naive "any alert in 3 districts"
     # rule fires immediately from the ~1 % benign false-positive rate).  Alerts are binned per
     # district in 10 s bins; the benign baseline (mean, sd) is learned from the first 50 s;
@@ -243,7 +266,13 @@ def city_scenario(X, y, ytype, seed=42, k=5, dt_flow=0.01, window_s=10.0, min_di
     return dict(scenario="ransomware campaign Healthcare->Water->Transport, zero-day detector (ransomware unseen)",
                 onset_s=onset, first_true_alert_s=first_alert,
                 detection_delay_s={d: round(first_alert[d] - onset[d], 2) for d in first_alert},
-                L3_mean_anchor_delay_ms=1e3 * float(np.mean(anchor_delay)) if anchor_delay else None,
+                L3_ledger_config=dict(block_size=led.block_size, block_interval_s=led.block_interval),
+                L3_mean_submit_latency_ms=1e3 * float(np.mean(submit_delay)) if submit_delay else None,
+                L3_mean_commit_latency_ms=1e3 * float(commit.mean()) if len(commit) else None,
+                L3_p50_commit_latency_ms=1e3 * float(np.percentile(commit, 50)) if len(commit) else None,
+                L3_p95_commit_latency_ms=1e3 * float(np.percentile(commit, 95)) if len(commit) else None,
+                L3_max_commit_latency_ms=1e3 * float(commit.max()) if len(commit) else None,
+                L3_committed_tx=int(len(commit)),
                 L4_district_anomaly_flag_s=anomaly_start, L4_campaign_declared_s=campaign_t,
                 L4_time_from_first_onset_s=(campaign_t - 60.0) if campaign_t else None,
                 no_L4_baseline_s="24 h (daily inter-agency report) or never",

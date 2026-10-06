@@ -8,9 +8,13 @@ Contribution-specific extensions to the federated layer:
     aggregator screens client updates with two cheap statistics:
         d_i  = ||w_i - median_j(w_j)||_2           (distance to coordinate-wise median)
         quarantine if d_i > max(median(d) + tau*MAD(d), gamma*median(d))  (tau=3, gamma=2.5)
-        then c_i computed against the mean delta of stage-1 survivors; quarantine if c_i < 0.2
-        c_i  = cos(w_i - w_g, mean_j(w_j - w_g))   (direction agreement with the crowd)
+        then c_i computed against the reference delta of the stage-1 survivors; quarantine if c_i < 0.2
+        c_i  = cos(w_i - w_g, ref)   ref = coordinate-wise median of the survivors' deltas (v2, the
+               released default and the version every reported number uses); mean for v1
     A client is quarantined for the round if the robust z-score test fails or c_i < c_min.
+    Algorithm 1 step (6): if fewer than floor(K/2)+1 clients pass both tests, the floor(K/2)+1 stage-1
+    survivors with the highest c_i are accepted (majority fallback); if the stage-1 survivors themselves
+    are not a majority the round is INCONCLUSIVE (screen_updates returns accept=None).
     The *decision* (accepted / quarantined, with the statistics) and the hash of the
     accepted global model are written to the permissioned ledger, so that a
     district can later prove it was (or was not) excluded, and so that the model
@@ -94,10 +98,14 @@ def run_robust_fl(X, y_bin, y_multi, X_test, y_test, k=5, rounds=15, local_epoch
     loc_tr, loc_te = [], []
     for idx in parts:
         idx = rng.permutation(idx); cut = int(0.8 * len(idx)); loc_tr.append(idx[:cut]); loc_te.append(idx[cut:])
-    # Initialise the global model from ONE district's own data (district 0),
-    # so no training flow crosses a district boundary at any point.  A
-    # pooled draw was used here originally; see CHANGELOG (Reviewer 1, C3).
-    boot = _bootstrap_within(y_bin, parts[0], rng, 500)
+    # Initialise the global model from ONE district's own TRAINING split
+    # (district 0, loc_tr[0]), so no raw example crosses a district boundary
+    # during federated training and none of district 0's local hold-out can
+    # enter the initialisation.  v2.1.0 drew from parts[0] (the whole district),
+    # which let 104 of the 500 bootstrap examples (seed 42) reappear in district 0's
+    # 6,673-example hold-out used by the personalised-FL evaluation; see
+    # CHANGELOG (round 2, Reviewer 1, C4).  A pooled draw was used before v2.1.
+    boot = _bootstrap_within(y_bin, loc_tr[0], rng, 500)
     g = _make_mlp(seed, hidden); g.fit(Xs[boot], y_bin[boot]); classes = np.array([0, 1])
     tc, ti = _weights_of(g)
     history, quarantine_log = [], []
@@ -121,15 +129,18 @@ def run_robust_fl(X, y_bin, y_multi, X_test, y_test, k=5, rounds=15, local_epoch
             accept, stats = screen_updates(vecs, gvec, version=screen_version)
         else:
             accept, stats = np.ones(k, dtype=bool), {}
-        w = ns * accept; w = w / w.sum()
-        new = (vecs * w[:, None]).sum(axis=0)
+        if accept is None:                      # Algorithm 1 step (6): INCONCLUSIVE -- keep w_g, count every district as not accepted
+            accept = np.zeros(k, dtype=bool); new = gvec   # (never reached in any reported run; mirrors byzantine.aggregate)
+        else:
+            w = ns * accept; w = w / w.sum()
+            new = (vecs * w[:, None]).sum(axis=0)
         nc, ni = _unflat(new, tc, ti); _set_weights(g, nc, ni)
         f1 = f1_score(y_test, g.predict(Xt)); h = _hash_weights(nc, ni)
         history.append(dict(round=r + 1, f1=f1, accepted=[DISTRICTS[i] for i in range(k) if accept[i]],
                             quarantined=[DISTRICTS[i] for i in range(k) if not accept[i]], model_hash=h))
         if defense and (~accept).any():
             quarantine_log.append(dict(round=r + 1, quarantined=[DISTRICTS[i] for i in range(k) if not accept[i]],
-                                       dist=[round(x, 3) for x in stats["dist"]], cos=[round(x, 3) for x in stats["cos"]]))
+                                       dist=[round(x, 3) for x in stats["dist"]], cos=[None if x is None else round(x, 3) for x in stats["cos"]]))
         if ledger is not None:
             ledger.submit(dict(kind="MODEL_UPDATE", round=r + 1, model_hash=h,
                                accepted=history[-1]["accepted"], quarantined=history[-1]["quarantined"],

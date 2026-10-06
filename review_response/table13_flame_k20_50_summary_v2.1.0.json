@@ -1,0 +1,142 @@
+[
+ {
+  "K": 20,
+  "aggregator": "fedavg",
+  "attack": "none",
+  "n_att": 0,
+  "f1": 0.9667,
+  "f1_sd": 0.0046,
+  "honest_rej": 0.0,
+  "att_rej_sum": 0,
+  "caught_mean": 0.0
+ },
+ {
+  "K": 20,
+  "aggregator": "fedavg",
+  "attack": "scale",
+  "n_att": 4,
+  "f1": 0.9451,
+  "f1_sd": 0.0037,
+  "honest_rej": 0.0,
+  "att_rej_sum": 0,
+  "caught_mean": 0.0
+ },
+ {
+  "K": 20,
+  "aggregator": "flame",
+  "attack": "none",
+  "n_att": 0,
+  "f1": 0.934,
+  "f1_sd": 0.0061,
+  "honest_rej": 87.33,
+  "att_rej_sum": 0,
+  "caught_mean": 0.0,
+  "hdbscan_rounds_with_cluster": 30,
+  "rounds_total": 30
+ },
+ {
+  "K": 20,
+  "aggregator": "flame",
+  "attack": "scale",
+  "n_att": 4,
+  "f1": 0.9349,
+  "f1_sd": 0.0037,
+  "honest_rej": 74.67,
+  "att_rej_sum": 35,
+  "caught_mean": 0.0,
+  "hdbscan_rounds_with_cluster": 30,
+  "rounds_total": 30
+ },
+ {
+  "K": 20,
+  "aggregator": "lpra",
+  "attack": "none",
+  "n_att": 0,
+  "f1": 0.9594,
+  "f1_sd": 0.0149,
+  "honest_rej": 4.0,
+  "att_rej_sum": 0,
+  "caught_mean": 0.0
+ },
+ {
+  "K": 20,
+  "aggregator": "lpra",
+  "attack": "scale",
+  "n_att": 4,
+  "f1": 0.9642,
+  "f1_sd": 0.008,
+  "honest_rej": 2.67,
+  "att_rej_sum": 120,
+  "caught_mean": 10.0
+ },
+ {
+  "K": 50,
+  "aggregator": "fedavg",
+  "attack": "none",
+  "n_att": 0,
+  "f1": 0.9595,
+  "f1_sd": 0.0069,
+  "honest_rej": 0.0,
+  "att_rej_sum": 0,
+  "caught_mean": 0.0
+ },
+ {
+  "K": 50,
+  "aggregator": "fedavg",
+  "attack": "scale",
+  "n_att": 10,
+  "f1": 0.9683,
+  "f1_sd": 0.0012,
+  "honest_rej": 0.0,
+  "att_rej_sum": 0,
+  "caught_mean": 0.0
+ },
+ {
+  "K": 50,
+  "aggregator": "flame",
+  "attack": "none",
+  "n_att": 0,
+  "f1": 0.9482,
+  "f1_sd": 0.0036,
+  "honest_rej": 195.0,
+  "att_rej_sum": 0,
+  "caught_mean": 0.0,
+  "hdbscan_rounds_with_cluster": 30,
+  "rounds_total": 30
+ },
+ {
+  "K": 50,
+  "aggregator": "flame",
+  "attack": "scale",
+  "n_att": 10,
+  "f1": 0.9482,
+  "f1_sd": 0.0035,
+  "honest_rej": 159.67,
+  "att_rej_sum": 112,
+  "caught_mean": 0.0,
+  "hdbscan_rounds_with_cluster": 30,
+  "rounds_total": 30
+ },
+ {
+  "K": 50,
+  "aggregator": "lpra",
+  "attack": "none",
+  "n_att": 0,
+  "f1": 0.9595,
+  "f1_sd": 0.0069,
+  "honest_rej": 0.0,
+  "att_rej_sum": 0,
+  "caught_mean": 0.0
+ },
+ {
+  "K": 50,
+  "aggregator": "lpra",
+  "attack": "scale",
+  "n_att": 10,
+  "f1": 0.9598,
+  "f1_sd": 0.0067,
+  "honest_rej": 0.0,
+  "att_rej_sum": 300,
+  "caught_mean": 10.0
+ }
+]

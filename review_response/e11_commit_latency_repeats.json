@@ -1,0 +1,78 @@
+[
+ {
+  "detection_delay_s": {
+   "Transport": 1.99,
+   "Water": 2.17,
+   "Healthcare": 1.57
+  },
+  "L3_ledger_config": {
+   "block_size": 50,
+   "block_interval_s": 0.5
+  },
+  "L3_mean_submit_latency_ms": 0.04610256171879877,
+  "L3_mean_commit_latency_ms": 20.264556344308254,
+  "L3_p50_commit_latency_ms": 9.143311999991965,
+  "L3_p95_commit_latency_ms": 91.69862180000273,
+  "L3_max_commit_latency_ms": 476.2769820000017,
+  "L3_committed_tx": 23113,
+  "L4_campaign_declared_s": 320.0,
+  "ledger_blocks": 463
+ },
+ {
+  "detection_delay_s": {
+   "Transport": 1.99,
+   "Water": 2.17,
+   "Healthcare": 1.57
+  },
+  "L3_ledger_config": {
+   "block_size": 50,
+   "block_interval_s": 0.5
+  },
+  "L3_mean_submit_latency_ms": 0.0468002968457707,
+  "L3_mean_commit_latency_ms": 19.78379857984672,
+  "L3_p50_commit_latency_ms": 9.311230000037085,
+  "L3_p95_commit_latency_ms": 88.88724120000666,
+  "L3_max_commit_latency_ms": 420.87165300000606,
+  "L3_committed_tx": 23113,
+  "L4_campaign_declared_s": 320.0,
+  "ledger_blocks": 463
+ },
+ {
+  "detection_delay_s": {
+   "Transport": 1.99,
+   "Water": 2.17,
+   "Healthcare": 1.57
+  },
+  "L3_ledger_config": {
+   "block_size": 50,
+   "block_interval_s": 0.5
+  },
+  "L3_mean_submit_latency_ms": 0.045909944533351246,
+  "L3_mean_commit_latency_ms": 20.069598128628275,
+  "L3_p50_commit_latency_ms": 9.225555999989865,
+  "L3_p95_commit_latency_ms": 94.01088560000511,
+  "L3_max_commit_latency_ms": 432.16896199999155,
+  "L3_committed_tx": 23113,
+  "L4_campaign_declared_s": 320.0,
+  "ledger_blocks": 463
+ },
+ {
+  "detection_delay_s": {
+   "Transport": 1.99,
+   "Water": 2.17,
+   "Healthcare": 1.57
+  },
+  "L3_ledger_config": {
+   "block_size": 50,
+   "block_interval_s": 0.5
+  },
+  "L3_mean_submit_latency_ms": 0.04929582910045435,
+  "L3_mean_commit_latency_ms": 21.10954469952035,
+  "L3_p50_commit_latency_ms": 9.438160000001972,
+  "L3_p95_commit_latency_ms": 95.58404119998112,
+  "L3_max_commit_latency_ms": 445.7590460000347,
+  "L3_committed_tx": 23113,
+  "L4_campaign_declared_s": 320.0,
+  "ledger_blocks": 463
+ }
+]

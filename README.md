@@ -2,7 +2,8 @@
 
 Edge intrusion detection · screened federated learning (LPRA) · permissioned-ledger
 model provenance · cloud orchestration — evaluated end to end on real network traffic, with the
-limits of each layer stated and measured (v2.1.0; see CHANGELOG.md).
+limits of each layer stated and measured (v2.2.0; see CHANGELOG.md, and MANIFEST.md for the table-by-table
+map from every reported number to its script and result file).
 
 This repository reproduces every number, table and figure in the accompanying article. No special
 hardware is required: the full pipeline runs on a laptop in well under an hour. Only the optional
@@ -63,8 +64,8 @@ put them in `data/` with exactly these names:
 | File in `data/` | Source | Needed for |
 |---|---|---|
 | `TON_IoT_Train_Test_Network.csv` | included | everything (E1–E11) |
-| `CICIDS2017.csv` | [CIC-IDS2017](https://www.unb.ca/cic/datasets/ids-2017.html), `MachineLearningCVE` folder | E12, Table 13, Table 2 |
-| `UNSW_NB15_training-set.csv` | [UNSW-NB15](https://research.unsw.edu.au/projects/unsw-nb15-dataset) | E12, Table 13, Table 2 |
+| `CICIDS2017.csv` | [CIC-IDS2017](https://www.unb.ca/cic/datasets/ids-2017.html), `MachineLearningCVE` folder | E12, Table 14, Table 2 |
+| `UNSW_NB15_training-set.csv` | [UNSW-NB15](https://research.unsw.edu.au/projects/unsw-nb15-dataset) | E12, Table 14, Table 2 |
 | `log2.csv` | [UCI Internet Firewall Data](https://archive.ics.uci.edu/dataset/542/internet+firewall+data) | Supplementary Table S2 |
 | `CICIoT2023.csv` *(optional)* | [CICIoT2023](https://www.unb.ca/cic/datasets/iotdataset-2023.html) | adds a row/column to the direction-free matrix |
 
@@ -136,8 +137,11 @@ python run_extended.py --part D
 python run_extended.py --part fig
 ```
 
-≈ 15–25 minutes in total. The parts are independent and resumable — part A checkpoints per seed, so an
-interrupted run continues where it stopped. `python run_extended.py` alone runs everything in one go.
+≈ 25–35 minutes in total (since v2.2.0 part C runs the district grid under the Table 13 protocol — three seeds,
+F1 averaged over the last three rounds — which adds roughly ten minutes). The parts are independent and resumable —
+part A checkpoints per seed, so an interrupted run continues where it stopped. `python run_extended.py` alone
+runs everything in one go. Part D (E11) records both the submission latency and the submit-to-commit latency
+of the replay ledger (50 transactions / 0.5 s); see CHANGELOG.md v2.2.0, DR.
 
 > If you re-run part A and it prints `already done, skipping`, delete
 > `results/extA_byzantine_grid_raw.csv` first; that file is the checkpoint.
@@ -224,6 +228,8 @@ has not been run appears as a highlighted placeholder instead of a stale value.
 ├── check_env.py                preflight check — run this first
 ├── run_poc.py                  E1, E3, E4, E6, E7, E8, E10, E12
 ├── run_extended.py             E2, E5, E9, E11   (--part A|B|C|D|fig)
+├── MANIFEST.md                 every table and figure → experiment, script, result file (v2.2.0)
+├── review_response/            review-round harnesses and their outputs (E17–E22; see its README)
 ├── run_advanced.py             E14 temporal, E15 resources/energy, E16 adaptive attacker
 ├── poc/
 │   ├── data_loader.py          bias-aware loaders; native / common-9 / direction-free-4 views
@@ -236,7 +242,8 @@ has not been run appears as a highlighted placeholder instead of a stale value.
 │   ├── resources.py            CPU time, working set and energy per million flows
 │   ├── blockchain.py           permissioned PoA ledger, Merkle proofs, enrolment list
 │   └── city_simulation.py      district gateways → ledger → cloud orchestrator + audit
-├── fabric/                     Fabric chaincode (CCaaS), Gateway-SDK benchmark, runbook
+├── fabric/                     Fabric chaincode (CCaaS), Gateway-SDK benchmark, runbook,
+│                               bench/decode_blockfile.py + blockfile_composition.json (E22, Table S14)
 ├── paper_src/                  make_facts.py, make_figures.py, make_paper.js, make_supp.js
 │   ├── apply_template_headers.js   splices the journal's header/footer parts into the built docx
 │   └── template/               the official Smart Cities (MDPI) template and its styles.xml
@@ -258,9 +265,12 @@ has not been run appears as a highlighted placeholder instead of a stale value.
 | E4 LPRA, personalised FL | Exp-9 | E11 zero-day ransomware scenario | `--part D` |
 | E5 aggregator comparison | `--part A --seed N` | E12 cross-dataset | Exp-1c / Exp-2 |
 | E6 leave-one-attack-out | Exp-7 | E13 Hyperledger Fabric | `fabric/` |
-| E7 feature ablation | Exp-8 | S1 / S2 / S5 (supplement) | Exp-1m / Exp-6 / Exp-8b |
+| E7 feature ablation | Exp-8 | S1 / S2 / S8 (supplement) | Exp-1m / Exp-6 / Exp-8b |
 | E14 temporal drift | `run_advanced.py --part T` | E15 resources and energy | `--part R` |
-| E16 adaptive attacker | `--part A --n-att 1\|2` | | |
+| E16 adaptive attacker | `--part A --n-att 1\|2` | E17 independent attacks | `review_response/compare_independent_attacks.py` |
+| E18 FLAME baseline (Algorithm 1) | `review_response/compare_flame.py`, `table13_flame_k20_50.py` | E19 extended tamper test | `review_response/compare_tamper.py` |
+| E20 attacker placement | `review_response/table13_attacker_placement.py` | E21 Byzantine-fraction sweep | `review_response/fk_boundary_sweep.py` |
+| E22 Fabric ledger composition | `fabric/bench/decode_blockfile.py` | | |
 
 ## 9. Reproducibility notes
 
@@ -280,15 +290,24 @@ has not been run appears as a highlighted placeholder instead of a stale value.
 1. All datasets are testbed captures. Identifier removal reduces, but does not eliminate, testbed artefacts.
 2. CICIoT2023 reports per-window statistics without a directional split, so it participates only in the
    four-feature direction-free view.
-3. LPRA is evaluated with at most 40% Byzantine districts. The adaptive sweep (E16) found a real failure of
-   the first version of the screen at that ratio and motivated the hardened default (`version="v2"` in
+3. LPRA assumes an honest majority of districts, and the boundary is measured (E21, Table S13): the screen
+   holds to a Byzantine fraction of about 0.36, degrades without inverting at 0.44–0.45 and inverts above one
+   half, where colluding identical updates become the median. The adaptive sweep (E16) found a real failure of
+   the first version of the screen at 40% and motivated the hardened default (`version="v2"` in
    `poc/robust_fl.py`): the reference direction is now the median of the survivors' deltas and the accepted
    set must be a majority. Pass `version="v1"` to reproduce the failure. The "stealth" attack of
-   Baruch et al. is still not detected, though it caused no measurable damage here.
+   Baruch et al. is still not detected, though it caused no measurable damage here. The F1 reached after a
+   correct quarantine depends on which districts were Byzantine (E20, Table S12), because quarantine removes
+   their data; the quarantine decision itself does not.
 4. Federated learning uses no secure aggregation or differential privacy, and the feature standardiser is
    fitted on pooled training statistics (2 × d numbers, not raw flows).
 5. The Fabric measurement uses two organisations on one host; a geographically distributed deployment would
-   be slower.
+   be slower. Its 60.8 MB per 10,000 alerts is a linear extrapolation of the 24.3 MB ledger measured after
+   4,001 alerts; about 71% of every anchored-alert transaction is the X.509 certificates Fabric embeds in it
+   (E22, Table S14).
+6. The emulated ledger's commit latency in the E11 replay (20.6 ms mean, p95 93 ms) is the wait for a
+   50-transaction block to fill at the replay's arrival rate; it is not a deployment figure, and the 0.8 ms of
+   `review_response/compare_ledger_latency.py` is the block-processing cost under a saturated mempool.
 
 ## 11. Citation and licence
 
@@ -307,13 +326,16 @@ git tag -a v1.0-manuscript -m "Numbers reported in the Smart Cities submission"
 git push origin v1.0-manuscript
 ```
 
-and cite that tag (or the commit hash) in the paper.  The peer-review revision is tagged `v2.1.0`
-(the Data Availability statement of the revised manuscript cites it); `v1.0-manuscript` remains the
-submitted version.  Note that `paper_src/make_paper.js` regenerates the *submitted* manuscript text; the
+and cite that tag (or the commit hash) in the paper.  The first peer-review revision is tagged `v2.1.0`
+and the second `v2.2.0` (the Data Availability statement of the revised manuscript cites v2.2.0);
+`v1.0-manuscript` remains the submitted version.  Note that `paper_src/make_paper.js` regenerates the *submitted* manuscript text; the
 revised text was edited in the manuscript file, and the numbers it reports come from `results/` as
-regenerated under this release plus the harnesses in `review_response/` (see `CHANGELOG.md`, v2.0 and v2.1).  The revised manuscript is delivered with every changed passage shaded by source (green Reviewer 1, pink Reviewer 3, yellow Reviewer 2, purple Editor, grey authors' own corrections); the key is at the top of `CHANGELOG.md`. `results/paper_facts.json` and the CSV files it is
+regenerated under this release plus the harnesses in `review_response/` (see `CHANGELOG.md`, v2.0, v2.1 and v2.2.0,
+and `MANIFEST.md`).  The revised manuscript is delivered with every changed passage shaded by source (green Reviewer 1, pink Reviewer 3, yellow Reviewer 2, purple Editor, grey authors' own corrections); the key is at the top of `CHANGELOG.md`. `results/paper_facts.json` and the CSV files it is
 built from are the audit trail: every number in the manuscript can be traced to one of them, and
 `python paper_src/make_figures.py` prints, per figure, which file and which table each value comes from.
 The Fabric measurements live in `fabric/fabric_facts.json` because they are produced by a Docker network
 rather than by the Python pipeline; the ledger size recorded there (24.3 MB after 4,001 anchored alerts —
-two 2,000-alert benchmark runs plus one functional-test invocation) is stated in decimal MB.
+two 2,000-alert benchmark runs plus one functional-test invocation) is stated in decimal MB, and the
+60.8 MB per 10,000 alerts derived from it is a linear extrapolation, not a measurement at 10,000 alerts
+(`fabric/blockfile_composition.json` gives the byte-level composition of that ledger).

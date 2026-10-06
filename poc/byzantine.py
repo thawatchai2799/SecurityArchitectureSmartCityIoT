@@ -2,7 +2,7 @@
 byzantine.py
 ------------
 Head-to-head evaluation of LPRA against standard Byzantine-robust aggregators,
-with 1 or 2 attackers out of K districts, four attacks including an adaptive
+with n_att attackers out of K districts (1 or 2 in Tables 9-10; up to 6 in the round-2 f/K sweep), five attacks (scale, flip, noise, stealth, adaptive) including an adaptive
 "stealth" attack that stays inside the honest norm envelope.
 
 Aggregators
@@ -14,7 +14,7 @@ Aggregators
     lpra          ours: median/MAD distance + cosine screen, then weighted mean,
                   decision + hash anchored on ledger (auditable)
 
-Attacks (attacker districts = the first `n_att` districts)
+Attacks (attacker districts = the first `n_att` districts unless attacker_ids is given)
     scale    w_g + 10 (w_i - w_g)
     flip     trained on flipped labels
     noise    Gaussian noise weights
@@ -80,15 +80,28 @@ def aggregate(name, V, ns, gvec, f, lpra_gamma=2.5, lpra_version="v2"):
 
 def run_byzantine(X, y_bin, y_multi, X_test, y_test, k=5, rounds=10, local_epochs=2, seed=42,
                   hidden=(32, 16), attack="scale", n_att=1, aggregator="lpra", f_assumed=None, ledger=None,
-                  regime="non-iid", lpra_gamma=2.5, lpra_version="v2", strength=2.0, direction="orthogonal"):
+                  regime="non-iid", lpra_gamma=2.5, lpra_version="v2", strength=2.0, direction="orthogonal",
+                  attacker_ids=None):
+    """attacker_ids: which districts are Byzantine.  None (default) keeps the
+    original fixed placement, the first n_att districts; a sequence of district
+    indices overrides it (used by review_response/table13_attacker_placement.py,
+    round 2, Reviewer 1, C3)."""
     rng = np.random.default_rng(seed)
     scaler = StandardScaler().fit(X)      # pooled statistics; see note in federated.py
     Xs = scaler.transform(X).astype(np.float32); Xt = scaler.transform(X_test).astype(np.float32)
     parts = partition(y_multi, k, regime, seed)
-    attackers = set(range(n_att)) if attack != "none" else set()
+    if attack == "none":
+        attackers = set()
+    elif attacker_ids is None:
+        attackers = set(range(n_att))                       # fixed placement (Tables 9, 10, 13 as published)
+    else:
+        attackers = set(int(i) for i in attacker_ids); assert len(attackers) == n_att, (attackers, n_att)
     f = f_assumed if f_assumed is not None else max(n_att, 1)
-    # Initialise the global model from ONE district's own data (district 0),
-    # so no training flow crosses a district boundary at any point.  A
+    # Initialise the global model from ONE district's own data (district 0):
+    # no raw example is exchanged during federated training (the feature
+    # standardiser above is still a pooled statistic, as Section 6.5 states).
+    # Under the default fixed placement district 0 is also attacker 0, i.e. it
+    # is assumed honest at initialisation and Byzantine from round 1 on.  A
     # pooled draw was used here originally; see CHANGELOG (Reviewer 1, C3).
     boot = _bootstrap_within(y_bin, parts[0], rng, 500)
     g = _make_mlp(seed, hidden); g.fit(Xs[boot], y_bin[boot]); classes = np.array([0, 1])
@@ -125,12 +138,12 @@ def run_byzantine(X, y_bin, y_multi, X_test, y_test, k=5, rounds=10, local_epoch
                     scale_len = strength * float(np.median(d_h))
                     crowd = V[honest].mean(0) - gvec           # where the honest updates are going
                     if direction == "opposite":
-                        r = -crowd
+                        rdir = -crowd
                     else:                                       # orthogonal to the crowd
-                        r = rng.normal(0, 1.0, size=gvec.shape)
-                        r -= crowd * float(np.dot(r, crowd) / (np.dot(crowd, crowd) + 1e-12))
-                    r = r / (np.linalg.norm(r) + 1e-12)
-                    V[i] = med + scale_len * r
+                        rdir = rng.normal(0, 1.0, size=gvec.shape)
+                        rdir -= crowd * float(np.dot(rdir, crowd) / (np.dot(crowd, crowd) + 1e-12))
+                    rdir = rdir / (np.linalg.norm(rdir) + 1e-12)   # (was `r`, which shadowed the round index; round 2)
+                    V[i] = med + scale_len * rdir
         new, acc, info = aggregate(aggregator, V, ns, gvec, f, lpra_gamma, lpra_version)
         nc, ni = _unflat(new, tc, ti); _set_weights(g, nc, ni)
         f1 = f1_score(y_test, g.predict(Xt))

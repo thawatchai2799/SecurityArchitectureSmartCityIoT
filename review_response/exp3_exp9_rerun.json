@@ -19,27 +19,27 @@
   "personalised": [
    {
     "district": "Transport",
-    "global_f1_local_test": 0.9771749298409729,
-    "personalised_f1_local_test": 0.9828185328185328
+    "global_f1_local_test": 0.977079240340537,
+    "personalised_f1_local_test": 0.9829134086301766
    },
    {
     "district": "Energy",
     "global_f1_local_test": 0.9726256983240223,
-    "personalised_f1_local_test": 0.9749350167099888
+    "personalised_f1_local_test": 0.9736964401896087
    },
    {
     "district": "Water",
     "global_f1_local_test": 0.9689813513260238,
-    "personalised_f1_local_test": 0.9820267686424474
+    "personalised_f1_local_test": 0.9823186466596578
    },
    {
     "district": "Healthcare",
     "global_f1_local_test": 0.9780046403712297,
-    "personalised_f1_local_test": 0.9806957186544343
+    "personalised_f1_local_test": 0.9808868501529052
    },
    {
     "district": "e-Gov",
-    "global_f1_local_test": 0.9188490139023602,
+    "global_f1_local_test": 0.9191461836998707,
     "personalised_f1_local_test": 0.9323308270676691
    }
   ]
@@ -49,23 +49,23 @@
   "byzantine_caught_rounds": 0
  },
  "exp9_scale/LPRA": {
-  "global_f1": 0.9706550856400682,
+  "global_f1": 0.9709474538445932,
   "byzantine_caught_rounds": 15
  },
  "exp9_flip/plain FedAvg": {
-  "global_f1": 0.9717875962707743,
+  "global_f1": 0.9717256475738781,
   "byzantine_caught_rounds": 0
  },
  "exp9_flip/LPRA": {
-  "global_f1": 0.9706550856400682,
+  "global_f1": 0.9709474538445932,
   "byzantine_caught_rounds": 15
  },
  "exp9_noise/plain FedAvg": {
-  "global_f1": 0.7798108989171028,
+  "global_f1": 0.9040792592923916,
   "byzantine_caught_rounds": 0
  },
  "exp9_noise/LPRA": {
-  "global_f1": 0.9706550856400682,
+  "global_f1": 0.9709474538445932,
   "byzantine_caught_rounds": 15
  }
 }

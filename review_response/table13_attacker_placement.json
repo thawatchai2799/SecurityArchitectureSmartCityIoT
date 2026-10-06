@@ -1,0 +1,2984 @@
+[
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 0,
+  "attackers": [
+   0
+  ],
+  "families": [
+   "backdoor",
+   "password"
+  ],
+  "agg": "fedavg",
+  "seed": 42,
+  "final_f1": 0.9084,
+  "last3": 0.9131,
+  "last3_raw": 0.9130769269755746,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 0,
+  "attackers": [
+   0
+  ],
+  "families": [
+   "backdoor",
+   "password"
+  ],
+  "agg": "fedavg",
+  "seed": 43,
+  "final_f1": 0.9707,
+  "last3": 0.956,
+  "last3_raw": 0.956019700237421,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 0,
+  "attackers": [
+   0
+  ],
+  "families": [
+   "backdoor",
+   "password"
+  ],
+  "agg": "fedavg",
+  "seed": 44,
+  "final_f1": 0.9716,
+  "last3": 0.9547,
+  "last3_raw": 0.9547016688646169,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 0,
+  "attackers": [
+   0
+  ],
+  "families": [
+   "backdoor",
+   "password"
+  ],
+  "agg": "lpra",
+  "seed": 42,
+  "final_f1": 0.9712,
+  "last3": 0.9712,
+  "last3_raw": 0.9711724187302305,
+  "hon": 0,
+  "att": 10,
+  "caught": 10
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 0,
+  "attackers": [
+   0
+  ],
+  "families": [
+   "backdoor",
+   "password"
+  ],
+  "agg": "lpra",
+  "seed": 43,
+  "final_f1": 0.9704,
+  "last3": 0.9704,
+  "last3_raw": 0.9703633117703081,
+  "hon": 0,
+  "att": 10,
+  "caught": 10
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 0,
+  "attackers": [
+   0
+  ],
+  "families": [
+   "backdoor",
+   "password"
+  ],
+  "agg": "lpra",
+  "seed": 44,
+  "final_f1": 0.9709,
+  "last3": 0.9708,
+  "last3_raw": 0.9708469739034259,
+  "hon": 0,
+  "att": 10,
+  "caught": 10
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 1,
+  "attackers": [
+   1
+  ],
+  "families": [
+   "ddos",
+   "ransomware"
+  ],
+  "agg": "fedavg",
+  "seed": 42,
+  "final_f1": 0.9705,
+  "last3": 0.9422,
+  "last3_raw": 0.942190894471838,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 1,
+  "attackers": [
+   1
+  ],
+  "families": [
+   "ddos",
+   "ransomware"
+  ],
+  "agg": "fedavg",
+  "seed": 43,
+  "final_f1": 0.9715,
+  "last3": 0.9711,
+  "last3_raw": 0.9710926218599866,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 1,
+  "attackers": [
+   1
+  ],
+  "families": [
+   "ddos",
+   "ransomware"
+  ],
+  "agg": "fedavg",
+  "seed": 44,
+  "final_f1": 0.9368,
+  "last3": 0.9488,
+  "last3_raw": 0.948821298475385,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 1,
+  "attackers": [
+   1
+  ],
+  "families": [
+   "ddos",
+   "ransomware"
+  ],
+  "agg": "lpra",
+  "seed": 42,
+  "final_f1": 0.9396,
+  "last3": 0.9395,
+  "last3_raw": 0.939520505788991,
+  "hon": 0,
+  "att": 10,
+  "caught": 10
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 1,
+  "attackers": [
+   1
+  ],
+  "families": [
+   "ddos",
+   "ransomware"
+  ],
+  "agg": "lpra",
+  "seed": 43,
+  "final_f1": 0.9385,
+  "last3": 0.9384,
+  "last3_raw": 0.9384175453625209,
+  "hon": 0,
+  "att": 10,
+  "caught": 10
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 1,
+  "attackers": [
+   1
+  ],
+  "families": [
+   "ddos",
+   "ransomware"
+  ],
+  "agg": "lpra",
+  "seed": 44,
+  "final_f1": 0.9385,
+  "last3": 0.9385,
+  "last3_raw": 0.9385243779762887,
+  "hon": 0,
+  "att": 10,
+  "caught": 10
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 2,
+  "attackers": [
+   2
+  ],
+  "families": [
+   "dos",
+   "scanning"
+  ],
+  "agg": "fedavg",
+  "seed": 42,
+  "final_f1": 0.9202,
+  "last3": 0.9042,
+  "last3_raw": 0.9041853088335402,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 2,
+  "attackers": [
+   2
+  ],
+  "families": [
+   "dos",
+   "scanning"
+  ],
+  "agg": "fedavg",
+  "seed": 43,
+  "final_f1": 0.9377,
+  "last3": 0.9329,
+  "last3_raw": 0.9328597384876834,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 2,
+  "attackers": [
+   2
+  ],
+  "families": [
+   "dos",
+   "scanning"
+  ],
+  "agg": "fedavg",
+  "seed": 44,
+  "final_f1": 0.9392,
+  "last3": 0.95,
+  "last3_raw": 0.9499943681138636,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 2,
+  "attackers": [
+   2
+  ],
+  "families": [
+   "dos",
+   "scanning"
+  ],
+  "agg": "lpra",
+  "seed": 42,
+  "final_f1": 0.9712,
+  "last3": 0.9712,
+  "last3_raw": 0.9712283322694081,
+  "hon": 0,
+  "att": 10,
+  "caught": 10
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 2,
+  "attackers": [
+   2
+  ],
+  "families": [
+   "dos",
+   "scanning"
+  ],
+  "agg": "lpra",
+  "seed": 43,
+  "final_f1": 0.9708,
+  "last3": 0.9708,
+  "last3_raw": 0.9707678945287067,
+  "hon": 0,
+  "att": 10,
+  "caught": 10
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 2,
+  "attackers": [
+   2
+  ],
+  "families": [
+   "dos",
+   "scanning"
+  ],
+  "agg": "lpra",
+  "seed": 44,
+  "final_f1": 0.9707,
+  "last3": 0.9707,
+  "last3_raw": 0.9706782223265454,
+  "hon": 0,
+  "att": 10,
+  "caught": 10
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 3,
+  "attackers": [
+   3
+  ],
+  "families": [
+   "injection",
+   "xss"
+  ],
+  "agg": "fedavg",
+  "seed": 42,
+  "final_f1": 0.9193,
+  "last3": 0.9193,
+  "last3_raw": 0.9192602171631804,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 3,
+  "attackers": [
+   3
+  ],
+  "families": [
+   "injection",
+   "xss"
+  ],
+  "agg": "fedavg",
+  "seed": 43,
+  "final_f1": 0.9701,
+  "last3": 0.9595,
+  "last3_raw": 0.9594772718533711,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 3,
+  "attackers": [
+   3
+  ],
+  "families": [
+   "injection",
+   "xss"
+  ],
+  "agg": "fedavg",
+  "seed": 44,
+  "final_f1": 0.9708,
+  "last3": 0.9595,
+  "last3_raw": 0.959472695471104,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 3,
+  "attackers": [
+   3
+  ],
+  "families": [
+   "injection",
+   "xss"
+  ],
+  "agg": "lpra",
+  "seed": 42,
+  "final_f1": 0.9711,
+  "last3": 0.9711,
+  "last3_raw": 0.9710689124915066,
+  "hon": 0,
+  "att": 10,
+  "caught": 10
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 3,
+  "attackers": [
+   3
+  ],
+  "families": [
+   "injection",
+   "xss"
+  ],
+  "agg": "lpra",
+  "seed": 43,
+  "final_f1": 0.9704,
+  "last3": 0.9704,
+  "last3_raw": 0.9704456258354481,
+  "hon": 0,
+  "att": 10,
+  "caught": 10
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 3,
+  "attackers": [
+   3
+  ],
+  "families": [
+   "injection",
+   "xss"
+  ],
+  "agg": "lpra",
+  "seed": 44,
+  "final_f1": 0.9705,
+  "last3": 0.9705,
+  "last3_raw": 0.9705167890861439,
+  "hon": 0,
+  "att": 10,
+  "caught": 10
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 4,
+  "attackers": [
+   4
+  ],
+  "families": [
+   "mitm"
+  ],
+  "agg": "fedavg",
+  "seed": 42,
+  "final_f1": 0.9514,
+  "last3": 0.9504,
+  "last3_raw": 0.95035653997336,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 4,
+  "attackers": [
+   4
+  ],
+  "families": [
+   "mitm"
+  ],
+  "agg": "fedavg",
+  "seed": 43,
+  "final_f1": 0.9389,
+  "last3": 0.9494,
+  "last3_raw": 0.949398298869971,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 4,
+  "attackers": [
+   4
+  ],
+  "families": [
+   "mitm"
+  ],
+  "agg": "fedavg",
+  "seed": 44,
+  "final_f1": 0.9386,
+  "last3": 0.9494,
+  "last3_raw": 0.9493577172961641,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 4,
+  "attackers": [
+   4
+  ],
+  "families": [
+   "mitm"
+  ],
+  "agg": "lpra",
+  "seed": 42,
+  "final_f1": 0.9711,
+  "last3": 0.9711,
+  "last3_raw": 0.9710804876934404,
+  "hon": 0,
+  "att": 10,
+  "caught": 10
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 4,
+  "attackers": [
+   4
+  ],
+  "families": [
+   "mitm"
+  ],
+  "agg": "lpra",
+  "seed": 43,
+  "final_f1": 0.9705,
+  "last3": 0.9704,
+  "last3_raw": 0.9703857206747477,
+  "hon": 0,
+  "att": 10,
+  "caught": 10
+ },
+ {
+  "K": 5,
+  "n_att": 1,
+  "placement": 4,
+  "attackers": [
+   4
+  ],
+  "families": [
+   "mitm"
+  ],
+  "agg": "lpra",
+  "seed": 44,
+  "final_f1": 0.9706,
+  "last3": 0.9707,
+  "last3_raw": 0.9707020301247083,
+  "hon": 0,
+  "att": 10,
+  "caught": 10
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 0,
+  "attackers": [
+   0,
+   1
+  ],
+  "families": [
+   "backdoor",
+   "ddos"
+  ],
+  "agg": "fedavg",
+  "seed": 42,
+  "final_f1": 0.9273,
+  "last3": 0.939,
+  "last3_raw": 0.9389792775767525,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 0,
+  "attackers": [
+   0,
+   1
+  ],
+  "families": [
+   "backdoor",
+   "ddos"
+  ],
+  "agg": "fedavg",
+  "seed": 43,
+  "final_f1": 0.9091,
+  "last3": 0.9324,
+  "last3_raw": 0.9324310203937388,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 0,
+  "attackers": [
+   0,
+   1
+  ],
+  "families": [
+   "backdoor",
+   "ddos"
+  ],
+  "agg": "fedavg",
+  "seed": 44,
+  "final_f1": 0.9269,
+  "last3": 0.9413,
+  "last3_raw": 0.9412577284564151,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 0,
+  "attackers": [
+   0,
+   1
+  ],
+  "families": [
+   "backdoor",
+   "ddos"
+  ],
+  "agg": "lpra",
+  "seed": 42,
+  "final_f1": 0.97,
+  "last3": 0.97,
+  "last3_raw": 0.9700108327933757,
+  "hon": 1,
+  "att": 20,
+  "caught": 10
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 0,
+  "attackers": [
+   0,
+   1
+  ],
+  "families": [
+   "backdoor",
+   "ddos"
+  ],
+  "agg": "lpra",
+  "seed": 43,
+  "final_f1": 0.9698,
+  "last3": 0.9698,
+  "last3_raw": 0.9698478681671528,
+  "hon": 0,
+  "att": 20,
+  "caught": 10
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 0,
+  "attackers": [
+   0,
+   1
+  ],
+  "families": [
+   "backdoor",
+   "ddos"
+  ],
+  "agg": "lpra",
+  "seed": 44,
+  "final_f1": 0.9387,
+  "last3": 0.9492,
+  "last3_raw": 0.9491879574427861,
+  "hon": 3,
+  "att": 20,
+  "caught": 10
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 1,
+  "attackers": [
+   6,
+   8
+  ],
+  "families": [
+   "ransomware",
+   "xss"
+  ],
+  "agg": "fedavg",
+  "seed": 42,
+  "final_f1": 0.9702,
+  "last3": 0.9519,
+  "last3_raw": 0.9518865260886241,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 1,
+  "attackers": [
+   6,
+   8
+  ],
+  "families": [
+   "ransomware",
+   "xss"
+  ],
+  "agg": "fedavg",
+  "seed": 43,
+  "final_f1": 0.9701,
+  "last3": 0.9368,
+  "last3_raw": 0.9368466774820116,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 1,
+  "attackers": [
+   6,
+   8
+  ],
+  "families": [
+   "ransomware",
+   "xss"
+  ],
+  "agg": "fedavg",
+  "seed": 44,
+  "final_f1": 0.9727,
+  "last3": 0.9554,
+  "last3_raw": 0.9554141820462799,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 1,
+  "attackers": [
+   6,
+   8
+  ],
+  "families": [
+   "ransomware",
+   "xss"
+  ],
+  "agg": "lpra",
+  "seed": 42,
+  "final_f1": 0.9384,
+  "last3": 0.9388,
+  "last3_raw": 0.938816342650025,
+  "hon": 0,
+  "att": 20,
+  "caught": 10
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 1,
+  "attackers": [
+   6,
+   8
+  ],
+  "families": [
+   "ransomware",
+   "xss"
+  ],
+  "agg": "lpra",
+  "seed": 43,
+  "final_f1": 0.9379,
+  "last3": 0.938,
+  "last3_raw": 0.9379764746820336,
+  "hon": 0,
+  "att": 20,
+  "caught": 10
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 1,
+  "attackers": [
+   6,
+   8
+  ],
+  "families": [
+   "ransomware",
+   "xss"
+  ],
+  "agg": "lpra",
+  "seed": 44,
+  "final_f1": 0.9385,
+  "last3": 0.9385,
+  "last3_raw": 0.938467623619287,
+  "hon": 0,
+  "att": 20,
+  "caught": 10
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 2,
+  "attackers": [
+   3,
+   5
+  ],
+  "families": [
+   "injection",
+   "password"
+  ],
+  "agg": "fedavg",
+  "seed": 42,
+  "final_f1": 0.9269,
+  "last3": 0.9452,
+  "last3_raw": 0.9451663251811909,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 2,
+  "attackers": [
+   3,
+   5
+  ],
+  "families": [
+   "injection",
+   "password"
+  ],
+  "agg": "fedavg",
+  "seed": 43,
+  "final_f1": 0.9696,
+  "last3": 0.9535,
+  "last3_raw": 0.9535415104629917,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 2,
+  "attackers": [
+   3,
+   5
+  ],
+  "families": [
+   "injection",
+   "password"
+  ],
+  "agg": "fedavg",
+  "seed": 44,
+  "final_f1": 0.9383,
+  "last3": 0.9491,
+  "last3_raw": 0.9490614340032311,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 2,
+  "attackers": [
+   3,
+   5
+  ],
+  "families": [
+   "injection",
+   "password"
+  ],
+  "agg": "lpra",
+  "seed": 42,
+  "final_f1": 0.9386,
+  "last3": 0.9598,
+  "last3_raw": 0.9597776066797032,
+  "hon": 1,
+  "att": 20,
+  "caught": 10
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 2,
+  "attackers": [
+   3,
+   5
+  ],
+  "families": [
+   "injection",
+   "password"
+  ],
+  "agg": "lpra",
+  "seed": 43,
+  "final_f1": 0.9702,
+  "last3": 0.9702,
+  "last3_raw": 0.9701748532024846,
+  "hon": 0,
+  "att": 20,
+  "caught": 10
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 2,
+  "attackers": [
+   3,
+   5
+  ],
+  "families": [
+   "injection",
+   "password"
+  ],
+  "agg": "lpra",
+  "seed": 44,
+  "final_f1": 0.9388,
+  "last3": 0.9492,
+  "last3_raw": 0.9492365817810834,
+  "hon": 3,
+  "att": 20,
+  "caught": 10
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 3,
+  "attackers": [
+   1,
+   2
+  ],
+  "families": [
+   "ddos",
+   "dos"
+  ],
+  "agg": "fedavg",
+  "seed": 42,
+  "final_f1": 0.9274,
+  "last3": 0.9308,
+  "last3_raw": 0.9308449131311013,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 3,
+  "attackers": [
+   1,
+   2
+  ],
+  "families": [
+   "ddos",
+   "dos"
+  ],
+  "agg": "fedavg",
+  "seed": 43,
+  "final_f1": 0.9387,
+  "last3": 0.9491,
+  "last3_raw": 0.9491273217781524,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 3,
+  "attackers": [
+   1,
+   2
+  ],
+  "families": [
+   "ddos",
+   "dos"
+  ],
+  "agg": "fedavg",
+  "seed": 44,
+  "final_f1": 0.9292,
+  "last3": 0.9314,
+  "last3_raw": 0.9313756448309484,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 3,
+  "attackers": [
+   1,
+   2
+  ],
+  "families": [
+   "ddos",
+   "dos"
+  ],
+  "agg": "lpra",
+  "seed": 42,
+  "final_f1": 0.9709,
+  "last3": 0.9709,
+  "last3_raw": 0.9708851258890657,
+  "hon": 0,
+  "att": 20,
+  "caught": 10
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 3,
+  "attackers": [
+   1,
+   2
+  ],
+  "families": [
+   "ddos",
+   "dos"
+  ],
+  "agg": "lpra",
+  "seed": 43,
+  "final_f1": 0.9386,
+  "last3": 0.9597,
+  "last3_raw": 0.9596707212797511,
+  "hon": 1,
+  "att": 20,
+  "caught": 10
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 3,
+  "attackers": [
+   1,
+   2
+  ],
+  "families": [
+   "ddos",
+   "dos"
+  ],
+  "agg": "lpra",
+  "seed": 44,
+  "final_f1": 0.9386,
+  "last3": 0.9386,
+  "last3_raw": 0.938647878257116,
+  "hon": 6,
+  "att": 20,
+  "caught": 10
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 4,
+  "attackers": [
+   0,
+   6
+  ],
+  "families": [
+   "backdoor",
+   "ransomware"
+  ],
+  "agg": "fedavg",
+  "seed": 42,
+  "final_f1": 0.9598,
+  "last3": 0.9508,
+  "last3_raw": 0.9508084749209128,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 4,
+  "attackers": [
+   0,
+   6
+  ],
+  "families": [
+   "backdoor",
+   "ransomware"
+  ],
+  "agg": "fedavg",
+  "seed": 43,
+  "final_f1": 0.939,
+  "last3": 0.9565,
+  "last3_raw": 0.9565273377300766,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 4,
+  "attackers": [
+   0,
+   6
+  ],
+  "families": [
+   "backdoor",
+   "ransomware"
+  ],
+  "agg": "fedavg",
+  "seed": 44,
+  "final_f1": 0.9383,
+  "last3": 0.9456,
+  "last3_raw": 0.9456498812449943,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 4,
+  "attackers": [
+   0,
+   6
+  ],
+  "families": [
+   "backdoor",
+   "ransomware"
+  ],
+  "agg": "lpra",
+  "seed": 42,
+  "final_f1": 0.9386,
+  "last3": 0.9387,
+  "last3_raw": 0.9386583670093896,
+  "hon": 0,
+  "att": 20,
+  "caught": 10
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 4,
+  "attackers": [
+   0,
+   6
+  ],
+  "families": [
+   "backdoor",
+   "ransomware"
+  ],
+  "agg": "lpra",
+  "seed": 43,
+  "final_f1": 0.9386,
+  "last3": 0.9386,
+  "last3_raw": 0.9386109281485577,
+  "hon": 0,
+  "att": 20,
+  "caught": 10
+ },
+ {
+  "K": 10,
+  "n_att": 2,
+  "placement": 4,
+  "attackers": [
+   0,
+   6
+  ],
+  "families": [
+   "backdoor",
+   "ransomware"
+  ],
+  "agg": "lpra",
+  "seed": 44,
+  "final_f1": 0.9388,
+  "last3": 0.9388,
+  "last3_raw": 0.9388046739829345,
+  "hon": 0,
+  "att": 20,
+  "caught": 10
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 0,
+  "attackers": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "dos",
+   "injection"
+  ],
+  "agg": "fedavg",
+  "seed": 42,
+  "final_f1": 0.9396,
+  "last3": 0.9459,
+  "last3_raw": 0.9459151673284186,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 0,
+  "attackers": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "dos",
+   "injection"
+  ],
+  "agg": "fedavg",
+  "seed": 43,
+  "final_f1": 0.9572,
+  "last3": 0.9402,
+  "last3_raw": 0.9401703328664196,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 0,
+  "attackers": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "dos",
+   "injection"
+  ],
+  "agg": "fedavg",
+  "seed": 44,
+  "final_f1": 0.9391,
+  "last3": 0.9492,
+  "last3_raw": 0.9491955177545911,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 0,
+  "attackers": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "dos",
+   "injection"
+  ],
+  "agg": "lpra",
+  "seed": 42,
+  "final_f1": 0.9697,
+  "last3": 0.9694,
+  "last3_raw": 0.9693781867137438,
+  "hon": 0,
+  "att": 40,
+  "caught": 10
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 0,
+  "attackers": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "dos",
+   "injection"
+  ],
+  "agg": "lpra",
+  "seed": 43,
+  "final_f1": 0.9352,
+  "last3": 0.9529,
+  "last3_raw": 0.9529190688928532,
+  "hon": 6,
+  "att": 40,
+  "caught": 10
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 0,
+  "attackers": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "dos",
+   "injection"
+  ],
+  "agg": "lpra",
+  "seed": 44,
+  "final_f1": 0.9703,
+  "last3": 0.9703,
+  "last3_raw": 0.9703175397722538,
+  "hon": 2,
+  "att": 40,
+  "caught": 10
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 1,
+  "attackers": [
+   0,
+   11,
+   15,
+   18
+  ],
+  "families": [
+   "backdoor",
+   "dos",
+   "ransomware"
+  ],
+  "agg": "fedavg",
+  "seed": 42,
+  "final_f1": 0.927,
+  "last3": 0.9413,
+  "last3_raw": 0.9413303546295314,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 1,
+  "attackers": [
+   0,
+   11,
+   15,
+   18
+  ],
+  "families": [
+   "backdoor",
+   "dos",
+   "ransomware"
+  ],
+  "agg": "fedavg",
+  "seed": 43,
+  "final_f1": 0.968,
+  "last3": 0.9678,
+  "last3_raw": 0.9678028128612784,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 1,
+  "attackers": [
+   0,
+   11,
+   15,
+   18
+  ],
+  "families": [
+   "backdoor",
+   "dos",
+   "ransomware"
+  ],
+  "agg": "fedavg",
+  "seed": 44,
+  "final_f1": 0.9703,
+  "last3": 0.9667,
+  "last3_raw": 0.9667137303431027,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 1,
+  "attackers": [
+   0,
+   11,
+   15,
+   18
+  ],
+  "families": [
+   "backdoor",
+   "dos",
+   "ransomware"
+  ],
+  "agg": "lpra",
+  "seed": 42,
+  "final_f1": 0.9694,
+  "last3": 0.9693,
+  "last3_raw": 0.9693385658906982,
+  "hon": 0,
+  "att": 40,
+  "caught": 10
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 1,
+  "attackers": [
+   0,
+   11,
+   15,
+   18
+  ],
+  "families": [
+   "backdoor",
+   "dos",
+   "ransomware"
+  ],
+  "agg": "lpra",
+  "seed": 43,
+  "final_f1": 0.9355,
+  "last3": 0.9253,
+  "last3_raw": 0.925283967014416,
+  "hon": 4,
+  "att": 40,
+  "caught": 10
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 1,
+  "attackers": [
+   0,
+   11,
+   15,
+   18
+  ],
+  "families": [
+   "backdoor",
+   "dos",
+   "ransomware"
+  ],
+  "agg": "lpra",
+  "seed": 44,
+  "final_f1": 0.9433,
+  "last3": 0.9614,
+  "last3_raw": 0.9613700270563544,
+  "hon": 1,
+  "att": 40,
+  "caught": 10
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 2,
+  "attackers": [
+   6,
+   7,
+   10,
+   14
+  ],
+  "families": [
+   "ddos",
+   "password",
+   "ransomware",
+   "scanning"
+  ],
+  "agg": "fedavg",
+  "seed": 42,
+  "final_f1": 0.9273,
+  "last3": 0.9416,
+  "last3_raw": 0.9415551534701677,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 2,
+  "attackers": [
+   6,
+   7,
+   10,
+   14
+  ],
+  "families": [
+   "ddos",
+   "password",
+   "ransomware",
+   "scanning"
+  ],
+  "agg": "fedavg",
+  "seed": 43,
+  "final_f1": 0.9701,
+  "last3": 0.959,
+  "last3_raw": 0.9589924643182504,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 2,
+  "attackers": [
+   6,
+   7,
+   10,
+   14
+  ],
+  "families": [
+   "ddos",
+   "password",
+   "ransomware",
+   "scanning"
+  ],
+  "agg": "fedavg",
+  "seed": 44,
+  "final_f1": 0.9386,
+  "last3": 0.9597,
+  "last3_raw": 0.95972466487544,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 2,
+  "attackers": [
+   6,
+   7,
+   10,
+   14
+  ],
+  "families": [
+   "ddos",
+   "password",
+   "ransomware",
+   "scanning"
+  ],
+  "agg": "lpra",
+  "seed": 42,
+  "final_f1": 0.9698,
+  "last3": 0.9697,
+  "last3_raw": 0.9696601511731388,
+  "hon": 0,
+  "att": 40,
+  "caught": 10
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 2,
+  "attackers": [
+   6,
+   7,
+   10,
+   14
+  ],
+  "families": [
+   "ddos",
+   "password",
+   "ransomware",
+   "scanning"
+  ],
+  "agg": "lpra",
+  "seed": 43,
+  "final_f1": 0.935,
+  "last3": 0.9289,
+  "last3_raw": 0.928911077850126,
+  "hon": 4,
+  "att": 40,
+  "caught": 10
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 2,
+  "attackers": [
+   6,
+   7,
+   10,
+   14
+  ],
+  "families": [
+   "ddos",
+   "password",
+   "ransomware",
+   "scanning"
+  ],
+  "agg": "lpra",
+  "seed": 44,
+  "final_f1": 0.9703,
+  "last3": 0.9703,
+  "last3_raw": 0.9703298005408961,
+  "hon": 0,
+  "att": 40,
+  "caught": 10
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 3,
+  "attackers": [
+   3,
+   5,
+   11,
+   19
+  ],
+  "families": [
+   "ddos",
+   "dos",
+   "injection",
+   "password"
+  ],
+  "agg": "fedavg",
+  "seed": 42,
+  "final_f1": 0.9389,
+  "last3": 0.9495,
+  "last3_raw": 0.9495150875990247,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 3,
+  "attackers": [
+   3,
+   5,
+   11,
+   19
+  ],
+  "families": [
+   "ddos",
+   "dos",
+   "injection",
+   "password"
+  ],
+  "agg": "fedavg",
+  "seed": 43,
+  "final_f1": 0.9692,
+  "last3": 0.9589,
+  "last3_raw": 0.9588771990825046,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 3,
+  "attackers": [
+   3,
+   5,
+   11,
+   19
+  ],
+  "families": [
+   "ddos",
+   "dos",
+   "injection",
+   "password"
+  ],
+  "agg": "fedavg",
+  "seed": 44,
+  "final_f1": 0.939,
+  "last3": 0.9494,
+  "last3_raw": 0.9493858007017382,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 3,
+  "attackers": [
+   3,
+   5,
+   11,
+   19
+  ],
+  "families": [
+   "ddos",
+   "dos",
+   "injection",
+   "password"
+  ],
+  "agg": "lpra",
+  "seed": 42,
+  "final_f1": 0.9696,
+  "last3": 0.9696,
+  "last3_raw": 0.9696356082592802,
+  "hon": 0,
+  "att": 40,
+  "caught": 10
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 3,
+  "attackers": [
+   3,
+   5,
+   11,
+   19
+  ],
+  "families": [
+   "ddos",
+   "dos",
+   "injection",
+   "password"
+  ],
+  "agg": "lpra",
+  "seed": 43,
+  "final_f1": 0.9673,
+  "last3": 0.9634,
+  "last3_raw": 0.9633731335374399,
+  "hon": 2,
+  "att": 40,
+  "caught": 10
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 3,
+  "attackers": [
+   3,
+   5,
+   11,
+   19
+  ],
+  "families": [
+   "ddos",
+   "dos",
+   "injection",
+   "password"
+  ],
+  "agg": "lpra",
+  "seed": 44,
+  "final_f1": 0.9703,
+  "last3": 0.9703,
+  "last3_raw": 0.9703175397722538,
+  "hon": 2,
+  "att": 40,
+  "caught": 10
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 4,
+  "attackers": [
+   0,
+   2,
+   12,
+   19
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "dos",
+   "injection"
+  ],
+  "agg": "fedavg",
+  "seed": 42,
+  "final_f1": 0.9395,
+  "last3": 0.9496,
+  "last3_raw": 0.9496314120225806,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 4,
+  "attackers": [
+   0,
+   2,
+   12,
+   19
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "dos",
+   "injection"
+  ],
+  "agg": "fedavg",
+  "seed": 43,
+  "final_f1": 0.9294,
+  "last3": 0.9347,
+  "last3_raw": 0.9347040015902047,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 4,
+  "attackers": [
+   0,
+   2,
+   12,
+   19
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "dos",
+   "injection"
+  ],
+  "agg": "fedavg",
+  "seed": 44,
+  "final_f1": 0.9389,
+  "last3": 0.9493,
+  "last3_raw": 0.9492897719742316,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 4,
+  "attackers": [
+   0,
+   2,
+   12,
+   19
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "dos",
+   "injection"
+  ],
+  "agg": "lpra",
+  "seed": 42,
+  "final_f1": 0.9697,
+  "last3": 0.9694,
+  "last3_raw": 0.969389730519152,
+  "hon": 0,
+  "att": 40,
+  "caught": 10
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 4,
+  "attackers": [
+   0,
+   2,
+   12,
+   19
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "dos",
+   "injection"
+  ],
+  "agg": "lpra",
+  "seed": 43,
+  "final_f1": 0.9351,
+  "last3": 0.953,
+  "last3_raw": 0.9529794704113251,
+  "hon": 5,
+  "att": 40,
+  "caught": 10
+ },
+ {
+  "K": 20,
+  "n_att": 4,
+  "placement": 4,
+  "attackers": [
+   0,
+   2,
+   12,
+   19
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "dos",
+   "injection"
+  ],
+  "agg": "lpra",
+  "seed": 44,
+  "final_f1": 0.9703,
+  "last3": 0.9703,
+  "last3_raw": 0.9703297978883132,
+  "hon": 2,
+  "att": 40,
+  "caught": 10
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 0,
+  "attackers": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "dos",
+   "injection",
+   "mitm",
+   "password",
+   "ransomware",
+   "scanning",
+   "xss"
+  ],
+  "agg": "fedavg",
+  "seed": 42,
+  "final_f1": 0.9704,
+  "last3": 0.9696,
+  "last3_raw": 0.9696026490353336,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 0,
+  "attackers": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "dos",
+   "injection",
+   "mitm",
+   "password",
+   "ransomware",
+   "scanning",
+   "xss"
+  ],
+  "agg": "fedavg",
+  "seed": 43,
+  "final_f1": 0.9668,
+  "last3": 0.9667,
+  "last3_raw": 0.9667029140677963,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 0,
+  "attackers": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "dos",
+   "injection",
+   "mitm",
+   "password",
+   "ransomware",
+   "scanning",
+   "xss"
+  ],
+  "agg": "fedavg",
+  "seed": 44,
+  "final_f1": 0.9686,
+  "last3": 0.9687,
+  "last3_raw": 0.968677523392199,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 0,
+  "attackers": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "dos",
+   "injection",
+   "mitm",
+   "password",
+   "ransomware",
+   "scanning",
+   "xss"
+  ],
+  "agg": "lpra",
+  "seed": 42,
+  "final_f1": 0.9632,
+  "last3": 0.9568,
+  "last3_raw": 0.956814540594443,
+  "hon": 0,
+  "att": 100,
+  "caught": 10
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 0,
+  "attackers": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "dos",
+   "injection",
+   "mitm",
+   "password",
+   "ransomware",
+   "scanning",
+   "xss"
+  ],
+  "agg": "lpra",
+  "seed": 43,
+  "final_f1": 0.9537,
+  "last3": 0.9534,
+  "last3_raw": 0.9533728756492104,
+  "hon": 0,
+  "att": 100,
+  "caught": 10
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 0,
+  "attackers": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "dos",
+   "injection",
+   "mitm",
+   "password",
+   "ransomware",
+   "scanning",
+   "xss"
+  ],
+  "agg": "lpra",
+  "seed": 44,
+  "final_f1": 0.9692,
+  "last3": 0.9691,
+  "last3_raw": 0.9690651252521943,
+  "hon": 0,
+  "att": 100,
+  "caught": 10
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 1,
+  "attackers": [
+   0,
+   3,
+   8,
+   22,
+   25,
+   35,
+   36,
+   37,
+   41,
+   48
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "injection",
+   "mitm",
+   "password",
+   "scanning",
+   "xss"
+  ],
+  "agg": "fedavg",
+  "seed": 42,
+  "final_f1": 0.9704,
+  "last3": 0.97,
+  "last3_raw": 0.9699805292838741,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 1,
+  "attackers": [
+   0,
+   3,
+   8,
+   22,
+   25,
+   35,
+   36,
+   37,
+   41,
+   48
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "injection",
+   "mitm",
+   "password",
+   "scanning",
+   "xss"
+  ],
+  "agg": "fedavg",
+  "seed": 43,
+  "final_f1": 0.9342,
+  "last3": 0.9425,
+  "last3_raw": 0.942540986852137,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 1,
+  "attackers": [
+   0,
+   3,
+   8,
+   22,
+   25,
+   35,
+   36,
+   37,
+   41,
+   48
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "injection",
+   "mitm",
+   "password",
+   "scanning",
+   "xss"
+  ],
+  "agg": "fedavg",
+  "seed": 44,
+  "final_f1": 0.969,
+  "last3": 0.9689,
+  "last3_raw": 0.9688975037068066,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 1,
+  "attackers": [
+   0,
+   3,
+   8,
+   22,
+   25,
+   35,
+   36,
+   37,
+   41,
+   48
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "injection",
+   "mitm",
+   "password",
+   "scanning",
+   "xss"
+  ],
+  "agg": "lpra",
+  "seed": 42,
+  "final_f1": 0.9633,
+  "last3": 0.9564,
+  "last3_raw": 0.956430222193633,
+  "hon": 0,
+  "att": 100,
+  "caught": 10
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 1,
+  "attackers": [
+   0,
+   3,
+   8,
+   22,
+   25,
+   35,
+   36,
+   37,
+   41,
+   48
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "injection",
+   "mitm",
+   "password",
+   "scanning",
+   "xss"
+  ],
+  "agg": "lpra",
+  "seed": 43,
+  "final_f1": 0.9537,
+  "last3": 0.9534,
+  "last3_raw": 0.9533810201665412,
+  "hon": 0,
+  "att": 100,
+  "caught": 10
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 1,
+  "attackers": [
+   0,
+   3,
+   8,
+   22,
+   25,
+   35,
+   36,
+   37,
+   41,
+   48
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "injection",
+   "mitm",
+   "password",
+   "scanning",
+   "xss"
+  ],
+  "agg": "lpra",
+  "seed": 44,
+  "final_f1": 0.969,
+  "last3": 0.969,
+  "last3_raw": 0.9689907385721894,
+  "hon": 0,
+  "att": 100,
+  "caught": 10
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 2,
+  "attackers": [
+   15,
+   16,
+   18,
+   24,
+   28,
+   33,
+   34,
+   37,
+   40,
+   43
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "mitm",
+   "ransomware",
+   "scanning"
+  ],
+  "agg": "fedavg",
+  "seed": 42,
+  "final_f1": 0.9703,
+  "last3": 0.9699,
+  "last3_raw": 0.969881688363507,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 2,
+  "attackers": [
+   15,
+   16,
+   18,
+   24,
+   28,
+   33,
+   34,
+   37,
+   40,
+   43
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "mitm",
+   "ransomware",
+   "scanning"
+  ],
+  "agg": "fedavg",
+  "seed": 43,
+  "final_f1": 0.966,
+  "last3": 0.966,
+  "last3_raw": 0.9660427010718188,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 2,
+  "attackers": [
+   15,
+   16,
+   18,
+   24,
+   28,
+   33,
+   34,
+   37,
+   40,
+   43
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "mitm",
+   "ransomware",
+   "scanning"
+  ],
+  "agg": "fedavg",
+  "seed": 44,
+  "final_f1": 0.9695,
+  "last3": 0.9697,
+  "last3_raw": 0.9696686684661152,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 2,
+  "attackers": [
+   15,
+   16,
+   18,
+   24,
+   28,
+   33,
+   34,
+   37,
+   40,
+   43
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "mitm",
+   "ransomware",
+   "scanning"
+  ],
+  "agg": "lpra",
+  "seed": 42,
+  "final_f1": 0.9632,
+  "last3": 0.9506,
+  "last3_raw": 0.9505855466075053,
+  "hon": 0,
+  "att": 100,
+  "caught": 10
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 2,
+  "attackers": [
+   15,
+   16,
+   18,
+   24,
+   28,
+   33,
+   34,
+   37,
+   40,
+   43
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "mitm",
+   "ransomware",
+   "scanning"
+  ],
+  "agg": "lpra",
+  "seed": 43,
+  "final_f1": 0.9525,
+  "last3": 0.9529,
+  "last3_raw": 0.9529482540968339,
+  "hon": 0,
+  "att": 100,
+  "caught": 10
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 2,
+  "attackers": [
+   15,
+   16,
+   18,
+   24,
+   28,
+   33,
+   34,
+   37,
+   40,
+   43
+  ],
+  "families": [
+   "backdoor",
+   "ddos",
+   "mitm",
+   "ransomware",
+   "scanning"
+  ],
+  "agg": "lpra",
+  "seed": 44,
+  "final_f1": 0.9516,
+  "last3": 0.9516,
+  "last3_raw": 0.9516281693995312,
+  "hon": 0,
+  "att": 100,
+  "caught": 10
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 3,
+  "attackers": [
+   7,
+   11,
+   12,
+   22,
+   25,
+   31,
+   37,
+   39,
+   40,
+   44
+  ],
+  "families": [
+   "ddos",
+   "dos",
+   "injection",
+   "mitm",
+   "scanning",
+   "xss"
+  ],
+  "agg": "fedavg",
+  "seed": 42,
+  "final_f1": 0.9703,
+  "last3": 0.9698,
+  "last3_raw": 0.9697835530852998,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 3,
+  "attackers": [
+   7,
+   11,
+   12,
+   22,
+   25,
+   31,
+   37,
+   39,
+   40,
+   44
+  ],
+  "families": [
+   "ddos",
+   "dos",
+   "injection",
+   "mitm",
+   "scanning",
+   "xss"
+  ],
+  "agg": "fedavg",
+  "seed": 43,
+  "final_f1": 0.9662,
+  "last3": 0.9663,
+  "last3_raw": 0.9663222224165245,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 3,
+  "attackers": [
+   7,
+   11,
+   12,
+   22,
+   25,
+   31,
+   37,
+   39,
+   40,
+   44
+  ],
+  "families": [
+   "ddos",
+   "dos",
+   "injection",
+   "mitm",
+   "scanning",
+   "xss"
+  ],
+  "agg": "fedavg",
+  "seed": 44,
+  "final_f1": 0.9687,
+  "last3": 0.9689,
+  "last3_raw": 0.9689287372707422,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 3,
+  "attackers": [
+   7,
+   11,
+   12,
+   22,
+   25,
+   31,
+   37,
+   39,
+   40,
+   44
+  ],
+  "families": [
+   "ddos",
+   "dos",
+   "injection",
+   "mitm",
+   "scanning",
+   "xss"
+  ],
+  "agg": "lpra",
+  "seed": 42,
+  "final_f1": 0.9632,
+  "last3": 0.9564,
+  "last3_raw": 0.9564408000075897,
+  "hon": 0,
+  "att": 100,
+  "caught": 10
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 3,
+  "attackers": [
+   7,
+   11,
+   12,
+   22,
+   25,
+   31,
+   37,
+   39,
+   40,
+   44
+  ],
+  "families": [
+   "ddos",
+   "dos",
+   "injection",
+   "mitm",
+   "scanning",
+   "xss"
+  ],
+  "agg": "lpra",
+  "seed": 43,
+  "final_f1": 0.9537,
+  "last3": 0.953,
+  "last3_raw": 0.9530394662659938,
+  "hon": 0,
+  "att": 100,
+  "caught": 10
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 3,
+  "attackers": [
+   7,
+   11,
+   12,
+   22,
+   25,
+   31,
+   37,
+   39,
+   40,
+   44
+  ],
+  "families": [
+   "ddos",
+   "dos",
+   "injection",
+   "mitm",
+   "scanning",
+   "xss"
+  ],
+  "agg": "lpra",
+  "seed": 44,
+  "final_f1": 0.969,
+  "last3": 0.969,
+  "last3_raw": 0.968977722881147,
+  "hon": 0,
+  "att": 100,
+  "caught": 10
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 4,
+  "attackers": [
+   0,
+   5,
+   6,
+   8,
+   17,
+   18,
+   29,
+   31,
+   35,
+   43
+  ],
+  "families": [
+   "backdoor",
+   "dos",
+   "mitm",
+   "password",
+   "ransomware",
+   "scanning",
+   "xss"
+  ],
+  "agg": "fedavg",
+  "seed": 42,
+  "final_f1": 0.9703,
+  "last3": 0.9695,
+  "last3_raw": 0.9695464756372685,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 4,
+  "attackers": [
+   0,
+   5,
+   6,
+   8,
+   17,
+   18,
+   29,
+   31,
+   35,
+   43
+  ],
+  "families": [
+   "backdoor",
+   "dos",
+   "mitm",
+   "password",
+   "ransomware",
+   "scanning",
+   "xss"
+  ],
+  "agg": "fedavg",
+  "seed": 43,
+  "final_f1": 0.9667,
+  "last3": 0.9666,
+  "last3_raw": 0.96660729212266,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 4,
+  "attackers": [
+   0,
+   5,
+   6,
+   8,
+   17,
+   18,
+   29,
+   31,
+   35,
+   43
+  ],
+  "families": [
+   "backdoor",
+   "dos",
+   "mitm",
+   "password",
+   "ransomware",
+   "scanning",
+   "xss"
+  ],
+  "agg": "fedavg",
+  "seed": 44,
+  "final_f1": 0.9686,
+  "last3": 0.9678,
+  "last3_raw": 0.9677699898732706,
+  "hon": 0,
+  "att": 0,
+  "caught": 0
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 4,
+  "attackers": [
+   0,
+   5,
+   6,
+   8,
+   17,
+   18,
+   29,
+   31,
+   35,
+   43
+  ],
+  "families": [
+   "backdoor",
+   "dos",
+   "mitm",
+   "password",
+   "ransomware",
+   "scanning",
+   "xss"
+  ],
+  "agg": "lpra",
+  "seed": 42,
+  "final_f1": 0.9633,
+  "last3": 0.9565,
+  "last3_raw": 0.9564665971473287,
+  "hon": 0,
+  "att": 100,
+  "caught": 10
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 4,
+  "attackers": [
+   0,
+   5,
+   6,
+   8,
+   17,
+   18,
+   29,
+   31,
+   35,
+   43
+  ],
+  "families": [
+   "backdoor",
+   "dos",
+   "mitm",
+   "password",
+   "ransomware",
+   "scanning",
+   "xss"
+  ],
+  "agg": "lpra",
+  "seed": 43,
+  "final_f1": 0.9537,
+  "last3": 0.9534,
+  "last3_raw": 0.9533810560966568,
+  "hon": 0,
+  "att": 100,
+  "caught": 10
+ },
+ {
+  "K": 50,
+  "n_att": 10,
+  "placement": 4,
+  "attackers": [
+   0,
+   5,
+   6,
+   8,
+   17,
+   18,
+   29,
+   31,
+   35,
+   43
+  ],
+  "families": [
+   "backdoor",
+   "dos",
+   "mitm",
+   "password",
+   "ransomware",
+   "scanning",
+   "xss"
+  ],
+  "agg": "lpra",
+  "seed": 44,
+  "final_f1": 0.9694,
+  "last3": 0.9692,
+  "last3_raw": 0.9692123404248524,
+  "hon": 0,
+  "att": 100,
+  "caught": 10
+ }
+]

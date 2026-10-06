@@ -1,0 +1,42 @@
+{
+  "scenario": "ransomware campaign Healthcare->Water->Transport, zero-day detector (ransomware unseen)",
+  "onset_s": {
+    "Healthcare": 60.0,
+    "Water": 180.0,
+    "Transport": 300.0
+  },
+  "first_true_alert_s": {
+    "Transport": 301.98999999987035,
+    "Water": 182.1699999999793,
+    "Healthcare": 61.56999999999632
+  },
+  "detection_delay_s": {
+    "Transport": 1.99,
+    "Water": 2.17,
+    "Healthcare": 1.57
+  },
+  "L3_ledger_config": {
+    "block_size": 50,
+    "block_interval_s": 0.5
+  },
+  "L3_mean_submit_latency_ms": 0.04852096599292995,
+  "L3_mean_commit_latency_ms": 20.60800622853048,
+  "L3_p50_commit_latency_ms": 9.384265000051073,
+  "L3_p95_commit_latency_ms": 92.96743759998593,
+  "L3_max_commit_latency_ms": 442.3658740000178,
+  "L3_committed_tx": 23113,
+  "L4_district_anomaly_flag_s": {
+    "Healthcare": 70.0,
+    "Water": 190.0,
+    "Transport": 310.0
+  },
+  "L4_campaign_declared_s": 320.0,
+  "L4_time_from_first_onset_s": 260.0,
+  "no_L4_baseline_s": "24 h (daily inter-agency report) or never",
+  "total_alerts": 23113,
+  "true_alerts": 20807,
+  "false_alerts": 2306,
+  "normal_flows_replayed": 240000,
+  "ledger_blocks": 463,
+  "ledger_intact": true
+}

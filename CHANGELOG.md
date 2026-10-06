@@ -1,6 +1,6 @@
-# Colour key of the revised manuscript (revise-v30) and its companions
+# Colour key of the revised manuscript (revise-v32) and its companions
 
-The manuscript file `smartcities-4547789_revise-v30.docx`, the Supplementary
+The manuscript file `smartcities-4547789_revise-v32.docx`, the Supplementary
 addendum and the response letter shade every passage that differs from the
 submitted version by the source of the change:
 
@@ -9,8 +9,10 @@ submitted version by the source of the change:
 | green  | `#C6EFCE` | changed in response to Reviewer 1 |
 | pink   | `#FFC7CE` | changed in response to Reviewer 3 |
 | yellow | `#FFEB9C` | changed in response to Reviewer 2 |
-| purple | `#E4D0F5` | changed at the Academic Editor's request: algorithm–implementation agreement (Section 4.4) and every value that moved when the experiments were re-run after the correction |
-| grey   | `#D9D9D9` | changed by the authors on their own initiative: errors found and corrected in self-review, and the pre-submission additions of entries DM and DN (this file, v2.1) |
+| purple | `#E4D0F5` | changed at the Editors' request: the Academic Editor's algorithm–implementation agreement (Section 4.4) and every value that moved when the experiments were re-run after the correction (round 1); the Highlights section asked for by the Section Managing Editor (round 2, revise-v32) |
+| grey   | `#D9D9D9` | changed by the authors on their own initiative: errors found and corrected in self-review, and the sentences the pre-submission FLAME additions (DM, DN, DO) required elsewhere; the FLAME passages themselves were rewritten for Reviewer 1 in round 2 and are green |
+
+Shading is cumulative over both review rounds; the passages new in the second round are listed in the colour key printed above the Abstract and in the v2.2.0 entry below.
 
 The shading is produced by `review_response/highlight_changes.py` from the
 submitted and the revised manuscript and is removed at proof stage.
@@ -935,6 +937,185 @@ phrases remain anywhere in either file. Confirmed separately that the already-de
 Paper_Draft_SmartCities_v31.docx needs no changes — it already has the correct wording in every location;
 this audit only affects what a *future* rebuild from source would produce. No new manuscript version was
 issued for this; the fix is to the repository, not the article.
+
+# What changed in v2.2.0 (code + results + supplement) — second peer-review round
+
+Reviewer 1 audited release v2.1.0 against the first revision and found four places where the code
+did not do what the manuscript said and one where the regeneration path was unclear; Reviewer 3
+asked for narrower claims and one measurement that had been extrapolated.  Every point is answered
+with a code correction and a re-run.  Superseded result files are kept under their own names
+(`*_v2.1.0.json`, `results/extD_scenario_v2.1.0.json`) and are listed at the end of `MANIFEST.md`.
+Statements in the v2.1 entries of this file that these re-runs have shown to be wrong are marked
+in section DX below rather than edited away.
+
+## DR. E11 measured submission latency, not commit latency (Reviewer 1, C1)
+
+`city_scenario()` in `run_extended.py` built the ledger with `block_size = 20, block_interval_s = 1.0`
+and timed `ledger.submit()` only; the 0.8 ms "commit latency" the first revision reported came from
+`review_response/compare_ledger_latency.py`, a separate saturated-mempool benchmark (2,000
+back-to-back submits, so a 50-transaction block fills in under a millisecond), not from E11.
+Fixed: the replay ledger is now 50 tx / 0.5 s as Section 5.8 states; the submission latency is kept
+(`L3_mean_submit_latency_ms`, 0.05 ms) and the commit latency is read from the ledger's own
+transaction records (`metrics["tx_latencies"]`, filled by `_cut_block()`, including the final flush):
+`L3_mean/p50/p95/max_commit_latency_ms` = 20.6 / 9.4 / 93.0 / 442 ms over 23,113 alerts and 463
+blocks (`results/extD_scenario.json`; four repeats 19.8–21.1 ms mean in
+`review_response/e11_commit_latency_repeats.json`).  462 of the 463 blocks were cut by fill, the
+last by the flush; the interval never fired.  The replay runs its 480 s simulated clock in about
+24 s of wall time, so the ledger sees alerts about twenty times faster than the simulated rate; at
+the simulated rate the 0.5 s interval would dominate (≈ 0.25 s mean).  The manuscript (Sections 4.4,
+5.7, 5.8) now labels the three latency kinds — submission, commit, Fabric end-to-end — and the E10
+sentence that read "ledger anchoring" now reads "ledger submission".  The v2.1.0 tag shipped no E11
+result file at all; the baseline re-run under the unmodified v2.1.0 code is archived as
+`results/extD_scenario_v2.1.0.json`.  `paper_src/make_facts.py` reads the new keys
+(`sce_submit_ms`, `sce_commit_*`); `make_paper.js`'s E11 sentence is rewritten on them.
+Detection and campaign timings are unchanged (1.6 / 2.2 / 2.0 s; campaign at 320 s).
+
+## DS. FLAME baseline re-implemented after Algorithm 1 (Reviewer 1, C2)
+
+v2.1.0 clustered the *updates* W_i − G_{t−1} rather than the local models W_i (FLAME's line 6) and
+used λ = 0.001, the value FLAME's paper derives for its image and text scenarios, not the 0.01 it
+used for network intrusion detection.  `review_response/flame_impl.py` now implements Algorithm 1
+step for step: cosine distance between the models; HDBSCAN with min_cluster_size = ⌊K/2⌋ + 1,
+min_samples = 1 and a single cluster allowed; S_t = median of ‖W_i − G_{t−1}‖ over all K; clipping
+by min(1, S_t/e_i); equal-weight mean of the admitted set; Gaussian noise σ = λ·S_t with λ = 0.01
+by default (`--lam` in `compare_flame.py` and `table13_flame_k20_50.py`; 0.001 and 0.1 run as
+sensitivities, Table S15).  The noise is seeded from SHA-256 of the previous global model so that
+any single cell reproduces in isolation (v2.1.0 seeded from a process-wide call counter; re-seeding
+moved several cells in the third decimal).  Effect:
+
+* K = 5: FLAME excludes the scaled attacker in 30 of 30 rounds (v2.1.0: 2 of 30) — on the models
+  the ×10 update is far from the honest cluster, on the updates its direction had matched them.
+  No-attack F1 0.9389 (cost 0.032 against FedAvg 0.9707, unchanged); the admitted set is 3 of 5 in
+  176 of 180 rounds; scale, flip and noise give the identical 0.9386 because the same three honest
+  districts, the same clipping bound and the same seeded noise produce literally the same trajectory;
+  stealth 0.9389 (0 of 30 excluded; was 0.9602 with 3 of 30); adaptive 0.9389 (60 of 60).
+* K = 20 / 50 (Table S11): every scaled attacker excluded (120 of 120, 300 of 300; v2.1.0 reported
+  35 and 112) with 41 of 160 and 126 of 400 honest district-rounds also discarded; no attack
+  0.9414 ± 0.0072 and 0.9480 ± 0.0035 (cost 0.025 — 0.032 at λ = 0.001 — and 0.012 against FedAvg),
+  78 of 200 and 199 of 500 honest district-rounds discarded; admitted 11–14 of 20 and 27–34 of 50.
+* `review_response/flame_cluster_property.py`: with these HDBSCAN settings the admitted set is
+  exactly ⌊K/2⌋ + 1 even for near-identical models (3/5, 5/9, 11/20, 26/50; scikit-learn and the
+  `hdbscan` package agree), so FLAME's no-attack cost is structural to its clustering parameters.
+
+**Withdrawn:** the v2.1 statements (DN, DO; Sections 5.6 and 7, Table S11 note, Reviewer 3 reply of
+the first response) that FLAME's cluster "excluded only some of the scaled attackers" — an
+artefact of clustering the updates.  Archived: `flame_comparison_v2.1.0.json`,
+`table13_flame_k20_50*_v2.1.0.json` and their clusterlogs.  Manuscript: Sections 3.4, 5.3, 5.6, 7,
+Table 3 (E18 row), Tables S11 and S15.
+
+## DT. Attacker placement in the scalability experiment (Reviewer 1, C3)
+
+Every poisoning experiment made districts 0 … n_att − 1 Byzantine.  `poc/byzantine.py`
+`run_byzantine()` gained `attacker_ids=None` (default = the old placement; regression-checked
+identical to `table13_perseed.json`), and `review_response/table13_attacker_placement.py` (E20,
+Table S12) runs all five single-attacker placements at K = 5 and the fixed set plus four random
+draws (`default_rng(1000 + p)`) at K = 10, 20 and 50, three seeds each (120 runs).  The quarantine
+decision is placement-independent: every attacker quarantined in 10 of 10 rounds under every
+placement, honest rejections 0 at K = 5 and 50, 0–6 of 80 at K = 10 (Table 13's fixed placement:
+0–3) and 0–6 of 160 at K = 20 (as in Table 13).  F1 after quarantine is not: LPRA 0.9644 ± 0.0128 [0.9388, 0.9709] at K = 5,
+0.9513 ± 0.0106 at K = 10, 0.9609 ± 0.0058 at K = 20, 0.9580 ± 0.0032 at K = 50, the low placements
+being those whose quarantined district held most of the ransomware family's dominant share (a
+correct quarantine removes that district's data).  The published fixed placement is the most
+favourable to LPRA's F1 at K = 10 and 50, equal-highest to three decimals at K = 5 (0.9708 against
+0.9709) and 0.004 below the top at K = 20,
+which Sections 3.1, 5.6 and 7 now say.  The family labels of the first summary were wrong for
+K ≤ 9 (district i owns families i and i + K); `families_of()` and `--summarise-only` rebuild the
+labels and the summary from the stored runs without retraining.  Also in `byzantine.py`: the
+adaptive branch's direction vector was named `r`, shadowing the round index (renamed `rdir`,
+numbers identical), and the initialisation comment now states what is exchanged (a pooled
+standardiser, no raw examples) and that district 0 is honest at initialisation under the fixed
+placement.
+
+## DU. Personalised-FL initialisation overlapped its hold-out (Reviewer 1, C4)
+
+`poc/robust_fl.py` drew the 500-flow bootstrap from `parts[0]` (all of district 0) instead of
+`loc_tr[0]` (its training split): on the full data, 104 of the 500 were also in district 0's
+6,673-flow hold-out — the reviewer's count, reproduced exactly.  Fixed (overlap 0);
+`byzantine.py` and `federated.py` keep `parts[0]` because they have no local hold-out.
+`exp3_exp9_rerun.py` re-run: Table 8 Energy pFL 0.975 → 0.974 (gain +0.2 → +0.1), the other rows
+unchanged; Table 7 LPRA cells unchanged (0.9707 → 0.9709), FedAvg under scale and flip unchanged,
+**FedAvg under Gaussian noise 0.780 → 0.904** (the initialisation-sensitive undefended cell: the
+history is now 0.686 (submitted) → 0.780 (v2.1) → 0.904, stated in Section 6.5); Exp-3 unchanged.
+Archived: `exp3_exp9_rerun_v2.1.0.json`.
+
+## DV. One canonical regeneration path (Reviewer 1, C5)
+
+* `MANIFEST.md` (new): every table and figure of the manuscript and the supplement with its
+  experiment ID, script, arguments, canonical result file and the archived files it supersedes.
+* `run_extended.py --part C` now runs the district grid under the Table 13 protocol itself (seeds
+  42–44, F1 averaged over the last three rounds, population s.d., `lpra_version="v2"`) and writes
+  `results/extC_districts_scaling.csv` in that form; the K = 5, 10 and 20 cells were re-derived with the
+  new code and match the shipped file at the manuscript's precision.  `table13_perseed.py` remains the per-seed record.
+* `run_extended.py` stamps `machine_<part>` per part so a partial run cannot re-stamp results of an
+  earlier run; `results/extended_results.json` has its `machine` block restored and `machine_D`
+  added.
+* `paper_src/make_facts.py` falls back to `fabric/fabric_facts.json` (the committed location) when
+  `results/fabric_facts.json` is absent; `paper_src/make_supp.js` builds Tables S11–S15 from the
+  same files and with the same captions as `review_response/build_supp_addendum.js`.
+* `poc/robust_fl.py` `run_robust_fl()` now handles the INCONCLUSIVE return of its own `screen_updates()`
+  as `byzantine.aggregate()` does (keep the global model, count every district as not accepted); the
+  branch was never reached in any reported run (self-review, round 2), and its docstring now states
+  the median reference of v2 and the step-(6) rules.
+* README, `review_response/README.md`, `CITATION.cff` (2.2.0) updated; docstrings of
+  `run_extended.py`, `compare_ledger_latency.py` (auxiliary benchmark, not E11) and
+  `exp3_exp9_rerun.py` corrected.
+
+## DW. Measurements for Reviewer 3
+
+* **Byzantine-fraction sweep (point 3; E21, Table S13):** `review_response/fk_boundary_sweep.py`,
+  K ∈ {9, 11}, f ∈ {2 … 6}, scale / flip / noise / colluding adaptive, FedAvg and LPRA v2 (v1 on
+  adaptive), three seeds, 270 runs.  The screen holds to f/K ≈ 0.36 (every scaled, noisy and
+  adaptive attacker quarantined 10/10; label flip slips first, from 0.33), degrades without
+  inverting at 0.44–0.45 (adaptive 30–34 of 40 and 36–40 of 50 quarantined, F1 0.96; LPRA v1
+  collapses as at K = 5, f = 2) and inverts above one half (identical colluding vectors are the
+  median: every honest district rejected under adaptive, F1 0.14; flip 0.15 against FedAvg's
+  0.59–0.71; scale: no attacker rejected).  INCONCLUSIVE never reached.  Stated in the Abstract,
+  Table 1, Sections 5.6, 6.1, 6.5 and 7 as a measured boundary.
+* **Composition of the Fabric ledger bytes (point 4; E22, Table S14):**
+  `fabric/bench/decode_blockfile.py` (new; dependency-free parser of fabric's block serialization
+  and protobuf wire format, layout and field numbers checked against fabric release-2.5) decodes
+  the E13 peer's block file: 408 blocks, 4,004 endorser transactions (4,001 AnchorAlert + 3
+  lifecycle), 8,006 endorsements, 5,480 B per transaction, of which X.509 certificates are 3,907 B
+  (71%; 16,014 copies of ten distinct certificates in the transactions), read/write set 432 B,
+  chaincode response 316 B, the six AnchorAlert arguments 160 B.  The 60.8 MB per 10,000 alerts of
+  Table 15 is 24,311,978 B / 4,001 × 10,000, a linear extrapolation, which the caption, the README
+  and `fabric/fabric_facts.json` now say; `fabric/blockfile_composition.json` holds the decode.
+* **Claims narrowed (points 1, 2):** Abstract and Conclusions no longer imply superiority over the
+  robust baselines; the stealth attack has its own paragraph in Section 5.3; Section 6.5 names the
+  defence class a patient adversary would need (validation-based or commitment-based; neither
+  implemented); Dong et al. (T-ITS 2023) added as reference [48] in Section 2.1.
+
+## DY. Highlights section added (revise-v32; Section Managing Editor, e-mails of 22 and 29 September 2026)
+
+Manuscript only: a Highlights block (two questions, two bullets each, in the journal's template form)
+between the correspondence line and the Abstract, shaded purple (Editors' request).  Every figure in
+it is taken from the manuscript: Table 4 (F1 0.997, FPR 0.009, 78 µs → "under 0.1 ms"), Table 6
+(0.971 / 0.952 / 0.994), Table 9 (ties with one attacker, within 0.006 with two; no-attack cost
+0.030–0.032 of the robust rules), Table S13 (0.36 / 0.44 / one half), Table 9 stealth rows, Section
+5.9/5.11 (0.96 → 0.12; 0.9824 → 0.0005), Section 5.10 (6,076 B, 71% certificates of the 5,480-B
+transaction, 1.91 TB per peer per year at 10 alerts/s, 146 tx/s), Section 5.5 (quorum re-sign).  No
+code or result file changed; `review_response/highlight_changes.py` gained the paragraph defaults for
+the new block.
+
+## DX. Statements in earlier entries of this file that v2.2.0 has shown to be wrong
+
+* v2.0 §D / v2.1: "commit latency at E11's own settings … is 0.79 ms" — that was the saturated
+  auxiliary benchmark; E11's measured commit latency is 20.6 ms mean (DR).
+* DN, DO: FLAME "excludes only 35 of 120 and 112 of 300 attacker-rounds", "FLAME's clustering
+  still never fires", and the K = 20/50 no-attack costs 0.0013 / 0.0019 (sklearn defaults) and
+  0.033 / 0.011 (v2.1.0 run) — superseded by DS (every attacker excluded; costs 0.025 / 0.012).
+* v2.1 §A: "FedAvg under Gaussian noise moved (0.686 → 0.780)" — now 0.904 after the hold-out
+  correction (DU); the LPRA and no-attack cells did not move.
+* DO: "the scaled attacker … is almost never excluded (2/30) and is met by clipping alone", "Noise ×1:
+  0.9486", "Stealth ×1: 0.9602 (3/30)", "55 of 150" — now 30/30 and 0.9386, 0.9386, 0.9389 (0/30),
+  60 of 150 (DS).
+* DO / v30 Section 5.6: FLAME at K = 20 under scaling "0.9349, below undefended FedAvg (0.9451)" and
+  "keeps about 11 of 20 and 30 of 50 … only at K = 50 does the cluster clear the floor" — now 0.953
+  (above FedAvg) and 11–14 of 20, 27–34 of 50 (DS).
+* v2.0 §D: "the code is unchanged" (E11) — the code was the defect: `city_scenario()` built the ledger
+  with 20 tx / 1.0 s and timed only the submission (DR).
+* v2.1 §B / README: "`results/extC_districts_scaling.csv` is the summary of `table13_perseed.json`"
+  — still true, and from v2.2.0 the pipeline produces it under the same protocol (DV).
 
 ## DQ. Three wording points from a second informal read (no number changes; all grey)
 
