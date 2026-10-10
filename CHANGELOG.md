@@ -1464,3 +1464,30 @@ reported number, table, figure or code behaviour:
   find-and-replace of "revise-vNN" across the whole file — will silently rewrite this bullet's
   wording too if it ever names a specific old/new version pair the same way; described in
   relative terms above for exactly that reason.)
+
+
+# Proof stage (after v2.2.0; no code or result change)
+
+Changes made while returning MDPI's proof (manuscript.v7) after acceptance. The tag v2.2.0,
+which the article cites, is not moved; these commits are on `main` only.
+
+* `paper_src/make_figures.py`, `fig1_architecture()`: layout only. The L3 band title and the
+  labels "alerts", "MODEL_UPDATE tx" and "Merkle proofs" touched the box borders; the L3 band
+  is 0.03 taller, the block-rule box starts at y = 5.63 and is 0.80 high (was 5.62 and 0.82), the band-title padding is 0.10,
+  and the three labels sit at y = 6.95 with bottom alignment. No number or label changed (they
+  still come from `paper_facts.json`). The redrawn `results/figures/fig1_architecture.png/.pdf`
+  is Figure 1 of the article as returned with the proof.
+* `MANIFEST.md`, Supplementary table map: the rows for S6 and S7 had kept an older numbering
+  (S6 "aggregator detail", no row for the cross-dataset table). They now follow the published
+  Supplementary Materials: S6 cross-dataset F1 (nine directional features), S7 aggregator detail
+  plus its Krum-regime extension, and a row for Figure S1.
+* Published Supplementary Materials, assembled from the first-round file (S1–S3, S6–S8,
+  Figure S1) and the second-round addendum (S4, S5, S7 extension, S9–S15). Four corrections to
+  the first-round part: Table S6 column headings TON_IoT and CIC-IDS2017 were swapped (values
+  unchanged, they equal Table 14(a)); Table S7 Median no-attack F1 0.939 -> 0.941, the
+  `final_f1` mean of `extA_byzantine_grid_raw.csv` and the value of Table 9; the note under S6
+  referred to the old Table 13 (now Table 14(b)) and implied that CICIoT2023 is evaluated; the
+  Figure S1 caption now says it is one heat map (four direction-free features).
+  Two notes in the addendum part: the source line now names "Tables S4, S5, S7 (extension),
+  S10–S15 and Section S9" (S9 is a section, not a table), and Table S14 states that its
+  per-transaction rows are rounded separately (they sum to 5,482 B and 99.9%, not 5,480 B and 100%).

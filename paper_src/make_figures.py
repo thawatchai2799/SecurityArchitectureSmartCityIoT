@@ -105,13 +105,13 @@ def fig_architecture():
 
     bands = [("L1  IoT / network traffic (public TON_IoT testbed flows)", 0.15, 1.75, "#F3F6FA"),
              ("L2  Edge AI — district gateways", 2.20, 2.05, "#EAF3E6"),
-             ("L3  Permissioned consortium ledger — city agencies", 4.70, 2.15, "#FDF1DE"),
+             ("L3  Permissioned consortium ledger — city agencies", 4.70, 2.18, "#FDF1DE"),   # band top 6.88: title clears the block-rule box, labels above clear the band
              ("L4  Cloud security orchestrator", 7.20, 2.22, "#EDE7F6")]
     for name, y0, h, c in bands:
         ax.add_patch(FancyBboxPatch((0.15, y0), 10.25, h, boxstyle="round,pad=0.02,rounding_size=0.08",
                                     fc=c, ec="#BBB", lw=0.6))
         ax.text(0.30, y0 + h - 0.12, name, fontsize=7.4, fontweight="bold", va="top", color="#444",
-                bbox=dict(facecolor=c, edgecolor="none", boxstyle="square,pad=0.20"), zorder=4)
+                bbox=dict(facecolor=c, edgecolor="none", boxstyle="square,pad=0.10"), zorder=4)
 
     districts = ["Transport", "Energy", "Water", "Healthcare", "e-Gov"]
     xs = [0.45 + i * 2.0 for i in range(5)]
@@ -123,7 +123,7 @@ def fig_architecture():
     for i, v in enumerate(["Municipality IT", "City Police", "Electric Utility",
                            "Water Authority", "University"]):
         box(0.50 + i * 2.0, 4.90, 1.65, 0.62, f"validator:\n{v}", fs=5.8)
-    box(0.55, 5.62, 9.45, 0.82,
+    box(0.55, 5.63, 9.45, 0.80,
         "block = header · prev-hash · Merkle root · PoA round-robin proposer · ≥ 2/3+1 endorsements;\n"
         "an enrolment list controls who may submit\n"
         "tx = ALERT{district, model-id, ts, SHA-256(evidence)}\n"
@@ -146,11 +146,11 @@ def fig_architecture():
     arrow(5.30, 3.68, 5.30, 7.42, color="#2E7D32", ls="--", zorder=1.5)
     ax.text(5.45, 4.36, weights, fontsize=6.2, color="#2E7D32")
     arrow(2.00, 6.92, 2.00, 7.42, color="#B8860B")
-    ax.text(2.10, 7.06, "alerts", fontsize=6.2, color="#B8860B", bbox=dict(facecolor="white", edgecolor="none", boxstyle="square,pad=0.1"), zorder=5)
+    ax.text(2.10, 6.95, "alerts", fontsize=6.2, color="#B8860B", bbox=dict(facecolor="white", edgecolor="none", boxstyle="square,pad=0.1"), zorder=5, va="bottom")
     arrow(6.40, 7.42, 6.40, 6.92, color="#6A1B9A")
-    ax.text(6.50, 7.06, "MODEL_UPDATE tx", fontsize=6.2, color="#6A1B9A", bbox=dict(facecolor="white", edgecolor="none", boxstyle="square,pad=0.1"), zorder=5)
+    ax.text(6.50, 6.95, "MODEL_UPDATE tx", fontsize=6.2, color="#6A1B9A", bbox=dict(facecolor="white", edgecolor="none", boxstyle="square,pad=0.1"), zorder=5, va="bottom")
     arrow(8.60, 7.42, 8.60, 6.92, color="#6A1B9A", ls="--")
-    ax.text(8.70, 7.06, "Merkle proofs", fontsize=6.2, color="#6A1B9A", bbox=dict(facecolor="white", edgecolor="none", boxstyle="square,pad=0.1"), zorder=5)
+    ax.text(8.70, 6.95, "Merkle proofs", fontsize=6.2, color="#6A1B9A", bbox=dict(facecolor="white", edgecolor="none", boxstyle="square,pad=0.1"), zorder=5, va="bottom")
     arrow(9.95, 7.42, 9.95, 3.68, color="#C62828", ls=":")
     ax.text(10.02, 4.18, "audit\ndistrict\nstore", fontsize=6.0, color="#C62828")
 
