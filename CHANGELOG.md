@@ -1488,6 +1488,15 @@ which the article cites, is not moved; these commits are on `main` only.
   `final_f1` mean of `extA_byzantine_grid_raw.csv` and the value of Table 9; the note under S6
   referred to the old Table 13 (now Table 14(b)) and implied that CICIoT2023 is evaluated; the
   Figure S1 caption now says it is one heat map (four direction-free features).
-  Two notes in the addendum part: the source line now names "Tables S4, S5, S7 (extension),
-  S10–S15 and Section S9" (S9 is a section, not a table), and Table S14 states that its
+  Two notes in the addendum part: the source line names the Supplementary tables that come
+  from review_response/ and fabric/ (see the next bullet for S9), and Table S14 states that its
   per-transaction rows are rounded separately (they sum to 5,482 B and 99.9%, not 5,480 B and 100%).
+* Supplementary numbering, at the Section Managing Editor's request (13 October 2026): the
+  former "Section S9" (equivalence of the released and the corrected `screen_updates()`) is a
+  table and is now **Table S9**, so the Supplementary items run S1–S15 without a gap. The same
+  item is called "Section S9" in earlier entries of this file and in the review-round addendum;
+  those entries are kept as written. MANIFEST.md now lists it as "S9".
+* Data Availability Statement of the article: the sentence pointing to review_response/ and
+  fabric/ for the Supplementary items is shortened at the editorial office's request (the items are
+  tables, not sections, and their scripts carry their own names); MANIFEST.md remains the map
+  from every table and figure, Supplementary ones included, to its script and result file.

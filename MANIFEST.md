@@ -71,7 +71,7 @@ script.  All federated experiments use the shipped `data/TON_IoT_Train_Test_Netw
 | S7 (extension) Krum regime | `review_response/compare_krum.py` | `review_response/krum_regime.json` |
 | S8 decision-tree leaves | `run_poc.py` Exp-8b | `results/exp8b_tree_rules.csv` |
 | Figure S1 cross-dataset heat map, four direction-free features | `run_poc.py` Exp-2 | `results/exp2_cross_dataset_f1_dirfree4.csv` |
-| Section S9 equivalence check | `review_response/compare_scale.py`, `compare_lpra.py` | `review_response/compare_scalability.json`, `compare_k5_adaptive.log` |
+| S9 equivalence check (released vs corrected `screen_updates()`) | `review_response/compare_scale.py`, `compare_lpra.py` | `review_response/compare_scalability.json`, `compare_k5_adaptive.log` |
 | S10 extended tamper test | `review_response/compare_tamper.py` | `review_response/tamper_extended.json` |
 | S11 FLAME at K = 20, 50 | `review_response/table13_flame_k20_50.py [--lam]` | `review_response/table13_flame_k20_50_summary.json`, `_lam0.001.json` |
 | S12 attacker placement | `review_response/table13_attacker_placement.py` | `review_response/table13_attacker_placement_summary.json` |
