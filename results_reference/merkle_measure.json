@@ -1,0 +1,34 @@
+{
+ "1": {
+  "batch": 1,
+  "root_us": 0.08363999995708582,
+  "proof_us": 0.1642550000724441,
+  "verify_us": 0.057100000958598685,
+  "proof_bytes": 0,
+  "proof_hashes": 0
+ },
+ "5": {
+  "batch": 5,
+  "root_us": 3.103584999735176,
+  "proof_us": 2.9163099998186226,
+  "verify_us": 1.1843150014101411,
+  "proof_bytes": 96,
+  "proof_hashes": 3
+ },
+ "6": {
+  "batch": 6,
+  "root_us": 2.9424200010907953,
+  "proof_us": 3.1929750002746005,
+  "verify_us": 1.1824100010926486,
+  "proof_bytes": 96,
+  "proof_hashes": 3
+ },
+ "30": {
+  "batch": 30,
+  "root_us": 12.26135000024442,
+  "proof_us": 12.566885000069306,
+  "verify_us": 1.91037999911714,
+  "proof_bytes": 160,
+  "proof_hashes": 5
+ }
+}

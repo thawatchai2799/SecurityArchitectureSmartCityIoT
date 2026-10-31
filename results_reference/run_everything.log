@@ -1,0 +1,391 @@
+[02:13:29] ================================================================================
+[02:13:29] run_everything.py started; seeds [42, 43, 44, 45, 46]; 6 protocols x 11 policies
+[02:13:30] preflight ok: cic2017, 5 capture days, packages present, results -> /home/claude/paper/work/results_reference
+[02:13:30] machine: {'python': '3.13.18', 'platform': 'Linux-6.18.44-fc-v185-x86_64-with-glibc2.39', 'cpu_count': 2, 'run_date': '2026-10-31 02:13'}
+[02:13:30] windows for seed 42: loading the 8 day files (1/5) ...
+[02:14:15] windows for seed 42: 800,000 flows, 40 windows, 5 districts (45 s)
+[02:14:15] windows for seed 43: loading the 8 day files (2/5) ...
+[02:14:30] ================================================================================
+[02:14:30] run_everything.py started; seeds [42, 43, 44, 45, 46]; 6 protocols x 11 policies
+[02:14:31] preflight ok: cic2017, 5 capture days, packages present, results -> /home/claude/paper/work/results_reference
+[02:14:31] machine: {'python': '3.13.18', 'platform': 'Linux-6.18.44-fc-v185-x86_64-with-glibc2.39', 'cpu_count': 2, 'run_date': '2026-10-31 02:14'}
+[02:14:31] windows for seed 42: cached
+[02:14:31] windows for seed 43: loading the 8 day files (1/4) ...
+[02:15:17] windows for seed 43: 800,000 flows, 40 windows, 5 districts (46 s)
+[02:15:17] windows for seed 44: loading the 8 day files (2/4) ...
+[02:16:00] windows for seed 44: 800,000 flows, 40 windows, 5 districts (43 s)
+[02:16:00] windows for seed 45: loading the 8 day files (3/4) ...
+[02:16:43] windows for seed 45: 800,000 flows, 40 windows, 5 districts (43 s)
+[02:16:43] windows for seed 46: loading the 8 day files (4/4) ...
+[02:17:25] windows for seed 46: 800,000 flows, 40 windows, 5 districts (42 s)
+[02:17:25] replays: 90 to run, 240 already done, 2 worker(s)
+[02:17:25] first estimate (reference machine, 2 worker(s)): about 0:45:02 -> finish around 03:02 on Sat 31 Oct; this will re-calibrate as replays complete
+[02:17:55] progress 240/330 =  72.7 % | elapsed 0:00:30 | remaining about 0:44:32 | finish around 03:02 on Sat 31 Oct
+[02:18:25] progress 240/330 =  72.7 % | elapsed 0:01:00 | remaining about 0:44:02 | finish around 03:02 on Sat 31 Oct
+[02:18:55] progress 240/330 =  72.7 % | elapsed 0:01:30 | remaining about 0:43:32 | finish around 03:02 on Sat 31 Oct
+[02:19:25] progress 240/330 =  72.7 % | elapsed 0:02:00 | remaining about 0:43:02 | finish around 03:02 on Sat 31 Oct
+[02:19:55] progress 240/330 =  72.7 % | elapsed 0:02:30 | remaining about 0:42:32 | finish around 03:02 on Sat 31 Oct
+[02:20:19] done    tree_local kswin    seed 43 in 0:02:53
+[02:20:19] progress 241/330 =  73.0 % | elapsed 0:02:54 | remaining about 0:45:15 | finish around 03:05 on Sat 31 Oct
+[02:20:37] done    tree_local kswin    seed 42 in 0:03:11
+[02:20:37] progress 242/330 =  73.3 % | elapsed 0:03:12 | remaining about 0:47:26 | finish around 03:08 on Sat 31 Oct
+[02:21:07] progress 242/330 =  73.3 % | elapsed 0:03:42 | remaining about 0:46:56 | finish around 03:08 on Sat 31 Oct
+[02:21:37] progress 242/330 =  73.3 % | elapsed 0:04:12 | remaining about 0:46:26 | finish around 03:08 on Sat 31 Oct
+[02:22:07] progress 242/330 =  73.3 % | elapsed 0:04:42 | remaining about 0:45:56 | finish around 03:08 on Sat 31 Oct
+[02:22:37] progress 242/330 =  73.3 % | elapsed 0:05:12 | remaining about 0:45:26 | finish around 03:08 on Sat 31 Oct
+[02:23:07] progress 242/330 =  73.3 % | elapsed 0:05:42 | remaining about 0:44:56 | finish around 03:08 on Sat 31 Oct
+[02:23:27] done    tree_local kswin    seed 44 in 0:03:09
+[02:23:27] progress 243/330 =  73.6 % | elapsed 0:06:02 | remaining about 0:45:12 | finish around 03:08 on Sat 31 Oct
+[02:23:57] progress 243/330 =  73.6 % | elapsed 0:06:32 | remaining about 0:44:42 | finish around 03:08 on Sat 31 Oct
+[02:24:03] done    tree_local kswin    seed 45 in 0:03:25
+[02:24:03] progress 244/330 =  73.9 % | elapsed 0:06:38 | remaining about 0:46:03 | finish around 03:10 on Sat 31 Oct
+[02:24:33] progress 244/330 =  73.9 % | elapsed 0:07:08 | remaining about 0:45:33 | finish around 03:10 on Sat 31 Oct
+[02:25:03] progress 244/330 =  73.9 % | elapsed 0:07:38 | remaining about 0:45:03 | finish around 03:10 on Sat 31 Oct
+[02:25:33] progress 244/330 =  73.9 % | elapsed 0:08:08 | remaining about 0:44:33 | finish around 03:10 on Sat 31 Oct
+[02:26:03] progress 244/330 =  73.9 % | elapsed 0:08:38 | remaining about 0:44:03 | finish around 03:10 on Sat 31 Oct
+[02:26:23] done    tree_local kswin    seed 46 in 0:02:56
+[02:26:23] progress 245/330 =  74.2 % | elapsed 0:08:58 | remaining about 0:42:57 | finish around 03:09 on Sat 31 Oct
+[02:26:53] progress 245/330 =  74.2 % | elapsed 0:09:28 | remaining about 0:42:27 | finish around 03:09 on Sat 31 Oct
+[02:27:03] done    tree_cap   kswin    seed 42 in 0:03:00
+[02:27:03] progress 246/330 =  74.5 % | elapsed 0:09:38 | remaining about 0:42:38 | finish around 03:09 on Sat 31 Oct
+[02:27:33] progress 246/330 =  74.5 % | elapsed 0:10:08 | remaining about 0:42:08 | finish around 03:09 on Sat 31 Oct
+[02:28:03] progress 246/330 =  74.5 % | elapsed 0:10:38 | remaining about 0:41:38 | finish around 03:09 on Sat 31 Oct
+[02:28:33] progress 246/330 =  74.5 % | elapsed 0:11:08 | remaining about 0:41:08 | finish around 03:09 on Sat 31 Oct
+[02:29:03] done    tree_cap   kswin    seed 43 in 0:02:39
+[02:29:03] progress 247/330 =  74.8 % | elapsed 0:11:38 | remaining about 0:40:00 | finish around 03:09 on Sat 31 Oct
+[02:29:33] progress 247/330 =  74.8 % | elapsed 0:12:08 | remaining about 0:39:30 | finish around 03:09 on Sat 31 Oct
+[02:29:45] done    tree_cap   kswin    seed 44 in 0:02:42
+[02:29:45] progress 248/330 =  75.2 % | elapsed 0:12:20 | remaining about 0:38:57 | finish around 03:08 on Sat 31 Oct
+[02:30:15] progress 248/330 =  75.2 % | elapsed 0:12:50 | remaining about 0:38:27 | finish around 03:08 on Sat 31 Oct
+[02:30:45] progress 248/330 =  75.2 % | elapsed 0:13:20 | remaining about 0:37:57 | finish around 03:08 on Sat 31 Oct
+[02:31:15] progress 248/330 =  75.2 % | elapsed 0:13:50 | remaining about 0:37:27 | finish around 03:08 on Sat 31 Oct
+[02:31:45] progress 248/330 =  75.2 % | elapsed 0:14:20 | remaining about 0:36:57 | finish around 03:08 on Sat 31 Oct
+[02:31:53] done    tree_cap   kswin    seed 45 in 0:02:52
+[02:31:53] progress 249/330 =  75.5 % | elapsed 0:14:28 | remaining about 0:36:51 | finish around 03:08 on Sat 31 Oct
+[02:32:23] progress 249/330 =  75.5 % | elapsed 0:14:58 | remaining about 0:36:21 | finish around 03:08 on Sat 31 Oct
+[02:32:29] done    tree_cap   kswin    seed 46 in 0:02:44
+[02:32:29] progress 250/330 =  75.8 % | elapsed 0:15:04 | remaining about 0:36:03 | finish around 03:08 on Sat 31 Oct
+[02:32:59] progress 250/330 =  75.8 % | elapsed 0:15:34 | remaining about 0:35:33 | finish around 03:08 on Sat 31 Oct
+[02:33:07] done    tree_local adwin    seed 42 in 0:01:13
+[02:33:07] progress 251/330 =  76.1 % | elapsed 0:15:42 | remaining about 0:33:34 | finish around 03:06 on Sat 31 Oct
+[02:33:37] progress 251/330 =  76.1 % | elapsed 0:16:12 | remaining about 0:33:04 | finish around 03:06 on Sat 31 Oct
+[02:34:07] progress 251/330 =  76.1 % | elapsed 0:16:42 | remaining about 0:32:34 | finish around 03:06 on Sat 31 Oct
+[02:34:21] done    tree_local adwin    seed 43 in 0:01:14
+[02:34:21] progress 252/330 =  76.4 % | elapsed 0:16:56 | remaining about 0:30:46 | finish around 03:05 on Sat 31 Oct
+[02:34:51] progress 252/330 =  76.4 % | elapsed 0:17:26 | remaining about 0:30:16 | finish around 03:05 on Sat 31 Oct
+[02:35:21] progress 252/330 =  76.4 % | elapsed 0:17:56 | remaining about 0:29:46 | finish around 03:05 on Sat 31 Oct
+[02:35:51] progress 252/330 =  76.4 % | elapsed 0:18:26 | remaining about 0:29:16 | finish around 03:05 on Sat 31 Oct
+[02:36:21] progress 252/330 =  76.4 % | elapsed 0:18:56 | remaining about 0:28:46 | finish around 03:05 on Sat 31 Oct
+[02:36:51] progress 252/330 =  76.4 % | elapsed 0:19:26 | remaining about 0:28:16 | finish around 03:05 on Sat 31 Oct
+[02:36:55] done    tree_local ddm      seed 42 in 0:04:26
+[02:36:55] progress 253/330 =  76.7 % | elapsed 0:19:30 | remaining about 0:31:19 | finish around 03:08 on Sat 31 Oct
+[02:37:25] progress 253/330 =  76.7 % | elapsed 0:20:00 | remaining about 0:30:49 | finish around 03:08 on Sat 31 Oct
+[02:37:55] progress 253/330 =  76.7 % | elapsed 0:20:30 | remaining about 0:30:19 | finish around 03:08 on Sat 31 Oct
+[02:38:07] done    tree_local adwin    seed 44 in 0:01:13
+[02:38:07] progress 254/330 =  77.0 % | elapsed 0:20:42 | remaining about 0:28:37 | finish around 03:06 on Sat 31 Oct
+[02:38:37] progress 254/330 =  77.0 % | elapsed 0:21:12 | remaining about 0:28:07 | finish around 03:06 on Sat 31 Oct
+[02:38:43] done    tree_local ddm      seed 43 in 0:04:24
+[02:38:43] progress 255/330 =  77.3 % | elapsed 0:21:18 | remaining about 0:30:38 | finish around 03:09 on Sat 31 Oct
+[02:39:13] progress 255/330 =  77.3 % | elapsed 0:21:48 | remaining about 0:30:08 | finish around 03:09 on Sat 31 Oct
+[02:39:43] progress 255/330 =  77.3 % | elapsed 0:22:18 | remaining about 0:29:38 | finish around 03:09 on Sat 31 Oct
+[02:39:55] done    tree_local adwin    seed 45 in 0:01:11
+[02:39:55] progress 256/330 =  77.6 % | elapsed 0:22:30 | remaining about 0:28:01 | finish around 03:07 on Sat 31 Oct
+[02:40:25] progress 256/330 =  77.6 % | elapsed 0:23:00 | remaining about 0:27:31 | finish around 03:07 on Sat 31 Oct
+[02:40:55] progress 256/330 =  77.6 % | elapsed 0:23:30 | remaining about 0:27:01 | finish around 03:07 on Sat 31 Oct
+[02:41:25] progress 256/330 =  77.6 % | elapsed 0:24:00 | remaining about 0:26:31 | finish around 03:07 on Sat 31 Oct
+[02:41:55] progress 256/330 =  77.6 % | elapsed 0:24:30 | remaining about 0:26:01 | finish around 03:07 on Sat 31 Oct
+[02:42:07] done    tree_local ddm      seed 44 in 0:04:00
+[02:42:07] progress 257/330 =  77.9 % | elapsed 0:24:42 | remaining about 0:27:39 | finish around 03:09 on Sat 31 Oct
+[02:42:37] progress 257/330 =  77.9 % | elapsed 0:25:12 | remaining about 0:27:09 | finish around 03:09 on Sat 31 Oct
+[02:43:07] progress 257/330 =  77.9 % | elapsed 0:25:42 | remaining about 0:26:39 | finish around 03:09 on Sat 31 Oct
+[02:43:19] done    tree_local adwin    seed 46 in 0:01:11
+[02:43:19] progress 258/330 =  78.2 % | elapsed 0:25:54 | remaining about 0:25:09 | finish around 03:08 on Sat 31 Oct
+[02:43:49] progress 258/330 =  78.2 % | elapsed 0:26:24 | remaining about 0:24:39 | finish around 03:08 on Sat 31 Oct
+[02:44:19] done    tree_local ddm      seed 45 in 0:04:24
+[02:44:19] progress 259/330 =  78.5 % | elapsed 0:26:54 | remaining about 0:26:12 | finish around 03:10 on Sat 31 Oct
+[02:44:49] progress 259/330 =  78.5 % | elapsed 0:27:24 | remaining about 0:25:42 | finish around 03:10 on Sat 31 Oct
+[02:45:19] progress 259/330 =  78.5 % | elapsed 0:27:54 | remaining about 0:25:12 | finish around 03:10 on Sat 31 Oct
+[02:45:29] done    tree_cap   adwin    seed 42 in 0:01:11
+[02:45:29] progress 260/330 =  78.8 % | elapsed 0:28:04 | remaining about 0:23:52 | finish around 03:09 on Sat 31 Oct
+[02:45:59] progress 260/330 =  78.8 % | elapsed 0:28:34 | remaining about 0:23:22 | finish around 03:09 on Sat 31 Oct
+[02:46:29] progress 260/330 =  78.8 % | elapsed 0:29:04 | remaining about 0:22:52 | finish around 03:09 on Sat 31 Oct
+[02:46:59] progress 260/330 =  78.8 % | elapsed 0:29:34 | remaining about 0:22:22 | finish around 03:09 on Sat 31 Oct
+[02:47:29] progress 260/330 =  78.8 % | elapsed 0:30:04 | remaining about 0:21:52 | finish around 03:09 on Sat 31 Oct
+[02:47:43] done    tree_local ddm      seed 46 in 0:04:25
+[02:47:43] progress 261/330 =  79.1 % | elapsed 0:30:18 | remaining about 0:23:29 | finish around 03:11 on Sat 31 Oct
+[02:48:13] progress 261/330 =  79.1 % | elapsed 0:30:48 | remaining about 0:22:59 | finish around 03:11 on Sat 31 Oct
+[02:48:43] progress 261/330 =  79.1 % | elapsed 0:31:18 | remaining about 0:22:29 | finish around 03:11 on Sat 31 Oct
+[02:48:57] done    tree_cap   adwin    seed 43 in 0:01:14
+[02:48:57] progress 262/330 =  79.4 % | elapsed 0:31:32 | remaining about 0:21:11 | finish around 03:10 on Sat 31 Oct
+[02:49:27] progress 262/330 =  79.4 % | elapsed 0:32:02 | remaining about 0:20:41 | finish around 03:10 on Sat 31 Oct
+[02:49:53] done    tree_cap   ddm      seed 42 in 0:04:23
+[02:49:53] progress 263/330 =  79.7 % | elapsed 0:32:28 | remaining about 0:21:57 | finish around 03:11 on Sat 31 Oct
+[02:50:23] progress 263/330 =  79.7 % | elapsed 0:32:58 | remaining about 0:21:27 | finish around 03:11 on Sat 31 Oct
+[02:50:53] progress 263/330 =  79.7 % | elapsed 0:33:28 | remaining about 0:20:57 | finish around 03:11 on Sat 31 Oct
+[02:51:03] done    tree_cap   adwin    seed 44 in 0:01:10
+[02:51:03] progress 264/330 =  80.0 % | elapsed 0:33:38 | remaining about 0:19:44 | finish around 03:10 on Sat 31 Oct
+[02:51:33] progress 264/330 =  80.0 % | elapsed 0:34:09 | remaining about 0:19:14 | finish around 03:10 on Sat 31 Oct
+[02:52:03] progress 264/330 =  80.0 % | elapsed 0:34:39 | remaining about 0:18:44 | finish around 03:10 on Sat 31 Oct
+[02:52:34] progress 264/330 =  80.0 % | elapsed 0:35:09 | remaining about 0:18:14 | finish around 03:10 on Sat 31 Oct
+[02:53:04] progress 264/330 =  80.0 % | elapsed 0:35:39 | remaining about 0:17:44 | finish around 03:10 on Sat 31 Oct
+[02:53:12] done    tree_cap   ddm      seed 43 in 0:04:14
+[02:53:12] progress 265/330 =  80.3 % | elapsed 0:35:47 | remaining about 0:19:02 | finish around 03:12 on Sat 31 Oct
+[02:53:42] progress 265/330 =  80.3 % | elapsed 0:36:17 | remaining about 0:18:32 | finish around 03:12 on Sat 31 Oct
+[02:54:12] progress 265/330 =  80.3 % | elapsed 0:36:47 | remaining about 0:18:02 | finish around 03:12 on Sat 31 Oct
+[02:54:24] done    tree_cap   adwin    seed 45 in 0:01:13
+[02:54:24] progress 266/330 =  80.6 % | elapsed 0:36:59 | remaining about 0:16:53 | finish around 03:11 on Sat 31 Oct
+[02:54:54] progress 266/330 =  80.6 % | elapsed 0:37:29 | remaining about 0:16:23 | finish around 03:11 on Sat 31 Oct
+[02:55:06] done    tree_cap   ddm      seed 44 in 0:04:02
+[02:55:06] progress 267/330 =  80.9 % | elapsed 0:37:41 | remaining about 0:17:22 | finish around 03:12 on Sat 31 Oct
+[02:55:36] progress 267/330 =  80.9 % | elapsed 0:38:11 | remaining about 0:16:52 | finish around 03:12 on Sat 31 Oct
+[02:56:06] progress 267/330 =  80.9 % | elapsed 0:38:41 | remaining about 0:16:22 | finish around 03:12 on Sat 31 Oct
+[02:56:18] done    tree_cap   adwin    seed 46 in 0:01:11
+[02:56:18] progress 268/330 =  81.2 % | elapsed 0:38:53 | remaining about 0:15:14 | finish around 03:11 on Sat 31 Oct
+[02:56:48] progress 268/330 =  81.2 % | elapsed 0:39:23 | remaining about 0:14:44 | finish around 03:11 on Sat 31 Oct
+[02:57:18] progress 268/330 =  81.2 % | elapsed 0:39:53 | remaining about 0:14:14 | finish around 03:11 on Sat 31 Oct
+[02:57:48] progress 268/330 =  81.2 % | elapsed 0:40:23 | remaining about 0:13:44 | finish around 03:11 on Sat 31 Oct
+[02:58:18] progress 268/330 =  81.2 % | elapsed 0:40:53 | remaining about 0:13:14 | finish around 03:11 on Sat 31 Oct
+[02:58:48] progress 268/330 =  81.2 % | elapsed 0:41:23 | remaining about 0:12:44 | finish around 03:11 on Sat 31 Oct
+[02:58:52] done    tree_cap   ddm      seed 45 in 0:04:27
+[02:58:52] progress 269/330 =  81.5 % | elapsed 0:41:27 | remaining about 0:14:03 | finish around 03:12 on Sat 31 Oct
+[02:59:18] done    fedavg     adwin    seed 42 in 0:00:26
+[02:59:18] progress 270/330 =  81.8 % | elapsed 0:41:53 | remaining about 0:13:31 | finish around 03:12 on Sat 31 Oct
+[02:59:44] done    fedavg     ddm      seed 42 in 0:00:26
+[02:59:44] progress 271/330 =  82.1 % | elapsed 0:42:19 | remaining about 0:12:59 | finish around 03:12 on Sat 31 Oct
+[03:00:08] done    fedavg     adwin    seed 43 in 0:00:24
+[03:00:08] progress 272/330 =  82.4 % | elapsed 0:42:43 | remaining about 0:12:28 | finish around 03:12 on Sat 31 Oct
+[03:00:34] done    fedavg     ddm      seed 43 in 0:00:26
+[03:00:34] progress 273/330 =  82.7 % | elapsed 0:43:09 | remaining about 0:11:57 | finish around 03:12 on Sat 31 Oct
+[03:00:42] done    tree_cap   ddm      seed 46 in 0:04:25
+[03:00:42] progress 274/330 =  83.0 % | elapsed 0:43:17 | remaining about 0:13:04 | finish around 03:13 on Sat 31 Oct
+[03:00:58] done    fedavg     adwin    seed 44 in 0:00:24
+[03:00:58] progress 275/330 =  83.3 % | elapsed 0:43:33 | remaining about 0:12:41 | finish around 03:13 on Sat 31 Oct
+[03:01:08] done    fedavg     ddm      seed 44 in 0:00:26
+[03:01:08] progress 276/330 =  83.6 % | elapsed 0:43:43 | remaining about 0:12:25 | finish around 03:13 on Sat 31 Oct
+[03:01:20] done    fedavg     adwin    seed 45 in 0:00:23
+[03:01:20] progress 277/330 =  83.9 % | elapsed 0:43:55 | remaining about 0:12:06 | finish around 03:13 on Sat 31 Oct
+[03:01:34] done    fedavg     ddm      seed 45 in 0:00:26
+[03:01:34] progress 278/330 =  84.2 % | elapsed 0:44:09 | remaining about 0:11:46 | finish around 03:13 on Sat 31 Oct
+[03:01:46] done    fedavg     adwin    seed 46 in 0:00:25
+[03:01:46] progress 279/330 =  84.5 % | elapsed 0:44:21 | remaining about 0:11:28 | finish around 03:13 on Sat 31 Oct
+[03:02:00] done    fedavg     ddm      seed 46 in 0:00:25
+[03:02:00] progress 280/330 =  84.8 % | elapsed 0:44:35 | remaining about 0:11:08 | finish around 03:13 on Sat 31 Oct
+[03:02:12] done    fedavg     kswin    seed 42 in 0:00:26
+[03:02:12] progress 281/330 =  85.2 % | elapsed 0:44:47 | remaining about 0:10:51 | finish around 03:13 on Sat 31 Oct
+[03:02:24] done    lpra       adwin    seed 42 in 0:00:25
+[03:02:24] progress 282/330 =  85.5 % | elapsed 0:44:59 | remaining about 0:10:34 | finish around 03:12 on Sat 31 Oct
+[03:02:38] done    lpra       ddm      seed 42 in 0:00:27
+[03:02:38] progress 283/330 =  85.8 % | elapsed 0:45:13 | remaining about 0:10:16 | finish around 03:12 on Sat 31 Oct
+[03:02:52] done    fedavg     kswin    seed 43 in 0:00:27
+[03:02:52] progress 284/330 =  86.1 % | elapsed 0:45:27 | remaining about 0:09:58 | finish around 03:12 on Sat 31 Oct
+[03:03:02] done    lpra       adwin    seed 43 in 0:00:24
+[03:03:02] progress 285/330 =  86.4 % | elapsed 0:45:37 | remaining about 0:09:43 | finish around 03:12 on Sat 31 Oct
+[03:03:16] done    lpra       ddm      seed 43 in 0:00:26
+[03:03:16] progress 286/330 =  86.7 % | elapsed 0:45:51 | remaining about 0:09:25 | finish around 03:12 on Sat 31 Oct
+[03:03:30] done    fedavg     kswin    seed 44 in 0:00:27
+[03:03:30] progress 287/330 =  87.0 % | elapsed 0:46:05 | remaining about 0:09:07 | finish around 03:12 on Sat 31 Oct
+[03:03:42] done    lpra       adwin    seed 44 in 0:00:25
+[03:03:42] progress 288/330 =  87.3 % | elapsed 0:46:17 | remaining about 0:08:50 | finish around 03:12 on Sat 31 Oct
+[03:03:56] done    lpra       ddm      seed 44 in 0:00:26
+[03:03:56] progress 289/330 =  87.6 % | elapsed 0:46:31 | remaining about 0:08:32 | finish around 03:12 on Sat 31 Oct
+[03:04:08] done    fedavg     kswin    seed 45 in 0:00:27
+[03:04:08] progress 290/330 =  87.9 % | elapsed 0:46:43 | remaining about 0:08:16 | finish around 03:12 on Sat 31 Oct
+[03:04:20] done    lpra       adwin    seed 45 in 0:00:24
+[03:04:20] progress 291/330 =  88.2 % | elapsed 0:46:55 | remaining about 0:07:59 | finish around 03:12 on Sat 31 Oct
+[03:04:32] done    lpra       ddm      seed 45 in 0:00:24
+[03:04:32] progress 292/330 =  88.5 % | elapsed 0:47:07 | remaining about 0:07:42 | finish around 03:12 on Sat 31 Oct
+[03:04:46] done    fedavg     kswin    seed 46 in 0:00:26
+[03:04:46] progress 293/330 =  88.8 % | elapsed 0:47:21 | remaining about 0:07:24 | finish around 03:12 on Sat 31 Oct
+[03:04:56] done    lpra       adwin    seed 46 in 0:00:23
+[03:04:56] progress 294/330 =  89.1 % | elapsed 0:47:31 | remaining about 0:07:09 | finish around 03:12 on Sat 31 Oct
+[03:05:12] done    lpra       ddm      seed 46 in 0:00:26
+[03:05:12] progress 295/330 =  89.4 % | elapsed 0:47:47 | remaining about 0:06:49 | finish around 03:12 on Sat 31 Oct
+[03:05:22] done    lpra       kswin    seed 42 in 0:00:25
+[03:05:22] progress 296/330 =  89.7 % | elapsed 0:47:57 | remaining about 0:06:35 | finish around 03:11 on Sat 31 Oct
+[03:05:38] done    lpra       kswin    seed 43 in 0:00:27
+[03:05:38] progress 297/330 =  90.0 % | elapsed 0:48:13 | remaining about 0:06:16 | finish around 03:11 on Sat 31 Oct
+[03:05:48] done    lpra       kswin    seed 44 in 0:00:26
+[03:05:48] progress 298/330 =  90.3 % | elapsed 0:48:23 | remaining about 0:06:03 | finish around 03:11 on Sat 31 Oct
+[03:06:04] done    lpra       kswin    seed 45 in 0:00:25
+[03:06:04] progress 299/330 =  90.6 % | elapsed 0:48:39 | remaining about 0:05:44 | finish around 03:11 on Sat 31 Oct
+[03:06:12] done    lpra       kswin    seed 46 in 0:00:25
+[03:06:12] progress 300/330 =  90.9 % | elapsed 0:48:47 | remaining about 0:05:32 | finish around 03:11 on Sat 31 Oct
+[03:06:26] done    central    kswin    seed 42 in 0:00:22
+[03:06:26] progress 301/330 =  91.2 % | elapsed 0:49:01 | remaining about 0:05:14 | finish around 03:11 on Sat 31 Oct
+[03:06:34] done    central    kswin    seed 43 in 0:00:21
+[03:06:34] progress 302/330 =  91.5 % | elapsed 0:49:09 | remaining about 0:05:02 | finish around 03:11 on Sat 31 Oct
+[03:06:48] done    central    kswin    seed 44 in 0:00:23
+[03:06:48] progress 303/330 =  91.8 % | elapsed 0:49:23 | remaining about 0:04:45 | finish around 03:11 on Sat 31 Oct
+[03:06:56] done    central    kswin    seed 45 in 0:00:22
+[03:06:56] progress 304/330 =  92.1 % | elapsed 0:49:31 | remaining about 0:04:33 | finish around 03:11 on Sat 31 Oct
+[03:07:12] done    central    kswin    seed 46 in 0:00:22
+[03:07:12] progress 305/330 =  92.4 % | elapsed 0:49:47 | remaining about 0:04:14 | finish around 03:11 on Sat 31 Oct
+[03:07:18] done    central    adwin    seed 42 in 0:00:21
+[03:07:18] progress 306/330 =  92.7 % | elapsed 0:49:53 | remaining about 0:04:04 | finish around 03:11 on Sat 31 Oct
+[03:07:32] done    central    ddm      seed 42 in 0:00:21
+[03:07:32] progress 307/330 =  93.0 % | elapsed 0:50:07 | remaining about 0:03:47 | finish around 03:11 on Sat 31 Oct
+[03:07:38] done    central    adwin    seed 43 in 0:00:21
+[03:07:38] progress 308/330 =  93.3 % | elapsed 0:50:13 | remaining about 0:03:37 | finish around 03:11 on Sat 31 Oct
+[03:07:54] done    central    ddm      seed 43 in 0:00:21
+[03:07:54] progress 309/330 =  93.6 % | elapsed 0:50:29 | remaining about 0:03:18 | finish around 03:11 on Sat 31 Oct
+[03:07:58] done    central    adwin    seed 44 in 0:00:21
+[03:07:58] progress 310/330 =  93.9 % | elapsed 0:50:33 | remaining about 0:03:11 | finish around 03:11 on Sat 31 Oct
+[03:08:14] done    central    ddm      seed 44 in 0:00:21
+[03:08:14] progress 311/330 =  94.2 % | elapsed 0:50:49 | remaining about 0:02:51 | finish around 03:11 on Sat 31 Oct
+[03:08:20] done    central    adwin    seed 45 in 0:00:21
+[03:08:20] progress 312/330 =  94.5 % | elapsed 0:50:55 | remaining about 0:02:42 | finish around 03:11 on Sat 31 Oct
+[03:08:36] done    central    ddm      seed 45 in 0:00:21
+[03:08:36] progress 313/330 =  94.8 % | elapsed 0:51:11 | remaining about 0:02:23 | finish around 03:10 on Sat 31 Oct
+[03:08:42] done    central    adwin    seed 46 in 0:00:21
+[03:08:42] progress 314/330 =  95.2 % | elapsed 0:51:17 | remaining about 0:02:13 | finish around 03:10 on Sat 31 Oct
+[03:08:56] done    mlp_local  adwin    seed 42 in 0:00:15
+[03:08:56] progress 315/330 =  95.5 % | elapsed 0:51:31 | remaining about 0:01:58 | finish around 03:10 on Sat 31 Oct
+[03:08:58] done    central    ddm      seed 46 in 0:00:23
+[03:08:58] progress 316/330 =  95.8 % | elapsed 0:51:33 | remaining about 0:01:54 | finish around 03:10 on Sat 31 Oct
+[03:09:10] done    mlp_local  kswin    seed 42 in 0:00:14
+[03:09:10] progress 317/330 =  96.1 % | elapsed 0:51:45 | remaining about 0:01:40 | finish around 03:10 on Sat 31 Oct
+[03:09:10] done    mlp_local  ddm      seed 42 in 0:00:13
+[03:09:10] progress 318/330 =  96.4 % | elapsed 0:51:45 | remaining about 0:01:38 | finish around 03:10 on Sat 31 Oct
+[03:09:22] done    mlp_local  adwin    seed 43 in 0:00:13
+[03:09:22] progress 319/330 =  96.7 % | elapsed 0:51:57 | remaining about 0:01:24 | finish around 03:10 on Sat 31 Oct
+[03:09:24] done    mlp_local  kswin    seed 43 in 0:00:13
+[03:09:24] progress 320/330 =  97.0 % | elapsed 0:51:59 | remaining about 0:01:21 | finish around 03:10 on Sat 31 Oct
+[03:09:36] done    mlp_local  ddm      seed 43 in 0:00:14
+[03:09:36] progress 321/330 =  97.3 % | elapsed 0:52:11 | remaining about 0:01:07 | finish around 03:10 on Sat 31 Oct
+[03:09:38] done    mlp_local  adwin    seed 44 in 0:00:13
+[03:09:38] progress 322/330 =  97.6 % | elapsed 0:52:13 | remaining about 0:01:03 | finish around 03:10 on Sat 31 Oct
+[03:09:52] done    mlp_local  kswin    seed 44 in 0:00:15
+[03:09:52] progress 323/330 =  97.9 % | elapsed 0:52:27 | remaining about 0:00:49 | finish around 03:10 on Sat 31 Oct
+[03:09:52] done    mlp_local  ddm      seed 44 in 0:00:14
+[03:09:52] progress 324/330 =  98.2 % | elapsed 0:52:27 | remaining about 0:00:47 | finish around 03:10 on Sat 31 Oct
+[03:10:04] done    mlp_local  adwin    seed 45 in 0:00:13
+[03:10:04] progress 325/330 =  98.5 % | elapsed 0:52:39 | remaining about 0:00:33 | finish around 03:10 on Sat 31 Oct
+[03:10:06] done    mlp_local  kswin    seed 45 in 0:00:15
+[03:10:06] progress 326/330 =  98.8 % | elapsed 0:52:41 | remaining about 0:00:30 | finish around 03:10 on Sat 31 Oct
+[03:10:18] done    mlp_local  ddm      seed 45 in 0:00:13
+[03:10:18] progress 327/330 =  99.1 % | elapsed 0:52:53 | remaining about 0:00:17 | finish around 03:10 on Sat 31 Oct
+[03:10:18] done    mlp_local  adwin    seed 46 in 0:00:13
+[03:10:18] progress 328/330 =  99.4 % | elapsed 0:52:53 | remaining about 0:00:15 | finish around 03:10 on Sat 31 Oct
+[03:10:30] done    mlp_local  ddm      seed 46 in 0:00:12
+[03:10:30] progress 329/330 =  99.7 % | elapsed 0:53:05 | remaining about 0:00:01 | finish around 03:10 on Sat 31 Oct
+[03:10:32] done    mlp_local  kswin    seed 46 in 0:00:14
+[03:10:32] progress 330/330 = 100.0 % | elapsed 0:53:07 | remaining about 0:00:00 | finish around 03:10 on Sat 31 Oct
+[03:10:32] replays finished: 90 ok, 0 failed, 0:53:07 elapsed
+[03:10:32] running: /usr/local/bin/python3 /home/claude/paper/work/make_sustain_figures.py
+[03:10:36]         return self.tick_values(vmin, vmax)
+[03:10:36]                ~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+[03:10:36]       File "/usr/local/lib/python3.13/site-packages/matplotlib/ticker.py", line 2492, in tick_values
+[03:10:36]         raise ValueError(
+[03:10:36]             "Data cannot be log-scaled because all values are <= 0.")
+[03:10:36]     ValueError: Data cannot be log-scaled because all values are <= 0.
+[03:10:36] FAILED (exit 1): /usr/local/bin/python3 /home/claude/paper/work/make_sustain_figures.py
+[03:10:36] FINISHED WITH ERRORS after 0:56:05; see the messages above and /home/claude/paper/work/results_reference/run_everything.log
+[15:47:39] ================================================================================
+[15:47:39] run_everything.py started; seeds [42, 43, 44, 45, 46]; 6 protocols x 12 policies
+[15:47:40] preflight ok: cic2017, 5 capture days, packages present, results -> /home/claude/paper/work/results_reference
+[15:47:40] machine: {'python': '3.13.18', 'platform': 'Linux-6.18.44-fc-v185-x86_64-with-glibc2.39', 'cpu_count': 2, 'run_date': '2026-10-31 15:47'}
+[15:47:40] windows for seed 42: cached
+[15:47:40] windows for seed 43: cached
+[15:47:40] windows for seed 44: cached
+[15:47:40] windows for seed 45: cached
+[15:47:40] windows for seed 46: cached
+[15:47:40] replays: 30 to run, 330 already done, 2 worker(s)
+[15:47:40] first estimate (reference machine, 2 worker(s)): about 0:22:00 -> finish around 16:09 on Sat 31 Oct; this will re-calibrate as replays complete
+[15:48:10] progress 330/360 =  91.7 % | elapsed 0:00:30 | remaining about 0:21:30 | finish around 16:09 on Sat 31 Oct
+[15:48:40] progress 330/360 =  91.7 % | elapsed 0:01:00 | remaining about 0:21:00 | finish around 16:09 on Sat 31 Oct
+[15:49:10] progress 330/360 =  91.7 % | elapsed 0:01:30 | remaining about 0:20:30 | finish around 16:09 on Sat 31 Oct
+[15:49:40] progress 330/360 =  91.7 % | elapsed 0:02:00 | remaining about 0:20:00 | finish around 16:09 on Sat 31 Oct
+[15:50:08] done    tree_local drift_fb seed 42 in 0:02:28
+[15:50:08] progress 331/360 =  91.9 % | elapsed 0:02:28 | remaining about 0:16:06 | finish around 16:06 on Sat 31 Oct
+[15:50:10] done    tree_local drift_fb seed 43 in 0:02:29
+[15:50:10] progress 332/360 =  92.2 % | elapsed 0:02:30 | remaining about 0:16:08 | finish around 16:06 on Sat 31 Oct
+[15:50:40] progress 332/360 =  92.2 % | elapsed 0:03:00 | remaining about 0:15:38 | finish around 16:06 on Sat 31 Oct
+[15:51:10] progress 332/360 =  92.2 % | elapsed 0:03:30 | remaining about 0:15:08 | finish around 16:06 on Sat 31 Oct
+[15:51:40] progress 332/360 =  92.2 % | elapsed 0:04:00 | remaining about 0:14:38 | finish around 16:06 on Sat 31 Oct
+[15:52:10] progress 332/360 =  92.2 % | elapsed 0:04:30 | remaining about 0:14:08 | finish around 16:06 on Sat 31 Oct
+[15:52:38] done    tree_local drift_fb seed 44 in 0:02:29
+[15:52:38] progress 333/360 =  92.5 % | elapsed 0:04:58 | remaining about 0:13:43 | finish around 16:06 on Sat 31 Oct
+[15:52:40] done    tree_local drift_fb seed 45 in 0:02:31
+[15:52:40] progress 334/360 =  92.8 % | elapsed 0:05:00 | remaining about 0:13:45 | finish around 16:06 on Sat 31 Oct
+[15:53:10] progress 334/360 =  92.8 % | elapsed 0:05:30 | remaining about 0:13:15 | finish around 16:06 on Sat 31 Oct
+[15:53:40] progress 334/360 =  92.8 % | elapsed 0:06:00 | remaining about 0:12:45 | finish around 16:06 on Sat 31 Oct
+[15:54:10] progress 334/360 =  92.8 % | elapsed 0:06:30 | remaining about 0:12:15 | finish around 16:06 on Sat 31 Oct
+[15:54:40] progress 334/360 =  92.8 % | elapsed 0:07:00 | remaining about 0:11:45 | finish around 16:06 on Sat 31 Oct
+[15:54:52] done    tree_cap   drift_fb seed 42 in 0:02:11
+[15:54:52] progress 335/360 =  93.1 % | elapsed 0:07:12 | remaining about 0:11:12 | finish around 16:06 on Sat 31 Oct
+[15:54:58] done    tree_local drift_fb seed 46 in 0:02:20
+[15:54:58] progress 336/360 =  93.3 % | elapsed 0:07:18 | remaining about 0:10:59 | finish around 16:05 on Sat 31 Oct
+[15:55:28] progress 336/360 =  93.3 % | elapsed 0:07:48 | remaining about 0:10:29 | finish around 16:05 on Sat 31 Oct
+[15:55:58] progress 336/360 =  93.3 % | elapsed 0:08:18 | remaining about 0:09:59 | finish around 16:05 on Sat 31 Oct
+[15:56:28] progress 336/360 =  93.3 % | elapsed 0:08:48 | remaining about 0:09:29 | finish around 16:05 on Sat 31 Oct
+[15:56:58] progress 336/360 =  93.3 % | elapsed 0:09:18 | remaining about 0:08:59 | finish around 16:05 on Sat 31 Oct
+[15:57:06] done    tree_cap   drift_fb seed 43 in 0:02:13
+[15:57:06] progress 337/360 =  93.6 % | elapsed 0:09:26 | remaining about 0:08:42 | finish around 16:05 on Sat 31 Oct
+[15:57:10] done    tree_cap   drift_fb seed 44 in 0:02:12
+[15:57:10] progress 338/360 =  93.9 % | elapsed 0:09:30 | remaining about 0:08:30 | finish around 16:05 on Sat 31 Oct
+[15:57:40] progress 338/360 =  93.9 % | elapsed 0:10:00 | remaining about 0:08:00 | finish around 16:05 on Sat 31 Oct
+[15:58:10] progress 338/360 =  93.9 % | elapsed 0:10:30 | remaining about 0:07:30 | finish around 16:05 on Sat 31 Oct
+[15:58:40] progress 338/360 =  93.9 % | elapsed 0:11:00 | remaining about 0:07:00 | finish around 16:05 on Sat 31 Oct
+[15:59:10] progress 338/360 =  93.9 % | elapsed 0:11:30 | remaining about 0:06:30 | finish around 16:05 on Sat 31 Oct
+[15:59:14] done    tree_cap   drift_fb seed 45 in 0:02:10
+[15:59:14] progress 339/360 =  94.2 % | elapsed 0:11:34 | remaining about 0:06:18 | finish around 16:05 on Sat 31 Oct
+[15:59:20] done    tree_cap   drift_fb seed 46 in 0:02:09
+[15:59:20] progress 340/360 =  94.4 % | elapsed 0:11:40 | remaining about 0:06:05 | finish around 16:05 on Sat 31 Oct
+[15:59:38] done    fedavg     drift_fb seed 42 in 0:00:24
+[15:59:38] progress 341/360 =  94.7 % | elapsed 0:11:58 | remaining about 0:05:33 | finish around 16:05 on Sat 31 Oct
+[15:59:46] done    fedavg     drift_fb seed 43 in 0:00:26
+[15:59:46] progress 342/360 =  95.0 % | elapsed 0:12:06 | remaining about 0:05:12 | finish around 16:04 on Sat 31 Oct
+[16:00:06] done    fedavg     drift_fb seed 44 in 0:00:28
+[16:00:06] progress 343/360 =  95.3 % | elapsed 0:12:26 | remaining about 0:04:42 | finish around 16:04 on Sat 31 Oct
+[16:00:12] done    fedavg     drift_fb seed 45 in 0:00:27
+[16:00:12] progress 344/360 =  95.6 % | elapsed 0:12:32 | remaining about 0:04:26 | finish around 16:04 on Sat 31 Oct
+[16:00:36] done    fedavg     drift_fb seed 46 in 0:00:29
+[16:00:36] progress 345/360 =  95.8 % | elapsed 0:12:56 | remaining about 0:03:54 | finish around 16:04 on Sat 31 Oct
+[16:00:38] done    lpra       drift_fb seed 42 in 0:00:25
+[16:00:38] progress 346/360 =  96.1 % | elapsed 0:12:58 | remaining about 0:03:42 | finish around 16:04 on Sat 31 Oct
+[16:01:02] done    lpra       drift_fb seed 43 in 0:00:27
+[16:01:02] progress 347/360 =  96.4 % | elapsed 0:13:22 | remaining about 0:03:09 | finish around 16:04 on Sat 31 Oct
+[16:01:04] done    lpra       drift_fb seed 44 in 0:00:26
+[16:01:04] progress 348/360 =  96.7 % | elapsed 0:13:24 | remaining about 0:02:59 | finish around 16:04 on Sat 31 Oct
+[16:01:30] done    lpra       drift_fb seed 45 in 0:00:27
+[16:01:30] progress 349/360 =  96.9 % | elapsed 0:13:50 | remaining about 0:02:25 | finish around 16:03 on Sat 31 Oct
+[16:01:30] done    lpra       drift_fb seed 46 in 0:00:27
+[16:01:30] progress 350/360 =  97.2 % | elapsed 0:13:50 | remaining about 0:02:18 | finish around 16:03 on Sat 31 Oct
+[16:01:52] done    central    drift_fb seed 43 in 0:00:22
+[16:01:52] progress 351/360 =  97.5 % | elapsed 0:14:12 | remaining about 0:01:48 | finish around 16:03 on Sat 31 Oct
+[16:01:54] done    central    drift_fb seed 42 in 0:00:23
+[16:01:54] progress 352/360 =  97.8 % | elapsed 0:14:14 | remaining about 0:01:40 | finish around 16:03 on Sat 31 Oct
+[16:02:16] done    central    drift_fb seed 44 in 0:00:24
+[16:02:16] progress 353/360 =  98.1 % | elapsed 0:14:36 | remaining about 0:01:12 | finish around 16:03 on Sat 31 Oct
+[16:02:18] done    central    drift_fb seed 45 in 0:00:25
+[16:02:18] progress 354/360 =  98.3 % | elapsed 0:14:38 | remaining about 0:01:05 | finish around 16:03 on Sat 31 Oct
+[16:02:34] done    mlp_local  drift_fb seed 42 in 0:00:15
+[16:02:34] progress 355/360 =  98.6 % | elapsed 0:14:54 | remaining about 0:00:46 | finish around 16:03 on Sat 31 Oct
+[16:02:40] done    central    drift_fb seed 46 in 0:00:24
+[16:02:40] progress 356/360 =  98.9 % | elapsed 0:15:00 | remaining about 0:00:35 | finish around 16:03 on Sat 31 Oct
+[16:02:48] done    mlp_local  drift_fb seed 43 in 0:00:14
+[16:02:48] progress 357/360 =  99.2 % | elapsed 0:15:08 | remaining about 0:00:24 | finish around 16:03 on Sat 31 Oct
+[16:02:54] done    mlp_local  drift_fb seed 44 in 0:00:15
+[16:02:54] progress 358/360 =  99.4 % | elapsed 0:15:14 | remaining about 0:00:16 | finish around 16:03 on Sat 31 Oct
+[16:03:02] done    mlp_local  drift_fb seed 45 in 0:00:15
+[16:03:02] progress 359/360 =  99.7 % | elapsed 0:15:22 | remaining about 0:00:05 | finish around 16:03 on Sat 31 Oct
+[16:03:10] done    mlp_local  drift_fb seed 46 in 0:00:15
+[16:03:10] progress 360/360 = 100.0 % | elapsed 0:15:30 | remaining about 0:00:00 | finish around 16:03 on Sat 31 Oct
+[16:03:11] replays finished: 30 ok, 0 failed, 0:15:30 elapsed
+[16:03:11] running: /usr/local/bin/python3 /home/claude/paper/work/make_sustain_figures.py
+[16:03:17]       wrote figS1_f1_timeline
+[16:03:17]       wrote figS2_pareto
+[16:03:17]       wrote figS3_energy_breakdown
+[16:03:17]       wrote figS4_scaling_anchoring
+[16:03:17]       wrote figS5_sensitivity
+[16:03:17]     facts -> /home/claude/paper/work/results_reference/sustain_facts.json
+[16:03:17] running: /usr/local/bin/python3 /home/claude/paper/work/paper_src/make_sustain_facts.py
+[16:03:19]     wrote 896 facts
+[16:03:19] running: /usr/local/bin/python3 /home/claude/paper/work/make_supplementary.py
+[16:03:20]       S1_windows: 40 rows
+[16:03:20]       S2_grid_per_seed: 360 rows
+[16:03:20]       S2_grid_mean_ci: 72 rows
+[16:03:20]       S3_per_window: 8640 rows
+[16:03:20]       S5_triggers_all_protocols: 30 rows
+[16:03:20]       S4_scaling: 360 rows
+[16:03:20] ALL DONE in 0:15:42; results in /home/claude/paper/work/results_reference
